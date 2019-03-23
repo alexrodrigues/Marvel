@@ -1,0 +1,125 @@
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## Build generated
+build/
+DerivedData/
+*.DS_Store
+*.ruby-version
+
+## Various settings
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+/*.gcno
+
+## Other
+*.moved-aside
+*.DS_Store
+.DS_Store
+SkyBrasil/container/*.json
+SkyBrasil/Frameworks/Active/DashPlayer.framework
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+# Packages/
+.build/
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+Pods/
+*MinhaSky.xcworkspace/
+
+# fastlane
+#
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+# screenshots whenever they are needed.
+# For more information about the recommended setup visit:
+# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
+
+SkyBrasil/fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+*/fastlane/test_output
+slather_output
+SkyBrasil/fastlane/Appfile
+SkyBrasil/fastlane/Deliverfile
+SkyBrasil/fastlane/Fastfile
+SkyBrasil/fastlane/metadata/app_icon.jpg
+SkyBrasil/fastlane/metadata/copyright.txt
+SkyBrasil/fastlane/metadata/primary_category.txt
+SkyBrasil/fastlane/metadata/primary_first_sub_category.txt
+SkyBrasil/fastlane/metadata/primary_second_sub_category.txt
+SkyBrasil/fastlane/metadata/secondary_category.txt
+SkyBrasil/fastlane/metadata/secondary_first_sub_category.txt
+SkyBrasil/fastlane/metadata/secondary_second_sub_category.txt
+SkyBrasil/fastlane/metadata/pt-BR/description.txt
+SkyBrasil/fastlane/metadata/pt-BR/keywords.txt
+SkyBrasil/fastlane/metadata/pt-BR/marketing_url.txt
+SkyBrasil/fastlane/metadata/pt-BR/name.txt
+SkyBrasil/fastlane/metadata/pt-BR/privacy_url.txt
+SkyBrasil/fastlane/metadata/pt-BR/promotional_text.txt
+SkyBrasil/fastlane/metadata/pt-BR/release_notes.txt
+SkyBrasil/fastlane/metadata/pt-BR/subtitle.txt
+SkyBrasil/fastlane/metadata/pt-BR/support_url.txt
+SkyBrasil/fastlane/metadata/review_information/demo_password.txt
+SkyBrasil/fastlane/metadata/review_information/demo_user.txt
+SkyBrasil/fastlane/metadata/review_information/email_address.txt
+SkyBrasil/fastlane/metadata/review_information/first_name.txt
+SkyBrasil/fastlane/metadata/review_information/last_name.txt
+SkyBrasil/fastlane/metadata/review_information/notes.txt
+SkyBrasil/fastlane/metadata/review_information/phone_number.txt
+SkyBrasil/fastlane/metadata/trade_representative_contact_information/address_line1.txt
+SkyBrasil/fastlane/metadata/trade_representative_contact_information/city_name.txt
+SkyBrasil/fastlane/metadata/trade_representative_contact_information/country.txt
+SkyBrasil/fastlane/metadata/trade_representative_contact_information/is_displayed_on_app_store.txt
+SkyBrasil/fastlane/metadata/trade_representative_contact_information/postal_code.txt
+SkyBrasil/fastlane/metadata/trade_representative_contact_information/state.txt
+SkyBrasil/fastlane/metadata/trade_representative_contact_information/trade_name.txt
+SkyBrasil/fastlane/screenshots/README.txt
+SkyBrasil/fastlane/screenshots/pt-BR/1_iphone6Plus_1.fox (1).png
+SkyBrasil/fastlane/screenshots/pt-BR/2_iphone6Plus_2.compras (1).png
+SkyBrasil/fastlane/screenshots/pt-BR/3_iphone6Plus_3.recarga pre.png
+SkyBrasil/fastlane/screenshots/pt-BR/4_iphone6Plus_4.minha recarga.png
+SkyBrasil/fastlane/screenshots/pt-BR/5_iphone6Plus_5.fatura (1).png
+SkyBrasil/fastlane/README.md
+SkyBrasil/fastlane/report.xml
+SkyBrasil/Frameworks/Active
+SkyBrasil/Frameworks/Active/*
+
+# R.Swift
+*.generated.swift
+
+coverage_by_groups.txt
+
+# AppCode files
+SkyBrasil/.idea/*
+
