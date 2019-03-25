@@ -12,9 +12,10 @@ import RxSwift
 
 class CharactersService: MarvelService {
     
-    func fetch() -> Observable<CharactersResponse> {
+    func fetch() -> Observable<[CharacterViewModel]> {
         let endpoint = "characters?\(fabricateDefaultParams())"
         return Api<CharactersResponse>()
                 .requestObject(endpoint: endpoint)
+                    .map { CharacterVMFactory().factor(response: $0) }
     }
 }
