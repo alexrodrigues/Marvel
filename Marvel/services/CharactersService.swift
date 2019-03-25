@@ -18,4 +18,11 @@ class CharactersService: MarvelService {
                 .requestObject(endpoint: endpoint)
                     .map { CharacterVMFactory().factor(response: $0) }
     }
+    
+    func search(text: String) -> Observable<[CharacterViewModel]> {
+        let endpoint = "characters?\(fabricateDefaultParams())&limit=\(LIMIT)&nameStartsWith=\(text)"
+        return Api<CharactersResponse>()
+            .requestObject(endpoint: endpoint)
+            .map { CharacterVMFactory().factor(response: $0) }
+    }
 }
