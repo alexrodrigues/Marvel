@@ -13,4 +13,15 @@ struct Character: Codable {
     var name: String?
     var description: String?
     var resourceURI: String?
+    var thumbnail: CharacterThumbnail?
+}
+
+struct CharacterThumbnail: Codable {
+    var path: String?
+    var imageExtension: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case path
+        case imageExtension = "extension"
+    }
 }

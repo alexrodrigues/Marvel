@@ -17,8 +17,9 @@ struct CharacterViewModel {
     }
     
     var profileImage: String {
-        if let image = _character.resourceURI {
-            return "\(image)/portrait_xlarge.jpg"
+        if let image = _character.thumbnail?.path,
+                let imageExtension = _character.thumbnail?.imageExtension {
+            return "\(image)/portrait_xlarge.\(imageExtension)"
         }
         return ""
     }
