@@ -15,6 +15,9 @@ class ListViewController: UIViewController {
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    private lazy var loadingMoreView: LoadingMoreView = {
+        return LoadingMoreView.loadFromNibNamed() as! LoadingMoreView
+    }()
     private let HOME_CELL = "HomeListCell"
     private let FIRST_PAGE = 1
     private var disponseBag = DisposeBag()
@@ -23,7 +26,7 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerCells()
+        setupView()
         fetch(page: FIRST_PAGE)
     }
     
@@ -43,6 +46,16 @@ class ListViewController: UIViewController {
             }, onError: { (error) in
                 self.showErrorAlert(error.localizedDescription)
             }).disposed(by: disponseBag)
+    }
+    
+    private func setupView() {
+        registerCells()
+        setupLoadingMoreView()
+    }
+    
+    private func setupLoadingMoreView() {
+        loadingMoreView.frame = CGRect(x: 0, y: 0, width: listTableView.frame.width, height: 50.0)
+        listTableView.tableFooterView = loadingMoreView
     }
 }
 
