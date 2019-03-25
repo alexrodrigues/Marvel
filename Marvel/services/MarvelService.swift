@@ -12,6 +12,8 @@ import RxCocoa
 
 class MarvelService {
     
+    internal let LIMIT = 20
+    
     public func fabricateDefaultParams() -> String {
         let timestamp = fabricteTimestamp()
         let hash = fabricateApiHash(timestamp: timestamp)

@@ -12,8 +12,8 @@ import RxSwift
 
 class CharactersService: MarvelService {
     
-    func fetch() -> Observable<[CharacterViewModel]> {
-        let endpoint = "characters?\(fabricateDefaultParams())"
+    func fetch(lastIndex: Int) -> Observable<[CharacterViewModel]> {
+        let endpoint = "characters?\(fabricateDefaultParams())&limit=\(LIMIT)&offset=\(lastIndex)"
         return Api<CharactersResponse>()
                 .requestObject(endpoint: endpoint)
                     .map { CharacterVMFactory().factor(response: $0) }
