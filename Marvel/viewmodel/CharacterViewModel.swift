@@ -24,6 +24,15 @@ struct CharacterViewModel {
         return ""
     }
     
+    var comicsUris = [MarvelItemViewModel]()
+    
+    var eventsUris = [MarvelItemViewModel]()
+    
+    var storiesUris = [MarvelItemViewModel]()
+    
+    var seriesUris = [MarvelItemViewModel]()
+    
+    
     init(character: Character) {
         _character = character
     }

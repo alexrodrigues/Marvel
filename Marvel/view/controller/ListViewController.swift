@@ -126,6 +126,10 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
             fetch(page: charactersArray.count + 1)
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(charactersArray[indexPath.row])
+    }
 }
 
 extension ListViewController: UISearchBarDelegate {
