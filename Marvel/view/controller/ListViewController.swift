@@ -101,6 +101,14 @@ class ListViewController: UIViewController {
         loadingMoreView.isHidden = false
         fetch(page: lastKnowIndex)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueIdentifiers.detail {
+            if let character = sender as? CharacterViewModel, let destination = segue.destination as? DetailViewController {
+                destination.character = character
+            }
+        }
+    }
 }
 
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
@@ -128,7 +136,8 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(charactersArray[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: SegueIdentifiers.detail, sender: charactersArray[indexPath.row])
     }
 }
 
