@@ -6,22 +6,16 @@
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import RxSwift
-
-enum ApiKeys: String {
-    case publicKey = "24ee0aeded0cc8ba4b26f8617278fa39"
-    case privateKey = "5f34e81bc5e61b93adbdf0b83d882a20341bd8b9"
-}
 
 class Api<T: Decodable> {
     
-    private let BASE = "https://gateway.marvel.com:443/v1/public/"
     private let ERROR_MESSAGE = "Something went wrong on fetching musics"
     
     func requestObject(endpoint: String) -> Observable<T> {
         var remoteTask: URLSessionTask!
-        guard let url = URL(string: "\(self.BASE)\(endpoint)")  else {
+        guard let url = URL(string: "\(ApiDefinitions.BASE_URL)\(endpoint)")  else {
             return Observable.error(MyError(msg: self.ERROR_MESSAGE))
         }
         return Observable<T>.create({ observer -> Disposable in

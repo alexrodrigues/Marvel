@@ -6,7 +6,7 @@
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class CharacterVMFactory {
     
