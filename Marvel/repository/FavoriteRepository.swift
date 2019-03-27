@@ -12,8 +12,8 @@ import RxCocoa
 import RxSwift
 
 class FavoriteRepository {
-
-    func save(character: CharacterViewModel) -> Observable<Bool> {
+    
+    func insert(character: CharacterViewModel) -> Observable<Bool> {
         let context = getCoreDataContext()
         guard let entity = NSEntityDescription.entity(forEntityName: "Favorite", in: context) else {
             return Observable.just(false)
@@ -24,6 +24,24 @@ class FavoriteRepository {
         favorite.setValue(character.path, forKey: "path")
         favorite.setValue(character.imageExtension, forKey: "imageExtension")
         do {
+            try context.save()
+        } catch {
+            return Observable.just(false)
+        }
+        return Observable.just(true)
+    }
+    
+    func delete(character: CharacterViewModel) -> Observable<Bool> {
+        let context = getCoreDataContext()
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Favorite")
+        request.returnsObjectsAsFaults = false
+        do {
+            let result = try context.fetch(request)
+            for obj in result as! [NSManagedObject]  {
+                if let identifier = obj.value(forKey: "id") as? Int, identifier == character.identifier {
+                    context.delete(obj)
+                }
+            }
             try context.save()
         } catch {
             return Observable.just(false)
@@ -54,13 +72,31 @@ class FavoriteRepository {
                 if let imageExtension = data.value(forKey: "imageExtension") as? String {
                     character.thumbnail?.imageExtension = imageExtension
                 }
-               viewModels.append(CharacterViewModel(character: character))
+                viewModels.append(CharacterViewModel(character: character))
             }
         } catch {
             return Observable.error(MyError(msg: "Failed fetching"))
         }
         
         return Observable.just(viewModels)
+    }
+    
+    func find(character: CharacterViewModel) -> Observable<[CharacterViewModel]> {
+        return Observable.create({ (observer) -> Disposable in
+            
+            let research = self.fetch()
+                .subscribe(onNext: { (viewModels) in
+                    let filtered = viewModels.filter { $0.identifier ==  character.identifier }
+                    observer.onNext(filtered)
+                    observer.onCompleted()
+                }, onError: { error in
+                    observer.onError(MyError(msg: "Failed finding character \(character.name)"))
+                })
+            
+            return Disposables.create {
+                research.dispose()
+            }
+        })
     }
     
     private func getCoreDataContext() -> NSManagedObjectContext {

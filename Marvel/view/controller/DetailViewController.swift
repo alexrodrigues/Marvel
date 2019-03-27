@@ -20,6 +20,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var favoriteComponentHeight: NSLayoutConstraint!
     
     private var disposeBag = DisposeBag()
+    private var favoriteBarButton: UIBarButtonItem!
     private let SUMMARY_CELL_IDENTIFIER = "SummaryCell"
     
     let sectionTitles = ["Comics", "Events", "Stories", "Series"]
@@ -34,12 +35,6 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         fetch()
-        CharactersService().insert(character: character)
-            .subscribe(onNext: { success in
-                
-            }, onError: { error in
-                
-            }).disposed(by: disposeBag)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,9 +42,10 @@ class DetailViewController: UIViewController {
         favoriteComponent.checkFavorites()
     }
     
-    private func setupView() {
-        favoriteComponent.setup(delegate: self)
+    private func setupView(){
         navigationItem.title = character.name
+        favoriteComponent.setup(delegate: self)
+        setupFavoriteButton()
         nameLabel.text = character.name
         ImageService.instance.downloadImage(url: character.profileImage, index: 0) { [weak self] (image, indexFromApi) in
             guard let self = self else { return }
@@ -117,6 +113,43 @@ class DetailViewController: UIViewController {
             return storiesArray
         }
         return seriesArray
+    }
+    
+    private func setupFavoriteButton() {
+        CharactersService().exists(character: character)
+                .observeOn(MainScheduler.instance)
+            .subscribe(onNext: {[weak self] exists in
+                guard let self = self else { return }
+                if exists {
+                    self.favoriteBarButton = UIBarButtonItem(title: "Desfavoritar", style: .done, target: self, action: #selector(DetailViewController.unfavorite))
+                    self.navigationItem.rightBarButtonItem = self.favoriteBarButton
+                } else {
+                    self.favoriteBarButton = UIBarButtonItem(title: "Favoritar", style: .done, target: self, action: #selector(DetailViewController.favorite))
+                    self.navigationItem.rightBarButtonItem = self.favoriteBarButton
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    @objc func favorite() {
+        CharactersService().insert(character: character)
+            .subscribe(onNext: { success in
+                self.setupFavoriteButton()
+                self.favoriteComponent.checkFavorites()
+            }, onError: { [weak self] error in
+                guard let self = self else { return }
+                self.showErrorAlert(error.localizedDescription)
+            }).disposed(by: disposeBag)
+    }
+    
+    @objc func unfavorite() {
+        CharactersService().delete(character: character)
+            .subscribe(onNext: { success in
+                self.setupFavoriteButton()
+                self.favoriteComponent.checkFavorites()
+            }, onError: { [weak self] error in
+                guard let self = self else { return }
+                self.showErrorAlert(error.localizedDescription)
+            }).disposed(by: disposeBag)
     }
 }
 
