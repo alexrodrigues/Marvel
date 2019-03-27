@@ -13,9 +13,9 @@ class Api<T: Decodable> {
     
     private let ERROR_MESSAGE = "Something went wrong on fetching musics"
     
-    func requestObject(endpoint: String) -> Observable<T> {
+    func requestObject(urlString: String) -> Observable<T> {
         var remoteTask: URLSessionTask!
-        guard let url = URL(string: "\(ApiDefinitions.BASE_URL)\(endpoint)")  else {
+        guard let url = URL(string: urlString)  else {
             return Observable.error(MyError(msg: self.ERROR_MESSAGE))
         }
         return Observable<T>.create({ observer -> Disposable in

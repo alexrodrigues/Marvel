@@ -14,7 +14,10 @@ struct MarvelItemViewModel {
     
     
     var resoureUri: String {
-        return _marvelItem.resourceURI ?? ""
+        if let resource = _marvelItem.resourceURI {
+            return resource.replacingOccurrences(of: "http", with: "https")
+        }
+        return ""
     }
     
     var name: String {

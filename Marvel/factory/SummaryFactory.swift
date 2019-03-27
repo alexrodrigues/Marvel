@@ -10,11 +10,9 @@ import Foundation
 
 class SummaryFactory {
 
-    func factor(response: SummaryResponse) -> [SummaryViewModel] {
-        var viewModels = [SummaryViewModel]()
-        guard let summaries = response.data?.results else { return [SummaryViewModel]() }
-        viewModels = summaries.map { SummaryViewModel(summary: $0) }
-        return viewModels
-    }
-    
+    func factor(response: SummaryResponse) -> SummaryViewModel {
+        guard let summaries = response.data?.results else { return SummaryViewModel(summary: Summary()) }
+        guard let first =  summaries.first else { return SummaryViewModel(summary: Summary())}
+        return SummaryViewModel(summary: first)
+    }    
 }
