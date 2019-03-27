@@ -11,10 +11,6 @@ import RxCocoa
 import RxSwift
 
 class SummaryService: MarvelService {
-
-    
-    
-    // comics que é o array de urls de json ["http://marvel1.json", "http://marvel2.json", "http://marvel3.json"]
     
     func fetch(models: [MarvelItemViewModel]) -> Observable<[SummaryViewModel]>  {
         var summariesArray = [SummaryViewModel]()
@@ -45,7 +41,6 @@ class SummaryService: MarvelService {
         })
     }
 
-    // faz a chamada de um só
     private func fetchUnique(marvelItemViewModel: MarvelItemViewModel) -> Observable<SummaryViewModel> {
         let resourceUrl = "\(marvelItemViewModel.resoureUri)?\(fabricateDefaultParams())"
         return Api<SummaryResponse>()

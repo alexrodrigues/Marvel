@@ -33,6 +33,6 @@ class CharacterVMFactory {
     }
     
     private func convertToJsonUris(items: [MarvelItem]) -> [MarvelItemViewModel] {
-        return items.map{ MarvelItemViewModel(marvelItem: $0) }
+        return Array(items.map{ MarvelItemViewModel(marvelItem: $0) }.prefix(3))
     }
 }
