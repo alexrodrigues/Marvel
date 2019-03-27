@@ -49,9 +49,8 @@ class DetailViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
-                self.activtiyIndicatorView.stopAnimating()
                 self.comicsArray = viewModels
-                self.detailTableView.reloadData()
+                self.presentTableview()
             }, onError: { error in
                 print(error.localizedDescription)
             }).disposed(by: disposeBag)
@@ -61,9 +60,8 @@ class DetailViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
-                self.activtiyIndicatorView.stopAnimating()
                 self.eventsArray = viewModels
-                self.detailTableView.reloadData()
+                self.presentTableview()
             }, onError: { error in
                 print(error.localizedDescription)
             }).disposed(by: disposeBag)
@@ -73,9 +71,8 @@ class DetailViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
-                self.activtiyIndicatorView.stopAnimating()
                 self.storiesArray = viewModels
-                self.detailTableView.reloadData()
+                self.presentTableview()
                 }, onError: { error in
                     print(error.localizedDescription)
             }).disposed(by: disposeBag)
@@ -85,12 +82,16 @@ class DetailViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
-                self.activtiyIndicatorView.stopAnimating()
                 self.seriesArray = viewModels
-                self.detailTableView.reloadData()
+                self.presentTableview()
                 }, onError: { error in
                     print(error.localizedDescription)
             }).disposed(by: disposeBag)
+    }
+    
+    private func presentTableview () {
+        self.activtiyIndicatorView.stopAnimating()
+        self.detailTableView.reloadData()
     }
     
     private func getRightArray(section: Int) -> [SummaryViewModel] {
