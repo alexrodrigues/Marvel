@@ -15,6 +15,8 @@ class ListViewController: UIViewController {
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var listSearchBar: UISearchBar!
+    @IBOutlet weak var favoriteComponent: FavoriteComponent!
+    @IBOutlet weak var favoriteComponentHeight: NSLayoutConstraint!
     
     private lazy var loadingMoreView: LoadingMoreView = {
         return LoadingMoreView.loadFromNibNamed() as! LoadingMoreView
@@ -30,15 +32,20 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        favoriteComponent.setup(delegate: self)
         setupView()
         fetch(page: FIRST_PAGE)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        favoriteComponent.checkFavorites()
     }
     
     private func registerCells() {
         listTableView.register(UINib(nibName: HOME_CELL, bundle: nil), forCellReuseIdentifier: HOME_CELL)
     }
 
-    
     private func search(text: String) {
         CharactersService().search(text: text)
             .observeOn(MainScheduler.instance)
@@ -167,6 +174,23 @@ extension ListViewController: UISearchBarDelegate {
             searchBar.showsCancelButton = false
             searchBar.resignFirstResponder()
             searchCancelled()
+        }
+    }
+}
+
+extension ListViewController: FavoriteComponentDelegate {
+    
+    func inflateFavorites() {
+        favoriteComponentHeight.constant = 90.0
+        UIView.animate(withDuration: 0.6) {
+            self.view.setNeedsLayout()
+        }
+    }
+    
+    func disinflateFavorites() {
+        favoriteComponentHeight.constant = 0.0
+        UIView.animate(withDuration: 0.6) {
+            self.view.setNeedsLayout()
         }
     }
 }

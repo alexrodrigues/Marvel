@@ -42,15 +42,25 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="nGS-wf-1ep"/>
                                 </connections>
                             </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHh-17-XIV" customClass="FavoriteComponent" customModule="Marvel" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="108" width="375" height="0.0"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="82m-3e-JPz"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="blP-vm-CM3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1RN-rb-lLt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xHh-17-XIV" secondAttribute="trailing" id="5jf-2B-OWG"/>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8ZW-l7-s8S"/>
+                            <constraint firstItem="xHh-17-XIV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HZk-uE-gwJ"/>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Mbc-Zm-L6d"/>
                             <constraint firstItem="blP-vm-CM3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QMQ-Zb-wN5"/>
                             <constraint firstItem="vNB-ki-huA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aIB-w1-ZEG"/>
-                            <constraint firstItem="blP-vm-CM3" firstAttribute="top" secondItem="SUw-G1-9Or" secondAttribute="bottom" id="bLT-ak-QOo"/>
+                            <constraint firstItem="xHh-17-XIV" firstAttribute="top" secondItem="SUw-G1-9Or" secondAttribute="bottom" id="bjB-mf-907"/>
+                            <constraint firstItem="blP-vm-CM3" firstAttribute="top" secondItem="xHh-17-XIV" secondAttribute="bottom" id="cLD-qI-MBG"/>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cUe-VT-CGI"/>
                             <constraint firstItem="vNB-ki-huA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="chF-Ea-XeK"/>
                             <constraint firstItem="blP-vm-CM3" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="eFC-Cq-Jvm"/>
@@ -60,6 +70,8 @@
                     <navigationItem key="navigationItem" title="Marvel" id="b4Q-P1-tdo"/>
                     <connections>
                         <outlet property="activityIndicator" destination="vNB-ki-huA" id="zZj-zo-dow"/>
+                        <outlet property="favoriteComponent" destination="xHh-17-XIV" id="wWC-9t-pKi"/>
+                        <outlet property="favoriteComponentHeight" destination="82m-3e-JPz" id="iDV-Q9-N54"/>
                         <outlet property="listSearchBar" destination="SUw-G1-9Or" id="KMP-g8-Ryg"/>
                         <outlet property="listTableView" destination="blP-vm-CM3" id="jhn-KD-pc8"/>
                         <segue destination="IYM-xe-5QI" kind="show" identifier="segueToDetail" id="9P9-PR-DrQ"/>
@@ -170,6 +182,13 @@
                                     <outlet property="delegate" destination="IYM-xe-5QI" id="y6s-1H-y2L"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udg-DM-7so" customClass="FavoriteComponent" customModule="Marvel" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="3M7-Ug-EN2"/>
+                                </constraints>
+                            </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BY0-C5-vVi">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                                 <color key="color" red="0.92455786470000001" green="0.10997990520000001" blue="0.1375359595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -177,18 +196,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="uhI-OF-TQg" firstAttribute="trailing" secondItem="bos-g4-wQt" secondAttribute="trailing" id="P76-Mc-RYg"/>
+                            <constraint firstItem="uhI-OF-TQg" firstAttribute="leading" secondItem="bos-g4-wQt" secondAttribute="leading" id="Iks-tM-Ctq"/>
+                            <constraint firstItem="uhI-OF-TQg" firstAttribute="trailing" secondItem="bos-g4-wQt" secondAttribute="trailing" id="J2M-l2-tiM"/>
                             <constraint firstItem="BY0-C5-vVi" firstAttribute="centerX" secondItem="kiz-YV-7xe" secondAttribute="centerX" id="RPE-nL-ZG8"/>
                             <constraint firstItem="BY0-C5-vVi" firstAttribute="centerY" secondItem="kiz-YV-7xe" secondAttribute="centerY" id="aNe-0c-ksB"/>
-                            <constraint firstItem="uhI-OF-TQg" firstAttribute="bottom" secondItem="bos-g4-wQt" secondAttribute="bottom" id="ocZ-Sb-iEo"/>
-                            <constraint firstItem="uhI-OF-TQg" firstAttribute="top" secondItem="bos-g4-wQt" secondAttribute="top" id="qgv-KJ-jar"/>
-                            <constraint firstItem="uhI-OF-TQg" firstAttribute="leading" secondItem="bos-g4-wQt" secondAttribute="leading" id="ybU-RW-p0O"/>
+                            <constraint firstItem="uhI-OF-TQg" firstAttribute="top" secondItem="bos-g4-wQt" secondAttribute="top" id="aeb-SE-lmc"/>
+                            <constraint firstItem="bos-g4-wQt" firstAttribute="bottom" secondItem="udg-DM-7so" secondAttribute="bottom" id="det-Z4-Dch"/>
+                            <constraint firstItem="udg-DM-7so" firstAttribute="leading" secondItem="bos-g4-wQt" secondAttribute="leading" id="hGJ-ng-H5q"/>
+                            <constraint firstItem="udg-DM-7so" firstAttribute="trailing" secondItem="bos-g4-wQt" secondAttribute="trailing" id="mMb-5J-fdu"/>
+                            <constraint firstItem="udg-DM-7so" firstAttribute="top" secondItem="uhI-OF-TQg" secondAttribute="bottom" id="vvp-qV-vkk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bos-g4-wQt"/>
                     </view>
                     <connections>
                         <outlet property="activtiyIndicatorView" destination="BY0-C5-vVi" id="V54-MP-2mQ"/>
                         <outlet property="detailTableView" destination="uhI-OF-TQg" id="D5t-cg-TD1"/>
+                        <outlet property="favoriteComponent" destination="udg-DM-7so" id="ihZ-7p-OhF"/>
+                        <outlet property="favoriteComponentHeight" destination="3M7-Ug-EN2" id="a3q-px-HM7"/>
                         <outlet property="nameLabel" destination="Wc9-re-ofa" id="qhU-Yl-9EV"/>
                         <outlet property="profileImageView" destination="w06-gz-gXa" id="pWU-It-73l"/>
                     </connections>

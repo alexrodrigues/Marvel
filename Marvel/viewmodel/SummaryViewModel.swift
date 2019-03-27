@@ -9,7 +9,7 @@
 import Foundation
 
 class SummaryViewModel {
-
+    
     private var _summary: Summary
     
     var title: String {

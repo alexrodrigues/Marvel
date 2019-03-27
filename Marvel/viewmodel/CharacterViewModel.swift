@@ -9,8 +9,12 @@
 import Foundation
 
 struct CharacterViewModel {
-
+    
     private var _character: Character
+    
+    var identifier: Int {
+        return _character.id ?? 0
+    }
     
     var name: String {
         return _character.name ?? ""
@@ -18,10 +22,18 @@ struct CharacterViewModel {
     
     var profileImage: String {
         if let image = _character.thumbnail?.path,
-                let imageExtension = _character.thumbnail?.imageExtension {
+            let imageExtension = _character.thumbnail?.imageExtension {
             return "\(image)/portrait_xlarge.\(imageExtension)"
         }
         return ""
+    }
+    
+    var path: String {
+        return _character.thumbnail?.path ?? ""
+    }
+    
+    var imageExtension: String {
+        return _character.thumbnail?.imageExtension ?? ""
     }
     
     var comicsUris = [MarvelItemViewModel]()
