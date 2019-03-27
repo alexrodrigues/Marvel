@@ -16,6 +16,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var activtiyIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var detailTableView: UITableView!
+    @IBOutlet weak var favoriteComponent: FavoriteComponent!
+    @IBOutlet weak var favoriteComponentHeight: NSLayoutConstraint!
     
     private var disposeBag = DisposeBag()
     private let SUMMARY_CELL_IDENTIFIER = "SummaryCell"
@@ -40,8 +42,14 @@ class DetailViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        favoriteComponent.checkFavorites()
+    }
+    
     private func setupView() {
-        self.navigationItem.title = character.name
+        favoriteComponent.setup(delegate: self)
+        navigationItem.title = character.name
         nameLabel.text = character.name
         ImageService.instance.downloadImage(url: character.profileImage, index: 0) { [weak self] (image, indexFromApi) in
             guard let self = self else { return }
@@ -135,3 +143,19 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
+extension DetailViewController: FavoriteComponentDelegate {
+    
+    func inflateFavorites() {
+        favoriteComponentHeight.constant = 90.0
+        UIView.animate(withDuration: 0.6) {
+            self.view.setNeedsLayout()
+        }
+    }
+    
+    func disinflateFavorites() {
+        favoriteComponentHeight.constant = 0.0
+        UIView.animate(withDuration: 0.6) {
+            self.view.setNeedsLayout()
+        }
+    }
+}

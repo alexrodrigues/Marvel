@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hoa-XU-Oyg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hoa-XU-Oyg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -182,6 +182,13 @@
                                     <outlet property="delegate" destination="IYM-xe-5QI" id="y6s-1H-y2L"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udg-DM-7so" customClass="FavoriteComponent" customModule="Marvel" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="3M7-Ug-EN2"/>
+                                </constraints>
+                            </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BY0-C5-vVi">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                                 <color key="color" red="0.92455786470000001" green="0.10997990520000001" blue="0.1375359595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -189,18 +196,23 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="uhI-OF-TQg" firstAttribute="trailing" secondItem="bos-g4-wQt" secondAttribute="trailing" id="P76-Mc-RYg"/>
+                            <constraint firstItem="uhI-OF-TQg" firstAttribute="leading" secondItem="bos-g4-wQt" secondAttribute="leading" id="Iks-tM-Ctq"/>
+                            <constraint firstItem="uhI-OF-TQg" firstAttribute="trailing" secondItem="bos-g4-wQt" secondAttribute="trailing" id="J2M-l2-tiM"/>
                             <constraint firstItem="BY0-C5-vVi" firstAttribute="centerX" secondItem="kiz-YV-7xe" secondAttribute="centerX" id="RPE-nL-ZG8"/>
                             <constraint firstItem="BY0-C5-vVi" firstAttribute="centerY" secondItem="kiz-YV-7xe" secondAttribute="centerY" id="aNe-0c-ksB"/>
-                            <constraint firstItem="uhI-OF-TQg" firstAttribute="bottom" secondItem="bos-g4-wQt" secondAttribute="bottom" id="ocZ-Sb-iEo"/>
-                            <constraint firstItem="uhI-OF-TQg" firstAttribute="top" secondItem="bos-g4-wQt" secondAttribute="top" id="qgv-KJ-jar"/>
-                            <constraint firstItem="uhI-OF-TQg" firstAttribute="leading" secondItem="bos-g4-wQt" secondAttribute="leading" id="ybU-RW-p0O"/>
+                            <constraint firstItem="uhI-OF-TQg" firstAttribute="top" secondItem="bos-g4-wQt" secondAttribute="top" id="aeb-SE-lmc"/>
+                            <constraint firstItem="bos-g4-wQt" firstAttribute="bottom" secondItem="udg-DM-7so" secondAttribute="bottom" id="det-Z4-Dch"/>
+                            <constraint firstItem="udg-DM-7so" firstAttribute="leading" secondItem="bos-g4-wQt" secondAttribute="leading" id="hGJ-ng-H5q"/>
+                            <constraint firstItem="udg-DM-7so" firstAttribute="trailing" secondItem="bos-g4-wQt" secondAttribute="trailing" id="mMb-5J-fdu"/>
+                            <constraint firstItem="udg-DM-7so" firstAttribute="top" secondItem="uhI-OF-TQg" secondAttribute="bottom" id="vvp-qV-vkk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bos-g4-wQt"/>
                     </view>
                     <connections>
                         <outlet property="activtiyIndicatorView" destination="BY0-C5-vVi" id="V54-MP-2mQ"/>
                         <outlet property="detailTableView" destination="uhI-OF-TQg" id="D5t-cg-TD1"/>
+                        <outlet property="favoriteComponent" destination="udg-DM-7so" id="ihZ-7p-OhF"/>
+                        <outlet property="favoriteComponentHeight" destination="3M7-Ug-EN2" id="a3q-px-HM7"/>
                         <outlet property="nameLabel" destination="Wc9-re-ofa" id="qhU-Yl-9EV"/>
                         <outlet property="profileImageView" destination="w06-gz-gXa" id="pWU-It-73l"/>
                     </connections>
