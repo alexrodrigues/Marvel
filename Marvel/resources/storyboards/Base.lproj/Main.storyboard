@@ -139,6 +139,36 @@
                                         <constraint firstAttribute="bottom" secondItem="w06-gz-gXa" secondAttribute="bottom" constant="16" id="ovN-wP-T2m"/>
                                     </constraints>
                                 </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="SummaryCell" textLabel="HUE-MH-eu9" detailTextLabel="2qm-Hr-YJP" style="IBUITableViewCellStyleSubtitle" id="Udu-at-yEG">
+                                        <rect key="frame" x="0.0" y="165.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Udu-at-yEG" id="3cJ-qm-gSd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HUE-MH-eu9">
+                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2qm-Hr-YJP">
+                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="IYM-xe-5QI" id="Lea-zz-j2F"/>
+                                    <outlet property="delegate" destination="IYM-xe-5QI" id="y6s-1H-y2L"/>
+                                </connections>
                             </tableView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="BY0-C5-vVi">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
@@ -157,6 +187,8 @@
                         <viewLayoutGuide key="safeArea" id="bos-g4-wQt"/>
                     </view>
                     <connections>
+                        <outlet property="activtiyIndicatorView" destination="BY0-C5-vVi" id="V54-MP-2mQ"/>
+                        <outlet property="detailTableView" destination="uhI-OF-TQg" id="D5t-cg-TD1"/>
                         <outlet property="nameLabel" destination="Wc9-re-ofa" id="qhU-Yl-9EV"/>
                         <outlet property="profileImageView" destination="w06-gz-gXa" id="pWU-It-73l"/>
                     </connections>

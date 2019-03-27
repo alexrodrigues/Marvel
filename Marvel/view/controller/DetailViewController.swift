@@ -15,8 +15,16 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var activtiyIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var detailTableView: UITableView!
     
     private var disposeBag = DisposeBag()
+    private let SUMMARY_CELL_IDENTIFIER = "SummaryCell"
+    
+    let sectionTitles = ["Comics", "Events", "Stories", "Series"]
+    var comicsArray = [SummaryViewModel]()
+    var eventsArray = [SummaryViewModel]()
+    var storiesArray = [SummaryViewModel]()
+    var seriesArray = [SummaryViewModel]()
     
     var character: CharacterViewModel!
     
@@ -38,35 +46,85 @@ class DetailViewController: UIViewController {
     private func fetch() {
         SummaryService()
             .fetch(models: character.comicsUris)
-            .subscribe(onNext: { viewModels in
-                print("Comics: \(viewModels.debugDescription)")
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] viewModels in
+                guard let self = self else { return }
+                self.activtiyIndicatorView.stopAnimating()
+                self.comicsArray = viewModels
+                self.detailTableView.reloadData()
             }, onError: { error in
                 print(error.localizedDescription)
             }).disposed(by: disposeBag)
         
         SummaryService()
             .fetch(models: character.eventsUris)
-            .subscribe(onNext: { viewModels in
-                print("Events: \(viewModels.debugDescription)")
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] viewModels in
+                guard let self = self else { return }
+                self.activtiyIndicatorView.stopAnimating()
+                self.eventsArray = viewModels
+                self.detailTableView.reloadData()
             }, onError: { error in
                 print(error.localizedDescription)
             }).disposed(by: disposeBag)
         
         SummaryService()
             .fetch(models: character.storiesUris)
-            .subscribe(onNext: { viewModels in
-                print("Stories: \(viewModels.debugDescription)")
-            }, onError: { error in
-                print(error.localizedDescription)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] viewModels in
+                guard let self = self else { return }
+                self.activtiyIndicatorView.stopAnimating()
+                self.storiesArray = viewModels
+                self.detailTableView.reloadData()
+                }, onError: { error in
+                    print(error.localizedDescription)
             }).disposed(by: disposeBag)
         
         SummaryService()
             .fetch(models: character.seriesUris)
-            .subscribe(onNext: { viewModels in
-                print("Series: \(viewModels.debugDescription)")
-            }, onError: { error in
-                print(error.localizedDescription)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] viewModels in
+                guard let self = self else { return }
+                self.activtiyIndicatorView.stopAnimating()
+                self.seriesArray = viewModels
+                self.detailTableView.reloadData()
+                }, onError: { error in
+                    print(error.localizedDescription)
             }).disposed(by: disposeBag)
     }
     
+    private func getRightArray(section: Int) -> [SummaryViewModel] {
+        if section == 0 {
+            return comicsArray
+        } else if section == 1 {
+            return eventsArray
+        } else if section == 2{
+            return storiesArray
+        }
+        return seriesArray
+    }
 }
+
+extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SUMMARY_CELL_IDENTIFIER, for: indexPath)
+        let summary = getRightArray(section: indexPath.section)[indexPath.row]
+        cell.textLabel?.text = summary.title
+        cell.detailTextLabel?.text = summary.description
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return getRightArray(section: section).count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
+    }
+}
+
