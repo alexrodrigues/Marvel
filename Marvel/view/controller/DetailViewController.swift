@@ -32,6 +32,12 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         fetch()
+        CharactersService().insert(character: character)
+            .subscribe(onNext: { success in
+                
+            }, onError: { error in
+                
+            }).disposed(by: disposeBag)
     }
     
     private func setupView() {
