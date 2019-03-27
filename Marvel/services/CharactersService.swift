@@ -15,14 +15,14 @@ class CharactersService: MarvelService {
     func fetch(lastIndex: Int) -> Observable<[CharacterViewModel]> {
         let endpoint = "characters?\(fabricateDefaultParams())&limit=\(LIMIT)&offset=\(lastIndex)"
         return Api<CharactersResponse>()
-                .requestObject(endpoint: endpoint)
+                .requestObject(urlString: "\(ApiDefinitions.BASE_URL)\(endpoint)")
                     .map { CharacterVMFactory().factor(response: $0) }
     }
     
     func search(text: String) -> Observable<[CharacterViewModel]> {
         let endpoint = "characters?\(fabricateDefaultParams())&limit=\(LIMIT)&nameStartsWith=\(text)"
         return Api<CharactersResponse>()
-            .requestObject(endpoint: endpoint)
+            .requestObject(urlString: "\(ApiDefinitions.BASE_URL)\(endpoint)")
             .map { CharacterVMFactory().factor(response: $0) }
     }
 }

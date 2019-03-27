@@ -14,6 +14,10 @@ struct Character: Codable {
     var description: String?
     var resourceURI: String?
     var thumbnail: CharacterThumbnail?
+    var comics: CharacterSummary?
+    var series: CharacterSummary?
+    var stories: CharacterSummary?
+    var events: CharacterSummary?
 }
 
 struct CharacterThumbnail: Codable {
@@ -25,3 +29,4 @@ struct CharacterThumbnail: Codable {
         case imageExtension = "extension"
     }
 }
+

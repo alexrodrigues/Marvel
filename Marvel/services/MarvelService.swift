@@ -17,11 +17,11 @@ class MarvelService {
     public func fabricateDefaultParams() -> String {
         let timestamp = fabricteTimestamp()
         let hash = fabricateApiHash(timestamp: timestamp)
-        return "apikey=\(ApiKeys.publicKey.rawValue)&ts=\(timestamp)&hash=\(hash)"
+        return "apikey=\(ApiDefinitions.ApiKeys.publicKey.rawValue)&ts=\(timestamp)&hash=\(hash)"
     }
     
     public func fabricateApiHash(timestamp: String) -> String {
-        let seed = "\(timestamp)\(ApiKeys.privateKey.rawValue)\(ApiKeys.publicKey.rawValue)"
+        let seed = "\(timestamp)\(ApiDefinitions.ApiKeys.privateKey.rawValue)\(ApiDefinitions.ApiKeys.publicKey.rawValue)"
         return MD5Helper.fabricate(value: seed)
     }
     
