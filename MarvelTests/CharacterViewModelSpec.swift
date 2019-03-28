@@ -18,7 +18,7 @@ class CharacterViewModelSpec: QuickSpec {
             var viewModel: CharacterViewModel!
             
             beforeEach {
-                var model = Character()
+                var model = MarvelCharacter()
                 model.id = 900
                 model.name = "Spider-man"
                 model.thumbnail = CharacterThumbnail(path: "https://marvel-image.com/900", imageExtension: "jpg")

@@ -15,7 +15,7 @@
 		041B741922465810004844D9 /* CharactersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B741822465810004844D9 /* CharactersService.swift */; };
 		041B741D22465B56004844D9 /* MarvelService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B741C22465B56004844D9 /* MarvelService.swift */; };
 		041B741F22465C93004844D9 /* CharactersResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B741E22465C93004844D9 /* CharactersResponse.swift */; };
-		041B742122465D3C004844D9 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B742022465D3C004844D9 /* Character.swift */; };
+		041B742122465D3C004844D9 /* MarvelCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B742022465D3C004844D9 /* MarvelCharacter.swift */; };
 		041B742422465FB3004844D9 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B742322465FB3004844D9 /* ListViewController.swift */; };
 		042D5079224CA75500273EB6 /* CharacterViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D5078224CA75500273EB6 /* CharacterViewModelSpec.swift */; };
 		042D507B224CABAC00273EB6 /* SummaryViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D507A224CABAC00273EB6 /* SummaryViewModelSpec.swift */; };
@@ -75,7 +75,7 @@
 		041B741822465810004844D9 /* CharactersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersService.swift; sourceTree = "<group>"; };
 		041B741C22465B56004844D9 /* MarvelService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelService.swift; sourceTree = "<group>"; };
 		041B741E22465C93004844D9 /* CharactersResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersResponse.swift; sourceTree = "<group>"; };
-		041B742022465D3C004844D9 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		041B742022465D3C004844D9 /* MarvelCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCharacter.swift; sourceTree = "<group>"; };
 		041B742322465FB3004844D9 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		042D5077224CA75400273EB6 /* MarvelTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MarvelTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		042D5078224CA75500273EB6 /* CharacterViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModelSpec.swift; sourceTree = "<group>"; };
@@ -288,7 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				041B741E22465C93004844D9 /* CharactersResponse.swift */,
-				041B742022465D3C004844D9 /* Character.swift */,
+				041B742022465D3C004844D9 /* MarvelCharacter.swift */,
 				0486094F224AD1FA001C599A /* CharacterSummary.swift */,
 			);
 			path = character;
@@ -614,7 +614,7 @@
 				041B741922465810004844D9 /* CharactersService.swift in Sources */,
 				04860957224AD965001C599A /* SummaryResponse.swift in Sources */,
 				04E2B22122495C7800DD72A3 /* CharacterVMFactory.swift in Sources */,
-				041B742122465D3C004844D9 /* Character.swift in Sources */,
+				041B742122465D3C004844D9 /* MarvelCharacter.swift in Sources */,
 				0486095F224ADD71001C599A /* ApiDefinitions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

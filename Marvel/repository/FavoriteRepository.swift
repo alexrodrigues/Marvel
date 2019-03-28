@@ -58,7 +58,7 @@ class FavoriteRepository {
         do {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
-                var character = Character()
+                var character = MarvelCharacter()
                 character.thumbnail = CharacterThumbnail()
                 if let name = data.value(forKey: "name") as? String {
                     character.name = name
