@@ -20,6 +20,7 @@
 		042D5079224CA75500273EB6 /* CharacterViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D5078224CA75500273EB6 /* CharacterViewModelSpec.swift */; };
 		042D507B224CABAC00273EB6 /* SummaryViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D507A224CABAC00273EB6 /* SummaryViewModelSpec.swift */; };
 		042D507D224CADEE00273EB6 /* MarvelItemViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D507C224CADEE00273EB6 /* MarvelItemViewModelSpec.swift */; };
+		042D507F224CAFC100273EB6 /* CharacterFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D507E224CAFC100273EB6 /* CharacterFactorySpec.swift */; };
 		04860950224AD1FA001C599A /* CharacterSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486094F224AD1FA001C599A /* CharacterSummary.swift */; };
 		04860952224AD215001C599A /* MarvelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860951224AD215001C599A /* MarvelItem.swift */; };
 		04860954224AD58C001C599A /* MarvelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860953224AD58C001C599A /* MarvelItemViewModel.swift */; };
@@ -80,6 +81,7 @@
 		042D5078224CA75500273EB6 /* CharacterViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModelSpec.swift; sourceTree = "<group>"; };
 		042D507A224CABAC00273EB6 /* SummaryViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryViewModelSpec.swift; sourceTree = "<group>"; };
 		042D507C224CADEE00273EB6 /* MarvelItemViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItemViewModelSpec.swift; sourceTree = "<group>"; };
+		042D507E224CAFC100273EB6 /* CharacterFactorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFactorySpec.swift; sourceTree = "<group>"; };
 		0486094F224AD1FA001C599A /* CharacterSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSummary.swift; sourceTree = "<group>"; };
 		04860951224AD215001C599A /* MarvelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItem.swift; sourceTree = "<group>"; };
 		04860953224AD58C001C599A /* MarvelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItemViewModel.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				042D5078224CA75500273EB6 /* CharacterViewModelSpec.swift */,
 				042D507A224CABAC00273EB6 /* SummaryViewModelSpec.swift */,
 				042D507C224CADEE00273EB6 /* MarvelItemViewModelSpec.swift */,
+				042D507E224CAFC100273EB6 /* CharacterFactorySpec.swift */,
 				042D5077224CA75400273EB6 /* MarvelTests-Bridging-Header.h */,
 			);
 			path = MarvelTests;
@@ -621,6 +624,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				042D507B224CABAC00273EB6 /* SummaryViewModelSpec.swift in Sources */,
+				042D507F224CAFC100273EB6 /* CharacterFactorySpec.swift in Sources */,
 				042D5079224CA75500273EB6 /* CharacterViewModelSpec.swift in Sources */,
 				042D507D224CADEE00273EB6 /* MarvelItemViewModelSpec.swift in Sources */,
 			);
