@@ -17,5 +17,5 @@ struct CharactersResponse: Codable {
 struct CharactersData: Codable {
     var offset: Int?
     var limit: Int?
-    var results: [Character]?
+    var results: [MarvelCharacter]?
 }

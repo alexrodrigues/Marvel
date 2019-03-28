@@ -10,7 +10,7 @@ import Foundation
 
 struct CharacterViewModel {
     
-    private var _character: Character
+    private var _character: MarvelCharacter
     
     var identifier: Int {
         return _character.id ?? 0
@@ -45,7 +45,7 @@ struct CharacterViewModel {
     var seriesUris = [MarvelItemViewModel]()
     
     
-    init(character: Character) {
+    init(character: MarvelCharacter) {
         _character = character
     }
 }

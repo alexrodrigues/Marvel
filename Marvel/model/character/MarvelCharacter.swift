@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Character: Codable {
+struct MarvelCharacter: Codable {
     var id: Int?
     var name: String?
     var description: String?
