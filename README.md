@@ -17,9 +17,7 @@ RxSwfit its a powerful library how offers an alternative to handle callback hell
 QuickNimble its a layer between the native sintaxe and us, it makes Unit tests easier to write and read also similar to other unit tests of different programming languages such NodeJs. 
 
 
-## *To my Farfetch reviewers:*
-
-I didnt have time to code on this weekend then I had to run against time in this week to develop those user stories. My deepest regret are the user interface which I could make more prettier and more unit and interface tests. This challange is awesome! Definitely I will finish those things and keep it open source.  
+## *To my Farfetch reviewers:*  
 
 Thank you for the challenge no matter the result I feel myself grateful!
 
