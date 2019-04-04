@@ -36,13 +36,13 @@ struct CharacterViewModel {
         return _character.thumbnail?.imageExtension ?? ""
     }
     
-    var comicsUris = [MarvelItemViewModel]()
+    var comicsUris: [MarvelItemViewModel]!
     
-    var eventsUris = [MarvelItemViewModel]()
+    var eventsUris: [MarvelItemViewModel]!
     
-    var storiesUris = [MarvelItemViewModel]()
+    var storiesUris: [MarvelItemViewModel]!
     
-    var seriesUris = [MarvelItemViewModel]()
+    var seriesUris: [MarvelItemViewModel]!
     
     
     init(character: MarvelCharacter) {
