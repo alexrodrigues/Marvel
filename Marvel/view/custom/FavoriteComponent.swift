@@ -17,6 +17,14 @@ protocol FavoriteComponentDelegate: class {
 
 class FavoriteComponent: UIView {
     
+    
+    private lazy var favoriteLabel: UILabel = {
+       let label = UILabel(frame: .zero)
+        label.textColor = UIColor.darkGray
+        label.text = "Favorites"
+        return label
+    }()
+    
     private lazy var favoriteCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -44,7 +52,13 @@ class FavoriteComponent: UIView {
     }
     
     private func initialize() {
+        addSubview(favoriteLabel)
         addSubview(favoriteCollectionView)
+        
+        favoriteLabel
+            .topAnchor(equalTo: topAnchor, constant: 0.0)
+        
+        
         favoriteCollectionView
             .leadingAnchor(equalTo: leadingAnchor, constant: 0.0)
             .trailingAnchor(equalTo: trailingAnchor, constant: 0.0)

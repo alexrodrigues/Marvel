@@ -146,6 +146,13 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: SegueIdentifiers.detail, sender: charactersArray[indexPath.row])
     }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Heroes"
+        }
+        return ""
+    }
 }
 
 extension ListViewController: UISearchBarDelegate {
