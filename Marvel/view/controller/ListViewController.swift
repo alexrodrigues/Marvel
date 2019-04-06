@@ -27,11 +27,12 @@ class ListViewController: UIViewController {
     private var lastKnowIndex = 1
     private var isLoadingRemoved = false
     private var disponseBag = DisposeBag()
-    private lazy var service = CharactersService()
+    private var listViewModel = ListViewModel()
     private var charactersArray = [CharacterViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
         favoriteComponent.setup(delegate: self)
         setupView()
         fetch(page: FIRST_PAGE)
@@ -42,33 +43,48 @@ class ListViewController: UIViewController {
         favoriteComponent.checkFavorites()
     }
     
+    private func bind() {
+        listViewModel.characters
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (characters) in
+                if (characters.isEmpty) { return }
+                guard let self = self else { return }
+                self.charactersArray.append(contentsOf: characters)
+                self.setupTableview()
+            }).disposed(by: disponseBag)
+        
+        listViewModel.searchCharacters
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (characters) in
+                if (characters.isEmpty) { return }
+                guard let self = self else { return }
+                self.charactersArray = characters
+                self.setupTableview()
+            }).disposed(by: disponseBag)
+        
+        listViewModel.errorMessage
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (message) in
+                if (message.isEmpty) { return }
+                guard let self = self else { return }
+                self.showErrorAlert(message)
+            }).disposed(by: disponseBag)
+    }
+    
     private func registerCells() {
         listTableView.register(UINib(nibName: HOME_CELL, bundle: nil), forCellReuseIdentifier: HOME_CELL)
     }
 
     private func search(text: String) {
-        CharactersService().search(text: text)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] response in
-                guard let self = self else { return }
-                self.charactersArray = response
-                self.setupTableview()
-                }, onError: { (error) in
-                    self.showErrorAlert(error.localizedDescription)
-            }).disposed(by: disponseBag)
+        listViewModel.search(text: text)
     }
     
     private func fetch(page: Int) {
         lastKnowIndex = page
-        CharactersService().fetch(lastIndex: page)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] response in
-                guard let self = self else { return }
-                self.charactersArray.append(contentsOf: response)
-                self.setupTableview()
-            }, onError: { (error) in
-                self.showErrorAlert(error.localizedDescription)
-            }).disposed(by: disponseBag)
+        listViewModel.fetch(lastIndex: lastKnowIndex)
     }
     
     private func setupView() {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class HomeListCell: UITableViewCell {
 
@@ -14,6 +15,7 @@ class HomeListCell: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var profileActivityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var placeholderView: UIView!
+    private let dispose = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +24,21 @@ class HomeListCell: UITableViewCell {
     func setup(character: CharacterViewModel, index: Int) {
         loadingState()
         nameLabel.text = character.name
-        downloadImage(character.profileImage, index: index)
+        
+        character.downloadImage(index)
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] imageResponse in
+                guard let `self` = self else { return }
+                if index == imageResponse.index {
+                    `self`.profileImageView.image = imageResponse.image
+                    `self`.profileActivityIndicatorView.stopAnimating()
+                    `self`.profileImageView.isHidden = false
+                    `self`.placeholderView.isHidden = true
+                }
+            }, onError: { error in
+                print(error.localizedDescription)
+            }).disposed(by: dispose)
     }
     
     private func loadingState() {
@@ -32,17 +48,4 @@ class HomeListCell: UITableViewCell {
         profileActivityIndicatorView.startAnimating()
     }
     
-    private func downloadImage(_ urlImage: String, index: Int) {
-        if (!urlImage.isEmpty) {
-            ImageService.instance.downloadImage(url: urlImage, index: index) { [weak self] (image, indexFromApi) in
-                guard let `self` = self else { return }
-                if index == indexFromApi {
-                    `self`.profileImageView.image = image
-                    `self`.profileActivityIndicatorView.stopAnimating()
-                    `self`.profileImageView.isHidden = false
-                    `self`.placeholderView.isHidden = true
-                }
-            }
-        }
-    }
 }
