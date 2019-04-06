@@ -50,10 +50,15 @@ class DetailViewController: UIViewController {
         favoriteComponent.setup(delegate: self)
         setupFavoriteButton()
         nameLabel.text = character.name
-        ImageService.instance.downloadImage(url: character.profileImage, index: 0) { [weak self] (image, indexFromApi) in
-            guard let self = self else { return }
-            self.profileImageView.image = image
-        }
+        character.downloadImage()
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] imageResponse in
+                guard let self = self else { return }
+                self.profileImageView.image = imageResponse.image
+            }, onError: { error in
+                    print(error.localizedDescription)
+            }).disposed(by: disposeBag)
     }
     
     
