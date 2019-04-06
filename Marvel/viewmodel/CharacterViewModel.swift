@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 struct CharacterViewModel {
     
@@ -36,14 +38,19 @@ struct CharacterViewModel {
         return _character.thumbnail?.imageExtension ?? ""
     }
     
-    var comicsUris = [MarvelItemViewModel]()
+    var comicsUris: [MarvelItemViewModel]!
     
-    var eventsUris = [MarvelItemViewModel]()
+    var eventsUris: [MarvelItemViewModel]!
     
-    var storiesUris = [MarvelItemViewModel]()
+    var storiesUris: [MarvelItemViewModel]!
     
-    var seriesUris = [MarvelItemViewModel]()
+    var seriesUris: [MarvelItemViewModel]!
     
+    
+    func downloadImage(_ anIndex: Int? = -1) -> Observable<ImageDownloadResponse> {
+        return ImageService()
+            .downloadImage(url: profileImage, index: anIndex ?? -1)
+    }
     
     init(character: MarvelCharacter) {
         _character = character

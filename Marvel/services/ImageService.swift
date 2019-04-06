@@ -7,43 +7,53 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+
+struct ImageDownloadResponse {
+    var image: UIImage?
+    var index: Int?
+    
+    init() {
+    }
+    
+    init(provideImage: UIImage, provideIndex: Int) {
+        self.image = provideImage
+        self.index = provideIndex
+    }
+}
 
 class ImageService {
-
-    typealias ImageCompletion = (_ image: UIImage?, _ index: Int) -> Void
     
     private var imageCache = NSCache<NSString, UIImage>()
-    static let instance = ImageService()
     
-    func downloadImage(url: String, index: Int, completion: @escaping ImageCompletion) {
+    func downloadImage(url: String, index: Int) -> Observable<ImageDownloadResponse> {
         if let cachedImage = imageCache.object(forKey: url as NSString) {
-            completion(cachedImage, index)
-            return
+            let cacheResponse = ImageDownloadResponse(provideImage: cachedImage, provideIndex: index)
+            return Observable.just(cacheResponse)
         }
-        DispatchQueue.global().async { [weak self] in
-            guard let `self` = self else { return }
-            guard let urlObject = URL(string: url) else {
-                `self`.throwError(index: index, completion: completion)
-                return
-            }
-            do {
-                let data = try Data(contentsOf: urlObject)
-                DispatchQueue.main.async {
+        return Observable<ImageDownloadResponse>.create({ observer -> Disposable in
+            
+            if let urlObject = URL(string: url)  {
+                do {
+                    let data = try Data(contentsOf: urlObject)
                     if let image = UIImage(data: data) {
                         self.imageCache.setObject(image, forKey: url as NSString)
-                        completion(image, index)
+                        let response = ImageDownloadResponse(provideImage: image, provideIndex: index)
+                        observer.onNext(response)
+                        observer.onCompleted()
                     }
+                } catch let exception {
+                    observer.onError(MyError(msg: exception.localizedDescription))
+                    observer.onCompleted()
                 }
-            } catch {
-                `self`.throwError(index: index, completion: completion)
+            } else {
+                observer.onError(MyError(msg: "Failed to download image \(index)"))
+                observer.onCompleted()
             }
-        }
+            
+            return Disposables.create {
+            }
+        })
     }
-    
-    private func throwError(index: Int, completion: @escaping ImageCompletion) {
-        DispatchQueue.main.async {
-            completion(nil, index)
-        }
-    }
-    
 }
