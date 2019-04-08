@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class FavoriteCell: UICollectionViewCell {
     
@@ -14,6 +15,8 @@ class FavoriteCell: UICollectionViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var placeholderView: UIView!
     @IBOutlet weak var activityIndictorView: UIActivityIndicatorView!
+    
+    private let dispose = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,7 +26,20 @@ class FavoriteCell: UICollectionViewCell {
         loadingState()
         nameLabel.text = favorite.name
         if !favorite.profileImage.isEmpty {
-            downloadImage(favorite.profileImage, index: index)
+            favorite.downloadImage(index)
+                .asObservable()
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { [weak self] imageResponse in
+                    guard let `self` = self else { return }
+                    if index == imageResponse.index {
+                        `self`.profileImageView.image = imageResponse.image
+                        `self`.activityIndictorView.stopAnimating()
+                        `self`.profileImageView.isHidden = false
+                        `self`.placeholderView.isHidden = true
+                    }
+                    }, onError: { error in
+                        print(error.localizedDescription)
+                }).disposed(by: dispose)
         }
     }
     
@@ -33,18 +49,5 @@ class FavoriteCell: UICollectionViewCell {
         placeholderView.isHidden = false
         activityIndictorView.startAnimating()
     }
-    
-    private func downloadImage(_ urlImage: String, index: Int) {
-        if (!urlImage.isEmpty) {
-            ImageService.instance.downloadImage(url: urlImage, index: index) { [weak self] (image, indexFromApi) in
-                guard let self = self else { return }
-                if index == indexFromApi {
-                    self.profileImageView.image = image
-                    self.activityIndictorView.stopAnimating()
-                    self.profileImageView.isHidden = false
-                    self.placeholderView.isHidden = true
-                }
-            }
-        }
-    }
+
 }

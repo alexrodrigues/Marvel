@@ -31,10 +31,13 @@ class DetailViewController: UIViewController {
     
     var character: CharacterViewModel!
     
+    private let detailViewModel = DetailViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        fetch()
+        bind()
+        detailViewModel.fetch(character: character)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,15 +50,21 @@ class DetailViewController: UIViewController {
         favoriteComponent.setup(delegate: self)
         setupFavoriteButton()
         nameLabel.text = character.name
-        ImageService.instance.downloadImage(url: character.profileImage, index: 0) { [weak self] (image, indexFromApi) in
-            guard let self = self else { return }
-            self.profileImageView.image = image
-        }
+        character.downloadImage()
+            .asObservable()
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] imageResponse in
+                guard let self = self else { return }
+                self.profileImageView.image = imageResponse.image
+            }, onError: { error in
+                    print(error.localizedDescription)
+            }).disposed(by: disposeBag)
     }
     
-    private func fetch() {
-        SummaryService()
-            .fetch(models: character.comicsUris)
+    
+    private func bind() {
+        detailViewModel
+            .comicsArray
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
@@ -65,8 +74,8 @@ class DetailViewController: UIViewController {
                 print(error.localizedDescription)
             }).disposed(by: disposeBag)
         
-        SummaryService()
-            .fetch(models: character.eventsUris)
+        detailViewModel
+            .eventsArray
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
@@ -76,8 +85,8 @@ class DetailViewController: UIViewController {
                 print(error.localizedDescription)
             }).disposed(by: disposeBag)
         
-        SummaryService()
-            .fetch(models: character.storiesUris)
+        detailViewModel
+            .storiesArray
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
@@ -87,8 +96,8 @@ class DetailViewController: UIViewController {
                     print(error.localizedDescription)
             }).disposed(by: disposeBag)
         
-        SummaryService()
-            .fetch(models: character.seriesUris)
+        detailViewModel
+            .seriesArray
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
@@ -116,8 +125,8 @@ class DetailViewController: UIViewController {
     }
     
     private func setupFavoriteButton() {
-        CharactersService().exists(character: character)
-                .observeOn(MainScheduler.instance)
+        detailViewModel.isCharacterExists(character: character)
+            .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] exists in
                 guard let self = self else { return }
                 if exists {
@@ -131,7 +140,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func favorite() {
-        CharactersService().insert(character: character)
+        detailViewModel.insert(character: character)
             .subscribe(onNext: { success in
                 self.setupFavoriteButton()
                 self.favoriteComponent.checkFavorites()
@@ -142,7 +151,7 @@ class DetailViewController: UIViewController {
     }
     
     @objc func unfavorite() {
-        CharactersService().delete(character: character)
+        detailViewModel.delete(character: character)
             .subscribe(onNext: { success in
                 self.setupFavoriteButton()
                 self.favoriteComponent.checkFavorites()
