@@ -204,7 +204,7 @@ extension ListViewController: UISearchBarDelegate {
 extension ListViewController: FavoriteComponentDelegate {
     
     func inflateFavorites() {
-        favoriteComponentHeight.constant = 90.0
+        favoriteComponentHeight.constant = FavoriteComponent.OPEN_HEIGHT
         UIView.animate(withDuration: 0.6) {
             self.view.setNeedsLayout()
         }

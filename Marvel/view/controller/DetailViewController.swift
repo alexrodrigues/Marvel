@@ -187,8 +187,8 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension DetailViewController: FavoriteComponentDelegate {
     
-    func inflateFavorites() {g
-        favoriteComponentHeight.constant = 90.0
+    func inflateFavorites() {
+        favoriteComponentHeight.constant = FavoriteComponent.OPEN_HEIGHT
         UIView.animate(withDuration: 0.6) {
             self.view.setNeedsLayout()
         }

@@ -17,10 +17,12 @@ protocol FavoriteComponentDelegate: class {
 
 class FavoriteComponent: UIView {
     
+    static let OPEN_HEIGHT = CGFloat(140.0)
     
     private lazy var favoriteLabel: UILabel = {
        let label = UILabel(frame: .zero)
         label.textColor = UIColor.darkGray
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Favorites"
         return label
     }()
@@ -29,7 +31,7 @@ class FavoriteComponent: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 82.0, height: 90.0)
-        layout.sectionInset = UIEdgeInsets(top: 0.0, left: 16.0, bottom: 0.0, right: 0.0)
+        layout.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .white
         collection.translatesAutoresizingMaskIntoConstraints = false
@@ -56,13 +58,15 @@ class FavoriteComponent: UIView {
         addSubview(favoriteCollectionView)
         
         favoriteLabel
-            .topAnchor(equalTo: topAnchor, constant: 0.0)
-        
+            .topAnchor(equalTo: topAnchor, constant: 16.0)
+            .leadingAnchor(equalTo: leadingAnchor, constant: 16.0)
+            .trailingAnchor(equalTo: trailingAnchor, constant: 16.0)
+            .heightAnchor(equalTo: 21.0)
         
         favoriteCollectionView
             .leadingAnchor(equalTo: leadingAnchor, constant: 0.0)
             .trailingAnchor(equalTo: trailingAnchor, constant: 0.0)
-            .topAnchor(equalTo: topAnchor, constant: 0.0)
+            .topAnchor(equalTo: favoriteLabel.bottomAnchor, constant: 8.0)
             .bottomAnchor(equalTo: bottomAnchor, constant: 0.0)
     }
     
@@ -113,7 +117,7 @@ extension FavoriteComponent: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 82.0, height: 90.0)
+        return CGSize(width: 82.0, height: 120.0)
     }
 }
 
