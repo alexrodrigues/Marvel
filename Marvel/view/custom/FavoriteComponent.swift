@@ -17,7 +17,7 @@ protocol FavoriteComponentDelegate: class {
 
 class FavoriteComponent: UIView {
     
-    static let OPEN_HEIGHT = CGFloat(140.0)
+    static let OPEN_HEIGHT = CGFloat(150.0)
     
     private lazy var favoriteLabel: UILabel = {
        let label = UILabel(frame: .zero)
@@ -33,7 +33,7 @@ class FavoriteComponent: UIView {
         layout.itemSize = CGSize(width: 82.0, height: 90.0)
         layout.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = .white
+        collection.backgroundColor = .red
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
@@ -66,8 +66,8 @@ class FavoriteComponent: UIView {
         favoriteCollectionView
             .leadingAnchor(equalTo: leadingAnchor, constant: 0.0)
             .trailingAnchor(equalTo: trailingAnchor, constant: 0.0)
-            .topAnchor(equalTo: favoriteLabel.bottomAnchor, constant: 8.0)
-            .bottomAnchor(equalTo: bottomAnchor, constant: 0.0)
+            .topAnchor(equalTo: topAnchor, constant: 45.0)
+            .bottomAnchor(equalTo: bottomAnchor, constant: 16.0)
     }
     
     func setup(delegate: FavoriteComponentDelegate) {
@@ -116,8 +116,5 @@ extension FavoriteComponent: UICollectionViewDataSource, UICollectionViewDelegat
         return favoritesArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 82.0, height: 120.0)
-    }
 }
 
