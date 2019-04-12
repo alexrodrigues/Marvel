@@ -149,7 +149,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 68.0
+        return 81.0
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -161,6 +161,13 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: SegueIdentifiers.detail, sender: charactersArray[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Heroes"
+        }
+        return ""
     }
 }
 
@@ -197,7 +204,7 @@ extension ListViewController: UISearchBarDelegate {
 extension ListViewController: FavoriteComponentDelegate {
     
     func inflateFavorites() {
-        favoriteComponentHeight.constant = 90.0
+        favoriteComponentHeight.constant = FavoriteComponent.OPEN_HEIGHT
         UIView.animate(withDuration: 0.6) {
             self.view.setNeedsLayout()
         }
