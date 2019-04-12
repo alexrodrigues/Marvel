@@ -11,7 +11,9 @@ import RxSwift
 import RxCocoa
 
 struct DetailViewModel {
-
+    
+    let sectionTitles = ["Comics", "Events", "Stories", "Series"]
+    
     var comicsArray = BehaviorRelay<[SummaryViewModel]>(value: [SummaryViewModel]())
     var eventsArray = BehaviorRelay<[SummaryViewModel]>(value: [SummaryViewModel]())
     var storiesArray = BehaviorRelay<[SummaryViewModel]>(value: [SummaryViewModel]())

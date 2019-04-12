@@ -23,15 +23,18 @@ class DetailViewController: UIViewController {
     private var favoriteBarButton: UIBarButtonItem!
     private let SUMMARY_CELL_IDENTIFIER = "SummaryCell"
     
-    let sectionTitles = ["Comics", "Events", "Stories", "Series"]
-    var comicsArray = [SummaryViewModel]()
-    var eventsArray = [SummaryViewModel]()
-    var storiesArray = [SummaryViewModel]()
-    var seriesArray = [SummaryViewModel]()
-    
     var character: CharacterViewModel!
     
-    private let detailViewModel = DetailViewModel()
+    private var detailViewModel: DetailViewModel!
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        detailViewModel = DetailViewModel()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +71,6 @@ class DetailViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
-                self.comicsArray = viewModels
                 self.presentTableview()
             }, onError: { error in
                 print(error.localizedDescription)
@@ -79,7 +81,6 @@ class DetailViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
-                self.eventsArray = viewModels
                 self.presentTableview()
             }, onError: { error in
                 print(error.localizedDescription)
@@ -90,7 +91,6 @@ class DetailViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
-                self.storiesArray = viewModels
                 self.presentTableview()
                 }, onError: { error in
                     print(error.localizedDescription)
@@ -101,7 +101,6 @@ class DetailViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
-                self.seriesArray = viewModels
                 self.presentTableview()
                 }, onError: { error in
                     print(error.localizedDescription)
@@ -115,13 +114,13 @@ class DetailViewController: UIViewController {
     
     private func getRightArray(section: Int) -> [SummaryViewModel] {
         if section == 0 {
-            return comicsArray
+            return detailViewModel.comicsArray.value
         } else if section == 1 {
-            return eventsArray
+            return detailViewModel.eventsArray.value
         } else if section == 2{
-            return storiesArray
+            return detailViewModel.storiesArray.value
         }
-        return seriesArray
+        return detailViewModel.seriesArray.value
     }
     
     private func setupFavoriteButton() {
@@ -181,7 +180,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
+        return detailViewModel.sectionTitles[section]
     }
 }
 
