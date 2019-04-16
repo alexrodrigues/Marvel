@@ -27,17 +27,10 @@ class DetailViewController: UIViewController {
     
     private var detailViewModel: DetailViewModel!
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    init() {
-        super.init(nibName: nil, bundle: nil)
-        detailViewModel = DetailViewModel()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        detailViewModel = DetailViewModel()
         setupView()
         bind()
         detailViewModel.fetch(character: character)
