@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 
-class HomeListCell: UITableViewCell {
+class HomeListCell: UICollectionViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
@@ -20,7 +20,7 @@ class HomeListCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-    func setup(character: CharacterViewModel, index: Int) {
+    func setup(character: CharacterViewModel) {
         loadingState()
         nameLabel.text = character.name
         

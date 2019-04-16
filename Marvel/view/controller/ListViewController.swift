@@ -14,9 +14,6 @@ class ListViewController: UIViewController, ViewConfiguration {
 
     // MARK: - Variables
     
-    private lazy var loadingMoreView: LoadingMoreView = {
-        return LoadingMoreView.loadFromNibNamed() as! LoadingMoreView
-    }()
     private let HOME_CELL = "HomeListCell"
     private let FIRST_PAGE = 1
     private var lastKnowIndex = 1
@@ -24,10 +21,11 @@ class ListViewController: UIViewController, ViewConfiguration {
     private var disponseBag = DisposeBag()
     private var listViewModel = ListViewModel()
     private var charactersArray = [CharacterViewModel]()
+    private var bottomRefreshController: UIRefreshControl!
     
     // MARK: - Outlets
     
-    @IBOutlet weak var listTableView: UITableView!
+    @IBOutlet weak var homeCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var listSearchBar: UISearchBar!
     private lazy var favoriteComponent: FavoriteComponent = {
@@ -61,7 +59,7 @@ class ListViewController: UIViewController, ViewConfiguration {
                 if (characters.isEmpty) { return }
                 guard let self = self else { return }
                 self.charactersArray.append(contentsOf: characters)
-                self.setupTableview()
+                self.setupCollectionview()
             }).disposed(by: disponseBag)
         
         listViewModel.searchCharacters
@@ -71,7 +69,7 @@ class ListViewController: UIViewController, ViewConfiguration {
                 if (characters.isEmpty) { return }
                 guard let self = self else { return }
                 self.charactersArray = characters
-                self.setupTableview()
+                self.setupCollectionview()
             }).disposed(by: disponseBag)
         
         listViewModel.errorMessage
@@ -85,17 +83,18 @@ class ListViewController: UIViewController, ViewConfiguration {
     }
     
     private func registerCells() {
-        listTableView.register(UINib(nibName: HOME_CELL, bundle: nil), forCellReuseIdentifier: HOME_CELL)
+        homeCollectionView.register(UINib(nibName: HOME_CELL, bundle: nil), forCellWithReuseIdentifier: HOME_CELL)
     }
     
-    private func setupTableview() {
-        self.activityIndicator.stopAnimating()
-        self.listTableView.isHidden = false
-        self.listTableView.reloadData()
+    private func setupCollectionview() {
+        activityIndicator.stopAnimating()
+        disableLoadingMore()
+        homeCollectionView.isHidden = false
+        homeCollectionView.reloadData()
     }
     
     private func showLoading() {
-        listTableView.isHidden = true
+        homeCollectionView.isHidden = true
         activityIndicator.startAnimating()
         charactersArray.removeAll()
     }
@@ -103,14 +102,17 @@ class ListViewController: UIViewController, ViewConfiguration {
     // MARK: - Setup View Methods
     
     private func setupLoadingMoreView() {
-        isLoadingRemoved = false
-        loadingMoreView.frame = CGRect(x: 0, y: 0, width: listTableView.frame.width, height: 50.0)
-        listTableView.tableFooterView = loadingMoreView
+        bottomRefreshController = UIRefreshControl()
+        bottomRefreshController.addTarget(self, action: #selector(ListViewController.performRefreshBottom), for: .valueChanged)
+        homeCollectionView.bottomRefreshControl = bottomRefreshController
+    }
+    
+    @objc func performRefreshBottom() {
+        fetch(page: charactersArray.count + 1)
     }
     
     private func disableLoadingMore() {
-        isLoadingRemoved = true
-        loadingMoreView.isHidden = true
+        bottomRefreshController.endRefreshing()
     }
     
     // MARK: - View Coding Methods
@@ -146,7 +148,6 @@ class ListViewController: UIViewController, ViewConfiguration {
     private func searchCancelled() {
         showLoading()
         isLoadingRemoved = false
-        loadingMoreView.isHidden = false
         fetch(page: lastKnowIndex)
     }
     
@@ -159,43 +160,24 @@ class ListViewController: UIViewController, ViewConfiguration {
     }
 }
 
-// MARK: - TableViewDelegate & TableViewDataSource Methods
+// MARK: - CollectionViewDelegate & CollectionViewDataSource Methods
 
-extension ListViewController: UITableViewDataSource, UITableViewDelegate {
- 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: HOME_CELL, for: indexPath) as? HomeListCell else {
-            return UITableViewCell()
+extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HOME_CELL, for: indexPath) as? HomeListCell else {
+            return UICollectionViewCell()
         }
-        cell.setup(character: charactersArray[indexPath.row], index: indexPath.row)
+        
+        let character =  charactersArray[indexPath.row]
+        cell.setup(character: character)
         return cell
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return charactersArray.count
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 81.0
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == charactersArray.count - 1 && !isLoadingRemoved {
-            fetch(page: charactersArray.count + 1)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: SegueIdentifiers.detail, sender: charactersArray[indexPath.row])
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Heroes"
-        }
-        return ""
-    } 
 }
 
 // MARK: - UISearchBarDelegate Methods

@@ -18,15 +18,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="blP-vm-CM3">
-                                <rect key="frame" x="0.0" y="108" width="375" height="559"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <inset key="scrollIndicatorInsets" minX="16" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9TG-tG-3Hp">
+                                <rect key="frame" x="0.0" y="108" width="375" height="510"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Co7-xf-1I2">
+                                    <size key="itemSize" width="108" height="127"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="oUU-uC-FeW"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="9Do-E6-Y9k"/>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="8F5-Sb-5JX"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="i9z-oF-2VB"/>
                                 </connections>
-                            </tableView>
+                            </collectionView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vNB-ki-huA">
                                 <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
                                 <color key="color" red="0.92455786470000001" green="0.10997990520000001" blue="0.1375359595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -46,34 +52,38 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="blP-vm-CM3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1RN-rb-lLt"/>
-                            <constraint firstItem="blP-vm-CM3" firstAttribute="top" secondItem="SUw-G1-9Or" secondAttribute="bottom" id="4u7-WR-Dbc"/>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8ZW-l7-s8S"/>
+                            <constraint firstItem="9TG-tG-3Hp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Fxd-pk-mce"/>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Mbc-Zm-L6d"/>
-                            <constraint firstItem="blP-vm-CM3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QMQ-Zb-wN5"/>
                             <constraint firstItem="vNB-ki-huA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aIB-w1-ZEG"/>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cUe-VT-CGI"/>
                             <constraint firstItem="vNB-ki-huA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="chF-Ea-XeK"/>
-                            <constraint firstItem="blP-vm-CM3" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="eFC-Cq-Jvm"/>
+                            <constraint firstItem="9TG-tG-3Hp" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="erw-MM-loq"/>
+                            <constraint firstItem="9TG-tG-3Hp" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="jIm-lL-nXC"/>
+                            <constraint firstItem="9TG-tG-3Hp" firstAttribute="top" secondItem="SUw-G1-9Or" secondAttribute="bottom" id="wMq-uX-maJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Heroes" id="LpB-Yr-8aP">
+                        <color key="badgeColor" red="0.82114034889999998" green="0.028517900030000001" blue="0.026026805859999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBarItem>
                     <navigationItem key="navigationItem" title="Marvel" id="b4Q-P1-tdo"/>
                     <connections>
                         <outlet property="activityIndicator" destination="vNB-ki-huA" id="zZj-zo-dow"/>
+                        <outlet property="homeCollectionView" destination="9TG-tG-3Hp" id="CTk-y1-Rj5"/>
                         <outlet property="listSearchBar" destination="SUw-G1-9Or" id="KMP-g8-Ryg"/>
-                        <outlet property="listTableView" destination="blP-vm-CM3" id="jhn-KD-pc8"/>
                         <segue destination="IYM-xe-5QI" kind="show" identifier="segueToDetail" id="9P9-PR-DrQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1394" y="121"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Item-->
         <scene sceneID="ldf-QM-tp3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hoa-XU-Oyg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="t7u-M2-yTT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dMy-qI-eWC">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -88,12 +98,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ZE8-pC-cRH"/>
+                        <segue destination="NfO-Pa-bKx" kind="relationship" relationship="rootViewController" id="Y2s-CR-awe"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cG4-si-rkl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="146" y="139"/>
+            <point key="canvasLocation" x="-508" y="121"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="5mS-bW-zIH">
@@ -208,8 +218,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aBP-ZR-ndz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1877.5999999999999" y="133.5832083958021"/>
+            <point key="canvasLocation" x="2276" y="121"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="N0y-dY-h81">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="NfO-Pa-bKx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="ro6-eD-gpd"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Jz-Nr-QJo">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" red="0.82114034889999998" green="0.028517900030000001" blue="0.026026805859999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="wGl-Lo-763"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8jb-7s-lWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="489" y="121"/>
         </scene>
     </scenes>
-    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+    <color key="tintColor" red="0.82114034889999998" green="0.028517900030000001" blue="0.026026805859999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

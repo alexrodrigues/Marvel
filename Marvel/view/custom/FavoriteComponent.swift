@@ -133,6 +133,5 @@ extension FavoriteComponent: UICollectionViewDataSource, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return favoritesArray.count
     }
-    
 }
 
