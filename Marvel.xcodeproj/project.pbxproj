@@ -40,7 +40,6 @@
 		04E2B22122495C7800DD72A3 /* CharacterVMFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2B22022495C7800DD72A3 /* CharacterVMFactory.swift */; };
 		04E2B22422495E0100DD72A3 /* HomeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E2B22322495E0100DD72A3 /* HomeListCell.xib */; };
 		04E2B22722495E3200DD72A3 /* HomeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2B22622495E3200DD72A3 /* HomeListCell.swift */; };
-		04E2B22922495FC300DD72A3 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2B22822495FC300DD72A3 /* ImageService.swift */; };
 		04E2B22D2249697100DD72A3 /* LoadingMore.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E2B22C2249697100DD72A3 /* LoadingMore.xib */; };
 		04E2B23022496A7100DD72A3 /* LoadingMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2B22F22496A7100DD72A3 /* LoadingMoreView.swift */; };
 		04EC23F1224C1F9A00EBB81D /* MD5Helper+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC23EF224C1F9A00EBB81D /* MD5Helper+Extensions.swift */; };
@@ -105,7 +104,6 @@
 		04E2B22022495C7800DD72A3 /* CharacterVMFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVMFactory.swift; sourceTree = "<group>"; };
 		04E2B22322495E0100DD72A3 /* HomeListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeListCell.xib; sourceTree = "<group>"; };
 		04E2B22622495E3200DD72A3 /* HomeListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeListCell.swift; sourceTree = "<group>"; };
-		04E2B22822495FC300DD72A3 /* ImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		04E2B22C2249697100DD72A3 /* LoadingMore.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingMore.xib; sourceTree = "<group>"; };
 		04E2B22F22496A7100DD72A3 /* LoadingMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingMoreView.swift; sourceTree = "<group>"; };
 		04EC23EF224C1F9A00EBB81D /* MD5Helper+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MD5Helper+Extensions.swift"; sourceTree = "<group>"; };
@@ -211,7 +209,6 @@
 				041B741C22465B56004844D9 /* MarvelService.swift */,
 				041B741822465810004844D9 /* CharactersService.swift */,
 				0486095A224ADA1E001C599A /* SummaryService.swift */,
-				04E2B22822495FC300DD72A3 /* ImageService.swift */,
 			);
 			path = services;
 			sourceTree = "<group>";
@@ -581,6 +578,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Marvel/Pods-Marvel-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAtomic/RxAtomic.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -589,6 +587,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAtomic.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -630,7 +629,6 @@
 				04443C5222556C790073AF87 /* ListViewModel.swift in Sources */,
 				04860963224ADEBD001C599A /* DetailViewController.swift in Sources */,
 				04E2B21F22495C1400DD72A3 /* CharacterViewModel.swift in Sources */,
-				04E2B22922495FC300DD72A3 /* ImageService.swift in Sources */,
 				041B741F22465C93004844D9 /* CharactersResponse.swift in Sources */,
 				041B741922465810004844D9 /* CharactersService.swift in Sources */,
 				04AAED082265C74C00813D3C /* ConstraintsHelper.swift in Sources */,

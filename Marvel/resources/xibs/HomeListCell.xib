@@ -18,21 +18,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="341" height="80.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nwj-U5-JPF">
-                        <rect key="frame" x="16" y="8" width="61" height="62"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="61" id="Wgs-Ks-cWy"/>
-                            <constraint firstAttribute="height" constant="62" id="jXK-VP-wwS"/>
-                        </constraints>
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                <integer key="value" value="8"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </view>
-                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="92v-R8-1Pf">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="92v-R8-1Pf">
                         <rect key="frame" x="16" y="8" width="61" height="62"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="61" id="9Cc-hH-ebV"/>
@@ -46,7 +32,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDD-Kl-hNv">
-                        <rect key="frame" x="85" y="8" width="248" height="62"/>
+                        <rect key="frame" x="93" y="8" width="240" height="62"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="62" id="cfe-Wv-bTi"/>
                         </constraints>
@@ -54,27 +40,17 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-VG-aB2">
-                        <rect key="frame" x="36" y="30.5" width="20" height="20"/>
-                        <color key="color" red="0.92455786470000001" green="0.10997990520000001" blue="0.1375359595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </activityIndicatorView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="KDD-Kl-hNv" firstAttribute="leading" secondItem="92v-R8-1Pf" secondAttribute="trailing" constant="16" id="ECH-1B-Zsu"/>
                     <constraint firstItem="92v-R8-1Pf" firstAttribute="leading" secondItem="9lx-HY-gJM" secondAttribute="leading" constant="16" id="GW3-yQ-ESA"/>
-                    <constraint firstItem="Nwj-U5-JPF" firstAttribute="leading" secondItem="9lx-HY-gJM" secondAttribute="leading" constant="16" id="VOS-aq-nrO"/>
-                    <constraint firstItem="xdx-VG-aB2" firstAttribute="leading" secondItem="9lx-HY-gJM" secondAttribute="leading" constant="36" id="ZpZ-3e-36R"/>
-                    <constraint firstItem="xdx-VG-aB2" firstAttribute="centerY" secondItem="9lx-HY-gJM" secondAttribute="centerY" id="aYQ-VA-uDb"/>
                     <constraint firstItem="KDD-Kl-hNv" firstAttribute="top" secondItem="9lx-HY-gJM" secondAttribute="top" constant="8" id="bJp-Pl-Y4o"/>
                     <constraint firstAttribute="trailing" secondItem="KDD-Kl-hNv" secondAttribute="trailing" constant="8" id="jEH-DV-2YF"/>
-                    <constraint firstItem="Nwj-U5-JPF" firstAttribute="top" secondItem="9lx-HY-gJM" secondAttribute="top" constant="8" id="jQH-bP-WUJ"/>
-                    <constraint firstItem="KDD-Kl-hNv" firstAttribute="leading" secondItem="Nwj-U5-JPF" secondAttribute="trailing" constant="8" id="nGr-Zt-K6r"/>
                     <constraint firstItem="92v-R8-1Pf" firstAttribute="top" secondItem="9lx-HY-gJM" secondAttribute="top" constant="8" id="spQ-mD-gnd"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="nameLabel" destination="KDD-Kl-hNv" id="PDr-xk-TX5"/>
-                <outlet property="placeholderView" destination="Nwj-U5-JPF" id="72T-tE-EwG"/>
-                <outlet property="profileActivityIndicatorView" destination="xdx-VG-aB2" id="j0B-be-q5b"/>
                 <outlet property="profileImageView" destination="92v-R8-1Pf" id="w4Q-cE-zPF"/>
             </connections>
             <point key="canvasLocation" x="-503.19999999999999" y="-115.59220389805098"/>

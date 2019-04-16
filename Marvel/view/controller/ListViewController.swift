@@ -37,7 +37,6 @@ class ListViewController: UIViewController, ViewConfiguration {
         let constraint = NSLayoutConstraint(item: favoriteComponent, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 0.0, constant: 0.0)
         return constraint
     } ()
-    // MARK: - Actions
     
     // MARK: - Life Cycle
     
