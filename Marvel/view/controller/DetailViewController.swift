@@ -30,7 +30,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         detailViewModel = DetailViewModel()
         setupView()
         bind()
