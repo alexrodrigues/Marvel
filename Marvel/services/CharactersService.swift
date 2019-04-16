@@ -18,6 +18,7 @@ class CharactersService: MarvelService {
         let endpoint = "characters?\(fabricateDefaultParams())&limit=\(LIMIT)&offset=\(lastIndex)"
         return Api<CharactersResponse>()
             .requestObject(urlString: "\(ApiDefinitions.BASE_URL)\(endpoint)")
+            .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .map { CharacterVMFactory().factor(response: $0) }
     }
     
@@ -43,6 +44,7 @@ class CharactersService: MarvelService {
         let endpoint = "characters?\(fabricateDefaultParams())&limit=\(LIMIT)&nameStartsWith=\(text)"
         return Api<CharactersResponse>()
             .requestObject(urlString: "\(ApiDefinitions.BASE_URL)\(endpoint)")
+            .observeOn(ConcurrentDispatchQueueScheduler(qos: .background))
             .map { CharacterVMFactory().factor(response: $0) }
     }
 }

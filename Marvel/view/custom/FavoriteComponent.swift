@@ -15,8 +15,14 @@ protocol FavoriteComponentDelegate: class {
     func disinflateFavorites()
 }
 
-class FavoriteComponent: UIView {
+class FavoriteComponent: UIView, ViewConfiguration {
     
+    // MARK: - Variables
+    
+    private weak var _delegate: FavoriteComponentDelegate?
+    private var favoritesArray = [CharacterViewModel]()
+    private let disposeBag = DisposeBag()
+    private let FAVORITE_CELL = "FavoriteCell"
     static let OPEN_HEIGHT = CGFloat(150.0)
     
     private lazy var favoriteLabel: UILabel = {
@@ -38,11 +44,8 @@ class FavoriteComponent: UIView {
         return collection
     }()
     
-    private weak var _delegate: FavoriteComponentDelegate?
-    private var favoritesArray = [CharacterViewModel]()
-    private let disposeBag = DisposeBag()
-    private let FAVORITE_CELL = "FavoriteCell"
-
+     // MARK: - Life Cycle
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialize()
@@ -53,10 +56,32 @@ class FavoriteComponent: UIView {
         initialize()
     }
     
+    private func registerCell() {
+        favoriteCollectionView.register(UINib(nibName: FAVORITE_CELL, bundle: Bundle.main), forCellWithReuseIdentifier: FAVORITE_CELL)
+    }
+    
     private func initialize() {
+        setupViews()
+    }
+    
+    func setup(delegate: FavoriteComponentDelegate) {
+        registerCell()
+        _delegate = delegate
+        checkFavorites()
+    }
+    
+    // MARK: - View Coding methods
+    
+    func configureViews() {
+        favoriteCollectionView.dataSource = self
+    }
+    
+    func setupViewHierarchy() {
         addSubview(favoriteLabel)
         addSubview(favoriteCollectionView)
-        
+    }
+    
+    func setupConstraints() {
         favoriteLabel
             .topAnchor(equalTo: topAnchor, constant: 16.0)
             .leadingAnchor(equalTo: leadingAnchor, constant: 16.0)
@@ -70,12 +95,7 @@ class FavoriteComponent: UIView {
             .bottomAnchor(equalTo: bottomAnchor, constant: 16.0)
     }
     
-    func setup(delegate: FavoriteComponentDelegate) {
-        registerCell()
-        favoriteCollectionView.dataSource = self
-        _delegate = delegate
-        checkFavorites()
-    }
+    // MARK: - Favorite methods
     
     func checkFavorites() {
         CharactersService().fetchFavorites()
@@ -96,11 +116,9 @@ class FavoriteComponent: UIView {
                     self._delegate?.disinflateFavorites()
             }).disposed(by: disposeBag)
     }
-    
-    private func registerCell() {
-        favoriteCollectionView.register(UINib(nibName: FAVORITE_CELL, bundle: Bundle.main), forCellWithReuseIdentifier: FAVORITE_CELL)
-    }
 }
+
+// MARK: - FavoriteComponent 
 
 extension FavoriteComponent: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

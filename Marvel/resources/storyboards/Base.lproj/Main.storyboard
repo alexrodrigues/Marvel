@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hoa-XU-Oyg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hoa-XU-Oyg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -43,25 +43,15 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="nGS-wf-1ep"/>
                                 </connections>
                             </searchBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xHh-17-XIV" customClass="FavoriteComponent" customModule="Marvel" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="108" width="375" height="0.0"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="82m-3e-JPz"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="blP-vm-CM3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="1RN-rb-lLt"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="xHh-17-XIV" secondAttribute="trailing" id="5jf-2B-OWG"/>
+                            <constraint firstItem="blP-vm-CM3" firstAttribute="top" secondItem="SUw-G1-9Or" secondAttribute="bottom" id="4u7-WR-Dbc"/>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8ZW-l7-s8S"/>
-                            <constraint firstItem="xHh-17-XIV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="HZk-uE-gwJ"/>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Mbc-Zm-L6d"/>
                             <constraint firstItem="blP-vm-CM3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QMQ-Zb-wN5"/>
                             <constraint firstItem="vNB-ki-huA" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aIB-w1-ZEG"/>
-                            <constraint firstItem="xHh-17-XIV" firstAttribute="top" secondItem="SUw-G1-9Or" secondAttribute="bottom" id="bjB-mf-907"/>
-                            <constraint firstItem="blP-vm-CM3" firstAttribute="top" secondItem="xHh-17-XIV" secondAttribute="bottom" id="cLD-qI-MBG"/>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cUe-VT-CGI"/>
                             <constraint firstItem="vNB-ki-huA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="chF-Ea-XeK"/>
                             <constraint firstItem="blP-vm-CM3" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="eFC-Cq-Jvm"/>
@@ -71,8 +61,6 @@
                     <navigationItem key="navigationItem" title="Marvel" id="b4Q-P1-tdo"/>
                     <connections>
                         <outlet property="activityIndicator" destination="vNB-ki-huA" id="zZj-zo-dow"/>
-                        <outlet property="favoriteComponent" destination="xHh-17-XIV" id="wWC-9t-pKi"/>
-                        <outlet property="favoriteComponentHeight" destination="82m-3e-JPz" id="iDV-Q9-N54"/>
                         <outlet property="listSearchBar" destination="SUw-G1-9Or" id="KMP-g8-Ryg"/>
                         <outlet property="listTableView" destination="blP-vm-CM3" id="jhn-KD-pc8"/>
                         <segue destination="IYM-xe-5QI" kind="show" identifier="segueToDetail" id="9P9-PR-DrQ"/>

@@ -10,18 +10,13 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, ViewConfiguration {
 
-    @IBOutlet weak var listTableView: UITableView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var listSearchBar: UISearchBar!
-    @IBOutlet weak var favoriteComponent: FavoriteComponent!
-    @IBOutlet weak var favoriteComponentHeight: NSLayoutConstraint!
+    // MARK: - Variables
     
     private lazy var loadingMoreView: LoadingMoreView = {
         return LoadingMoreView.loadFromNibNamed() as! LoadingMoreView
     }()
-    
     private let HOME_CELL = "HomeListCell"
     private let FIRST_PAGE = 1
     private var lastKnowIndex = 1
@@ -30,11 +25,27 @@ class ListViewController: UIViewController {
     private var listViewModel = ListViewModel()
     private var charactersArray = [CharacterViewModel]()
     
+    // MARK: - Outlets
+    
+    @IBOutlet weak var listTableView: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var listSearchBar: UISearchBar!
+    private lazy var favoriteComponent: FavoriteComponent = {
+        return FavoriteComponent()
+    }()
+    private lazy var favoriteComponentHeight: NSLayoutConstraint = {
+        let constraint = NSLayoutConstraint(item: favoriteComponent, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 0.0, constant: 0.0)
+        return constraint
+    } ()
+    // MARK: - Actions
+    
+    // MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
         favoriteComponent.setup(delegate: self)
-        setupView()
+        setupViews()
         fetch(page: FIRST_PAGE)
     }
     
@@ -77,23 +88,6 @@ class ListViewController: UIViewController {
     private func registerCells() {
         listTableView.register(UINib(nibName: HOME_CELL, bundle: nil), forCellReuseIdentifier: HOME_CELL)
     }
-
-    private func search(text: String) {
-        listViewModel.search(text: text)
-    }
-    
-    private func fetch(page: Int) {
-        lastKnowIndex = page
-        listViewModel.fetch(lastIndex: lastKnowIndex)
-    }
-    
-    private func setupView() {
-        registerCells()
-        setupLoadingMoreView()
-        if let search = listSearchBar.value(forKey: "_searchField") as? UITextField {
-            search.clearButtonMode = .never
-        }
-    }
     
     private func setupTableview() {
         self.activityIndicator.stopAnimating()
@@ -107,6 +101,8 @@ class ListViewController: UIViewController {
         charactersArray.removeAll()
     }
     
+    // MARK: - Setup View Methods
+    
     private func setupLoadingMoreView() {
         isLoadingRemoved = false
         loadingMoreView.frame = CGRect(x: 0, y: 0, width: listTableView.frame.width, height: 50.0)
@@ -118,6 +114,36 @@ class ListViewController: UIViewController {
         loadingMoreView.isHidden = true
     }
     
+    // MARK: - View Coding Methods
+    
+    func configureViews() {
+        registerCells()
+        setupLoadingMoreView()
+        if let search = listSearchBar.value(forKey: "_searchField") as? UITextField {
+            search.clearButtonMode = .never
+        }
+    }
+    
+    func setupViewHierarchy() {
+    }
+    
+    func setupConstraints() {
+        favoriteComponent.addConstraint(favoriteComponentHeight)
+    }
+    
+    // MARK: - ViewModel Fetch Methods
+    
+    private func fetch(page: Int) {
+        lastKnowIndex = page
+        listViewModel.fetch(lastIndex: lastKnowIndex)
+    }
+    
+    // MARK: - Search Methods
+    
+    private func search(text: String) {
+        listViewModel.search(text: text)
+    }
+
     private func searchCancelled() {
         showLoading()
         isLoadingRemoved = false
@@ -133,6 +159,8 @@ class ListViewController: UIViewController {
         }
     }
 }
+
+// MARK: - TableViewDelegate & TableViewDataSource Methods
 
 extension ListViewController: UITableViewDataSource, UITableViewDelegate {
  
@@ -168,8 +196,10 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
             return "Heroes"
         }
         return ""
-    }
+    } 
 }
+
+// MARK: - UISearchBarDelegate Methods
 
 extension ListViewController: UISearchBarDelegate {
     
@@ -200,6 +230,8 @@ extension ListViewController: UISearchBarDelegate {
         }
     }
 }
+
+// MARK: - FavoriteComponentDelegate Methods
 
 extension ListViewController: FavoriteComponentDelegate {
     
