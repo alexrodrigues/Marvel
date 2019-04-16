@@ -30,10 +30,10 @@ class FavoriteComponent: UIView {
     private lazy var favoriteCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 82.0, height: 90.0)
+        layout.itemSize = CGSize(width: 82.0, height: 120.0)
         layout.sectionInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = .red
+        collection.backgroundColor = .white
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
