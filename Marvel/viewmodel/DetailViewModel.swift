@@ -23,7 +23,6 @@ struct DetailViewModel {
     
     private let disposeBag = DisposeBag()
     
-    
     func fetch(character: CharacterViewModel) {
         
         SummaryService()
@@ -68,7 +67,7 @@ struct DetailViewModel {
         return CharactersService().exists(character: character)
     }
     
-    func insert(character: CharacterViewModel) -> Observable<Bool>  {
+    func insert(character: CharacterViewModel) -> Observable<Bool> {
         return CharactersService().insert(character: character)
     }
     

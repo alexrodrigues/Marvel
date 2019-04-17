@@ -17,7 +17,6 @@ struct ListViewModel {
     var errorMessage = BehaviorRelay<String>(value: "")
     private let disposeBag = DisposeBag()
     
-    
     func fetch(lastIndex: Int) {
         CharactersService().fetch(lastIndex: lastIndex)
             .subscribe(onNext: { response in

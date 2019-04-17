@@ -22,12 +22,11 @@ class DetailViewController: UIViewController {
     
     private var disposeBag = DisposeBag()
     private var favoriteBarButton: UIBarButtonItem!
-    private let SUMMARY_CELL_IDENTIFIER = "SummaryCell"
+    private let summaryCellIdentifier = "SummaryCell"
     
     var character: CharacterViewModel!
     
     private var detailViewModel: DetailViewModel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +41,7 @@ class DetailViewController: UIViewController {
         favoriteComponent.checkFavorites()
     }
     
-    private func setupView(){
+    private func setupView() {
         navigationItem.title = character.name
         favoriteComponent.setup(delegate: self)
         setupFavoriteButton()
@@ -52,12 +51,11 @@ class DetailViewController: UIViewController {
         profileImageView.kf.setImage(with: character.profileImageUrl)
     }
     
-    
     private func bind() {
         detailViewModel
             .comicsArray
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] viewModels in
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.presentTableview()
             }, onError: { error in
@@ -67,7 +65,7 @@ class DetailViewController: UIViewController {
         detailViewModel
             .eventsArray
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] viewModels in
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.presentTableview()
             }, onError: { error in
@@ -77,7 +75,7 @@ class DetailViewController: UIViewController {
         detailViewModel
             .storiesArray
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] viewModels in
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.presentTableview()
                 }, onError: { error in
@@ -87,7 +85,7 @@ class DetailViewController: UIViewController {
         detailViewModel
             .seriesArray
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] viewModels in
+            .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 self.presentTableview()
                 }, onError: { error in
@@ -105,7 +103,7 @@ class DetailViewController: UIViewController {
             return detailViewModel.comicsArray.value
         } else if section == 1 {
             return detailViewModel.eventsArray.value
-        } else if section == 2{
+        } else if section == 2 {
             return detailViewModel.storiesArray.value
         }
         return detailViewModel.seriesArray.value
@@ -128,7 +126,7 @@ class DetailViewController: UIViewController {
     
     @objc func favorite() {
         detailViewModel.insert(character: character)
-            .subscribe(onNext: { success in
+            .subscribe(onNext: { _ in
                 self.setupFavoriteButton()
                 self.favoriteComponent.checkFavorites()
             }, onError: { [weak self] error in
@@ -139,7 +137,7 @@ class DetailViewController: UIViewController {
     
     @objc func unfavorite() {
         detailViewModel.delete(character: character)
-            .subscribe(onNext: { success in
+            .subscribe(onNext: { _ in
                 self.setupFavoriteButton()
                 self.favoriteComponent.checkFavorites()
             }, onError: { [weak self] error in
@@ -152,7 +150,7 @@ class DetailViewController: UIViewController {
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SUMMARY_CELL_IDENTIFIER, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: summaryCellIdentifier, for: indexPath)
         let summary = getRightArray(section: indexPath.section)[indexPath.row]
         cell.textLabel?.text = summary.title
         cell.detailTextLabel?.text = summary.description
@@ -175,7 +173,7 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
 extension DetailViewController: FavoriteComponentDelegate {
     
     func inflateFavorites() {
-        favoriteComponentHeight.constant = FavoriteComponent.OPEN_HEIGHT
+        favoriteComponentHeight.constant = FavoriteComponent.openHeight
         UIView.animate(withDuration: 0.6) {
             self.view.setNeedsLayout()
         }

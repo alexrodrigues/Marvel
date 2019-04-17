@@ -18,7 +18,6 @@ class CharacterFactorySpec: QuickSpec {
         
         describe("CharacterFactory Spec") {
             
-            
             beforeEach {
                 
                 var models = [MarvelCharacter]()
@@ -75,7 +74,6 @@ class CharacterFactorySpec: QuickSpec {
                 expect(viewModels[2].profileImageUrl?.absoluteString).to(equal("https://marvel-image.com/902/portrait_xlarge.jpg"))
             })
         }
-        
         
     }
 }

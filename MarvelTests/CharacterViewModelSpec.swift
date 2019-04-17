@@ -10,7 +10,6 @@ import Quick
 import Nimble
 @testable import Marvel
 
-
 class CharacterViewModelSpec: QuickSpec {
 
     override func spec() {

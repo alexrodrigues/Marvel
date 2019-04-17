@@ -12,10 +12,9 @@ struct MyError: Error {
     let msg: String
     
 }
+
 extension MyError: LocalizedError {
     public var errorDescription: String? {
         return NSLocalizedString(msg, comment: "")
     }
 }
-
-

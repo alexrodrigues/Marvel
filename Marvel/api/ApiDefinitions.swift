@@ -9,7 +9,7 @@
 import Foundation
 
 struct ApiDefinitions {
-    static let BASE_URL = "https://gateway.marvel.com:443/v1/public/"
+    static let baseUrl = "https://gateway.marvel.com:443/v1/public/"
     
     enum ApiKeys: String {
         case publicKey = "24ee0aeded0cc8ba4b26f8617278fa39"

@@ -15,8 +15,8 @@ class ListViewController: UIViewController, ViewConfiguration {
 
     // MARK: - Variables
     
-    private let HOME_CELL = "HomeListCell"
-    private let FIRST_PAGE = 1
+    private let homeCell = "HomeListCell"
+    private let firstPage = 1
     private var lastKnowIndex = 1
     private var isLoadingRemoved = false
     private var disponseBag = DisposeBag()
@@ -44,7 +44,7 @@ class ListViewController: UIViewController, ViewConfiguration {
         bind()
         favoriteComponent.setup(delegate: self)
         setupViews()
-        fetch(page: FIRST_PAGE)
+        fetch(page: firstPage)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,7 +84,7 @@ class ListViewController: UIViewController, ViewConfiguration {
     }
     
     private func registerCells() {
-        homeCollectionView.register(UINib(nibName: HOME_CELL, bundle: nil), forCellWithReuseIdentifier: HOME_CELL)
+        homeCollectionView.register(UINib(nibName: homeCell, bundle: nil), forCellWithReuseIdentifier: homeCell)
     }
     
     private func setupCollectionview() {
@@ -166,7 +166,7 @@ class ListViewController: UIViewController, ViewConfiguration {
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HOME_CELL, for: indexPath) as? HomeListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCell, for: indexPath) as? HomeListCell else {
             return UICollectionViewCell()
         }
         
@@ -240,7 +240,7 @@ extension ListViewController: UISearchBarDelegate {
 extension ListViewController: FavoriteComponentDelegate {
     
     func inflateFavorites() {
-        favoriteComponentHeight.constant = FavoriteComponent.OPEN_HEIGHT
+        favoriteComponentHeight.constant = FavoriteComponent.openHeight
         UIView.animate(withDuration: 0.6) {
             self.view.setNeedsLayout()
         }
@@ -253,4 +253,3 @@ extension ListViewController: FavoriteComponentDelegate {
         }
     }
 }
-
