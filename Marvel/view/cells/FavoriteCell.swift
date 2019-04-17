@@ -8,13 +8,12 @@
 
 import UIKit
 import RxSwift
+import Kingfisher
 
 class FavoriteCell: UICollectionViewCell {
     
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var placeholderView: UIView!
-    @IBOutlet weak var activityIndictorView: UIActivityIndicatorView!
     
     private let dispose = DisposeBag()
     
@@ -25,29 +24,13 @@ class FavoriteCell: UICollectionViewCell {
     func setup(favorite: CharacterViewModel, index: Int) {
         loadingState()
         nameLabel.text = favorite.name
-        if !favorite.profileImage.isEmpty {
-            favorite.downloadImage(index)
-                .asObservable()
-                .observeOn(MainScheduler.instance)
-                .subscribe(onNext: { [weak self] imageResponse in
-                    guard let `self` = self else { return }
-                    if index == imageResponse.index {
-                        `self`.profileImageView.image = imageResponse.image
-                        `self`.activityIndictorView.stopAnimating()
-                        `self`.profileImageView.isHidden = false
-                        `self`.placeholderView.isHidden = true
-                    }
-                    }, onError: { error in
-                        print(error.localizedDescription)
-                }).disposed(by: dispose)
-        }
+        
+        profileImageView.kf.indicatorType = .activity
+        profileImageView.kf.setImage(with: favorite.profileImageUrl)
     }
     
     private func loadingState() {
-        profileImageView.isHidden = true
         profileImageView.image = nil
-        placeholderView.isHidden = false
-        activityIndictorView.startAnimating()
     }
 
 }
