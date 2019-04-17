@@ -178,6 +178,21 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return charactersArray.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: SegueIdentifiers.detail, sender: charactersArray[indexPath.row])
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? HomeListCell {
+            cell.didHighlight()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? HomeListCell {
+            cell.didUnHighlight()
+        }
+    }
 }
 
 // MARK: - UISearchBarDelegate Methods
