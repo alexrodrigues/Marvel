@@ -21,31 +21,21 @@
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BGh-82-fUM">
                         <rect key="frame" x="0.0" y="0.0" width="108" height="127"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UkR-mX-Aty">
-                                <rect key="frame" x="19" y="13" width="70" height="69"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="1j4-XZ-Eew"/>
-                                    <constraint firstAttribute="height" constant="69" id="cO2-HM-FmP"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="8"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </imageView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="UkR-mX-Aty" firstAttribute="centerX" secondItem="BGh-82-fUM" secondAttribute="centerX" id="hpB-8G-Y9k"/>
-                            <constraint firstItem="UkR-mX-Aty" firstAttribute="top" secondItem="BGh-82-fUM" secondAttribute="top" constant="13" id="nj4-D6-4Tb"/>
-                        </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UkR-mX-Aty">
+                        <rect key="frame" x="8" y="8" width="92" height="88"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3H7-pp-adC">
-                        <rect key="frame" x="10" y="89" width="88" height="23"/>
+                        <rect key="frame" x="8" y="104" width="92" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="23" id="Aec-xO-Ugn"/>
+                            <constraint firstAttribute="height" constant="18" id="Ynd-YD-ZGl"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
@@ -56,11 +46,15 @@
             <constraints>
                 <constraint firstItem="BGh-82-fUM" firstAttribute="leading" secondItem="FVZ-En-1Li" secondAttribute="leading" id="55d-EO-ICs"/>
                 <constraint firstItem="BGh-82-fUM" firstAttribute="top" secondItem="FVZ-En-1Li" secondAttribute="top" id="FIE-xo-e4B"/>
-                <constraint firstItem="3H7-pp-adC" firstAttribute="leading" secondItem="FVZ-En-1Li" secondAttribute="leading" constant="10" id="MLY-LG-iLK"/>
-                <constraint firstAttribute="bottom" secondItem="3H7-pp-adC" secondAttribute="bottom" constant="15" id="UMm-uK-hsc"/>
+                <constraint firstAttribute="trailing" secondItem="3H7-pp-adC" secondAttribute="trailing" constant="8" id="GgE-FO-pf5"/>
+                <constraint firstItem="3H7-pp-adC" firstAttribute="leading" secondItem="FVZ-En-1Li" secondAttribute="leading" constant="8" id="OKy-i3-WPE"/>
+                <constraint firstItem="UkR-mX-Aty" firstAttribute="leading" secondItem="FVZ-En-1Li" secondAttribute="leading" constant="8" id="RzY-iV-Yae"/>
+                <constraint firstAttribute="bottom" secondItem="3H7-pp-adC" secondAttribute="bottom" constant="5" id="bRG-pl-4bU"/>
                 <constraint firstAttribute="bottom" secondItem="BGh-82-fUM" secondAttribute="bottom" id="dDn-1P-Hax"/>
-                <constraint firstAttribute="trailing" secondItem="3H7-pp-adC" secondAttribute="trailing" constant="10" id="k7p-dl-ZwL"/>
+                <constraint firstItem="3H7-pp-adC" firstAttribute="top" secondItem="UkR-mX-Aty" secondAttribute="bottom" constant="8" id="ehL-4i-IuB"/>
+                <constraint firstAttribute="trailing" secondItem="UkR-mX-Aty" secondAttribute="trailing" constant="8" id="f5s-ou-grT"/>
                 <constraint firstAttribute="trailing" secondItem="BGh-82-fUM" secondAttribute="trailing" id="r8U-uY-AHe"/>
+                <constraint firstItem="UkR-mX-Aty" firstAttribute="top" secondItem="FVZ-En-1Li" secondAttribute="top" constant="8" id="yFb-s7-G8w"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="J5g-Ui-DxV"/>
             <size key="customSize" width="108" height="127"/>

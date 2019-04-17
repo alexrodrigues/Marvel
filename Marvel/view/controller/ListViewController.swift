@@ -6,6 +6,7 @@
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
+import AVFoundation
 import UIKit
 import RxCocoa
 import RxSwift
@@ -162,7 +163,7 @@ class ListViewController: UIViewController, ViewConfiguration {
 
 // MARK: - CollectionViewDelegate & CollectionViewDataSource Methods
 
-extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HOME_CELL, for: indexPath) as? HomeListCell else {
@@ -192,6 +193,13 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         if let cell = collectionView.cellForItem(at: indexPath) as? HomeListCell {
             cell.didUnHighlight()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let original = CGSize(width: 108.0, height: 127.0)
+        let width = UIScreen.main.bounds.size.width
+        let desired = CGRect(x: 0, y: 0, width: (width / 3) - 16.0, height: 500.0)
+        return AVMakeRect(aspectRatio: original, insideRect: desired).size
     }
 }
 
