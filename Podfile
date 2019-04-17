@@ -4,11 +4,14 @@
 target 'Marvel' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  inhibit_all_warnings!
 
   # Pods for Marvel
   pod 'RxSwift',    '~> 4.0'
   pod 'RxCocoa',    '~> 4.0'
-
+  pod 'Kingfisher', '~> 5.0'
+  pod 'SwiftLint'
+  pod 'CCBottomRefreshControl'
   
   target 'MarvelTests' do
     inherit! :search_paths

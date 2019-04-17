@@ -9,43 +9,38 @@
 import UIKit
 import RxSwift
 
-class HomeListCell: UITableViewCell {
+class HomeListCell: UICollectionViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var profileActivityIndicatorView: UIActivityIndicatorView!
-    @IBOutlet weak var placeholderView: UIView!
+    
     private let dispose = DisposeBag()
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    func setup(character: CharacterViewModel, index: Int) {
+    func setup(character: CharacterViewModel) {
         loadingState()
         nameLabel.text = character.name
         
-        character.downloadImage(index)
-            .asObservable()
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] imageResponse in
-                guard let `self` = self else { return }
-                if index == imageResponse.index {
-                    `self`.profileImageView.image = imageResponse.image
-                    `self`.profileActivityIndicatorView.stopAnimating()
-                    `self`.profileImageView.isHidden = false
-                    `self`.placeholderView.isHidden = true
-                }
-            }, onError: { error in
-                print(error.localizedDescription)
-            }).disposed(by: dispose)
+        profileImageView.kf.indicatorType = .activity
+        profileImageView.kf.setImage(with: character.profileImageUrl)
     }
     
     private func loadingState() {
-        profileImageView.isHidden = true
         profileImageView.image = nil
-        placeholderView.isHidden = false
-        profileActivityIndicatorView.startAnimating()
     }
     
+    func didUnHighlight() {
+        UIView.animate(withDuration: 0.2) {
+            self.alpha = 1.0
+        }
+    }
+    
+    func didHighlight() {
+        UIView.animate(withDuration: 0.2) {
+            self.alpha = 0.2
+        }
+    }
 }

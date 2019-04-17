@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import Kingfisher
 
 class DetailViewController: UIViewController {
 
@@ -46,15 +47,9 @@ class DetailViewController: UIViewController {
         favoriteComponent.setup(delegate: self)
         setupFavoriteButton()
         nameLabel.text = character.name
-        character.downloadImage()
-            .asObservable()
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] imageResponse in
-                guard let self = self else { return }
-                self.profileImageView.image = imageResponse.image
-            }, onError: { error in
-                    print(error.localizedDescription)
-            }).disposed(by: disposeBag)
+        
+        profileImageView.kf.indicatorType = .activity
+        profileImageView.kf.setImage(with: character.profileImageUrl)
     }
     
     
