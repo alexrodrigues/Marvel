@@ -77,16 +77,6 @@ class FavoriteViewController: UIViewController {
         activityIndicator.startAnimating()
         charactersArray.removeAll()
     }
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueIdentifiers.detailFavorite {
-            if let character = sender as? CharacterViewModel, let destination = segue.destination as? DetailViewController {
-                destination.character = character
-            }
-        }
-    }
 }
 
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -103,22 +93,6 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return charactersArray.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: SegueIdentifiers.detailFavorite, sender: charactersArray[indexPath.row])
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? FavoriteCell {
-            cell.didHighlight()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? FavoriteCell {
-            cell.didUnHighlight()
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
