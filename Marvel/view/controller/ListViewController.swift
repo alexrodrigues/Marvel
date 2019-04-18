@@ -89,7 +89,6 @@ class ListViewController: UIViewController, ViewConfiguration {
     
     private func setupCollectionview() {
         activityIndicator.stopAnimating()
-        disableLoadingMore()
         homeCollectionView.isHidden = false
         homeCollectionView.reloadData()
     }
@@ -113,6 +112,7 @@ class ListViewController: UIViewController, ViewConfiguration {
     }
     
     private func disableLoadingMore() {
+        homeCollectionView.bottomRefreshControl = nil
         bottomRefreshController.endRefreshing()
     }
     
@@ -138,6 +138,7 @@ class ListViewController: UIViewController, ViewConfiguration {
     private func fetch(page: Int) {
         lastKnowIndex = page
         listViewModel.fetch(lastIndex: lastKnowIndex)
+        setupLoadingMoreView()
     }
     
     // MARK: - Search Methods
@@ -148,6 +149,7 @@ class ListViewController: UIViewController, ViewConfiguration {
 
     private func searchCancelled() {
         showLoading()
+        
         isLoadingRemoved = false
         fetch(page: lastKnowIndex)
     }
@@ -196,9 +198,12 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let original = CGSize(width: 108.0, height: 127.0)
+        let original = CGSize(width: 100.0, height: 160.0)
+        let ratio = CGFloat(1.6)
         let width = UIScreen.main.bounds.size.width
-        let desired = CGRect(x: 0, y: 0, width: (width / 3) - 16.0, height: 500.0)
+        let desiredWidth = (width / 2) - 16.0
+        
+        let desired = CGRect(x: 0, y: 0, width: desiredWidth, height: desiredWidth * ratio)
         return AVMakeRect(aspectRatio: original, insideRect: desired).size
     }
 }
