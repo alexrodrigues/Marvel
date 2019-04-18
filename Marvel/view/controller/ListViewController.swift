@@ -15,20 +15,15 @@ class ListViewController: UIViewController, ViewConfiguration {
 
     // MARK: - Variables
     
-    private let HOME_CELL = "HomeListCell"
-    private let FIRST_PAGE = 1
+    private let homeCell = "HomeListCell"
+    private let firstPage = 1
     private var lastKnowIndex = 1
     private var isLoadingRemoved = false
     private var disponseBag = DisposeBag()
     private var listViewModel = ListViewModel()
     private var charactersArray = [CharacterViewModel]()
-    private var bottomRefreshController: UIRefreshControl!
-    
-    // MARK: - Outlets
-    
-    @IBOutlet weak var homeCollectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var listSearchBar: UISearchBar!
+    private var bottomRefreshControl: UIRefreshControl!
+    private var upperRefreshControl: UIRefreshControl!
     private lazy var favoriteComponent: FavoriteComponent = {
         return FavoriteComponent()
     }()
@@ -37,6 +32,12 @@ class ListViewController: UIViewController, ViewConfiguration {
         return constraint
     } ()
     
+    // MARK: - Outlets
+    
+    @IBOutlet weak var homeCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var listSearchBar: UISearchBar!
+    
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -44,7 +45,7 @@ class ListViewController: UIViewController, ViewConfiguration {
         bind()
         favoriteComponent.setup(delegate: self)
         setupViews()
-        fetch(page: FIRST_PAGE)
+        fetch(page: firstPage)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -61,6 +62,7 @@ class ListViewController: UIViewController, ViewConfiguration {
                 guard let self = self else { return }
                 self.charactersArray.append(contentsOf: characters)
                 self.setupCollectionview()
+                self.hideRefreshers()
             }).disposed(by: disponseBag)
         
         listViewModel.searchCharacters
@@ -84,12 +86,11 @@ class ListViewController: UIViewController, ViewConfiguration {
     }
     
     private func registerCells() {
-        homeCollectionView.register(UINib(nibName: HOME_CELL, bundle: nil), forCellWithReuseIdentifier: HOME_CELL)
+        homeCollectionView.register(UINib(nibName: homeCell, bundle: nil), forCellWithReuseIdentifier: homeCell)
     }
     
     private func setupCollectionview() {
         activityIndicator.stopAnimating()
-        disableLoadingMore()
         homeCollectionView.isHidden = false
         homeCollectionView.reloadData()
     }
@@ -100,20 +101,38 @@ class ListViewController: UIViewController, ViewConfiguration {
         charactersArray.removeAll()
     }
     
+    private func hideRefreshers() {
+        bottomRefreshControl.endRefreshing()
+        upperRefreshControl.endRefreshing()
+    }
+    
     // MARK: - Setup View Methods
     
     private func setupLoadingMoreView() {
-        bottomRefreshController = UIRefreshControl()
-        bottomRefreshController.addTarget(self, action: #selector(ListViewController.performRefreshBottom), for: .valueChanged)
-        homeCollectionView.bottomRefreshControl = bottomRefreshController
+        bottomRefreshControl = UIRefreshControl()
+        bottomRefreshControl.tintColor = .red
+        bottomRefreshControl.addTarget(self, action: #selector(ListViewController.performLoadMoreBottom), for: .valueChanged)
+        homeCollectionView.bottomRefreshControl = bottomRefreshControl
+        
+        upperRefreshControl = UIRefreshControl()
+        upperRefreshControl.tintColor = .red
+        upperRefreshControl.addTarget(self, action: #selector(ListViewController.performRefresh), for: .valueChanged)
+        homeCollectionView.refreshControl = upperRefreshControl
     }
     
-    @objc func performRefreshBottom() {
+    @objc func performRefresh() {
+        fetch(page: firstPage)
+    }
+    
+    @objc func performLoadMoreBottom() {
         fetch(page: charactersArray.count + 1)
     }
     
     private func disableLoadingMore() {
-        bottomRefreshController.endRefreshing()
+        upperRefreshControl.endRefreshing()
+        bottomRefreshControl.endRefreshing()
+        homeCollectionView.bottomRefreshControl = nil
+        homeCollectionView.refreshControl = nil
     }
     
     // MARK: - View Coding Methods
@@ -149,7 +168,8 @@ class ListViewController: UIViewController, ViewConfiguration {
     private func searchCancelled() {
         showLoading()
         isLoadingRemoved = false
-        fetch(page: lastKnowIndex)
+        setupLoadingMoreView()
+        fetch(page: firstPage)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -166,7 +186,7 @@ class ListViewController: UIViewController, ViewConfiguration {
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HOME_CELL, for: indexPath) as? HomeListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCell, for: indexPath) as? HomeListCell else {
             return UICollectionViewCell()
         }
         
@@ -196,9 +216,12 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let original = CGSize(width: 108.0, height: 127.0)
+        let original = CGSize(width: 100.0, height: 208.0)
+        let ratio = CGFloat(2.08)
         let width = UIScreen.main.bounds.size.width
-        let desired = CGRect(x: 0, y: 0, width: (width / 3) - 16.0, height: 500.0)
+        let desiredWidth = (width / 2) - 16.0
+        
+        let desired = CGRect(x: 0, y: 0, width: desiredWidth, height: desiredWidth * ratio)
         return AVMakeRect(aspectRatio: original, insideRect: desired).size
     }
 }
@@ -240,7 +263,7 @@ extension ListViewController: UISearchBarDelegate {
 extension ListViewController: FavoriteComponentDelegate {
     
     func inflateFavorites() {
-        favoriteComponentHeight.constant = FavoriteComponent.OPEN_HEIGHT
+        favoriteComponentHeight.constant = FavoriteComponent.openHeight
         UIView.animate(withDuration: 0.6) {
             self.view.setNeedsLayout()
         }
@@ -253,4 +276,3 @@ extension ListViewController: FavoriteComponentDelegate {
         }
     }
 }
-

@@ -8,8 +8,6 @@
 
 import UIKit
 
-import UIKit
-
 protocol ViewConfiguration: class {
     func setupViews()
     func configureViews()
@@ -28,4 +26,3 @@ extension ViewConfiguration {
     func setupViewHierarchy() {}
     func setupConstraints() {}
 }
-

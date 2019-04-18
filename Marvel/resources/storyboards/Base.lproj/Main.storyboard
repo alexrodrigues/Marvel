@@ -20,12 +20,12 @@
                         <subviews>
                             <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9TG-tG-3Hp">
                                 <rect key="frame" x="0.0" y="108" width="375" height="510"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Co7-xf-1I2">
-                                    <size key="itemSize" width="108" height="127"/>
+                                <color key="backgroundColor" red="0.18823529411764706" green="0.20000000000000001" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="0.0" id="Co7-xf-1I2">
+                                    <size key="itemSize" width="100" height="160"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <connections>
@@ -50,7 +50,7 @@
                                 </connections>
                             </searchBar>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.18823529410000001" green="0.20000000000000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="SUw-G1-9Or" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="8ZW-l7-s8S"/>
                             <constraint firstItem="9TG-tG-3Hp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Fxd-pk-mce"/>
@@ -112,26 +112,89 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cG4-si-rkl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-508" y="121"/>
+            <point key="canvasLocation" x="-554" y="347"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Heroes-->
         <scene sceneID="N0y-dY-h81">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="NfO-Pa-bKx" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="ro6-eD-gpd"/>
+                    <navigationItem key="navigationItem" title="Heroes" id="ro6-eD-gpd"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="2Jz-Nr-QJo">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <color key="selectedImageTintColor" red="0.82114034889999998" green="0.028517900030000001" blue="0.026026805859999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.87627476453781128" green="0.18181419372558594" blue="0.20479610562324524" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="wGl-Lo-763"/>
+                        <segue destination="qbp-P6-IUH" kind="relationship" relationship="viewControllers" id="Pob-Hk-uRI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8jb-7s-lWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="489" y="121"/>
+        </scene>
+        <!--Marvel-->
+        <scene sceneID="qgd-ab-wUc">
+            <objects>
+                <viewController title="Marvel" id="qbp-P6-IUH" customClass="FavoriteViewController" customModule="Marvel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nXh-ou-9Ft">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sVM-xq-ceo">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.20000000000000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="0.0" id="98g-DQ-c0V">
+                                    <size key="itemSize" width="100" height="160"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="qbp-P6-IUH" id="QGg-HK-Ttc"/>
+                                    <outlet property="delegate" destination="qbp-P6-IUH" id="0EU-HS-yOZ"/>
+                                </connections>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="0gt-y7-SWN">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                                <color key="color" red="0.92455786470000001" green="0.10997990520000001" blue="0.1375359595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18823529410000001" green="0.20000000000000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="0gt-y7-SWN" firstAttribute="centerX" secondItem="nXh-ou-9Ft" secondAttribute="centerX" id="4mg-6V-jhd"/>
+                            <constraint firstItem="sVM-xq-ceo" firstAttribute="top" secondItem="nlN-WZ-quq" secondAttribute="top" id="UeB-XV-4E6"/>
+                            <constraint firstItem="sVM-xq-ceo" firstAttribute="leading" secondItem="nlN-WZ-quq" secondAttribute="leading" id="l81-vv-I74"/>
+                            <constraint firstItem="0gt-y7-SWN" firstAttribute="centerY" secondItem="nXh-ou-9Ft" secondAttribute="centerY" id="pjt-50-Tje"/>
+                            <constraint firstItem="sVM-xq-ceo" firstAttribute="trailing" secondItem="nlN-WZ-quq" secondAttribute="trailing" id="rb0-xe-MAc"/>
+                            <constraint firstItem="sVM-xq-ceo" firstAttribute="bottom" secondItem="nlN-WZ-quq" secondAttribute="bottom" id="xMM-nN-guX"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nlN-WZ-quq"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Favorites" id="Ib0-cV-YW6"/>
+                    <navigationItem key="navigationItem" title="Favorites" id="IU7-cD-2Ps"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="0gt-y7-SWN" id="6VT-HQ-vva"/>
+                        <outlet property="favoriteCollectionView" destination="sVM-xq-ceo" id="k6M-vL-sSz"/>
+                        <segue destination="wjX-U7-yQF" kind="show" identifier="segueFavoriteDetail" id="tqj-6B-GDJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XWM-C2-Fli" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1428" y="854"/>
+        </scene>
+        <!--Detail-->
+        <scene sceneID="oXq-Xe-KXg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Detail" id="wjX-U7-yQF" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6bu-XW-3mW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1960" y="853"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.82114034889999998" green="0.028517900030000001" blue="0.026026805859999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

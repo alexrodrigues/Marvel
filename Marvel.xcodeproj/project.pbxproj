@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040A8B592268C05E003EB4EC /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A8B582268C05E003EB4EC /* FavoriteViewModel.swift */; };
 		041B73EC2246414E004844D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B73EB2246414E004844D9 /* AppDelegate.swift */; };
 		041B73F12246414E004844D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041B73EF2246414E004844D9 /* Main.storyboard */; };
 		041B73F322464150004844D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 041B73F222464150004844D9 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		042D507F224CAFC100273EB6 /* CharacterFactorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042D507E224CAFC100273EB6 /* CharacterFactorySpec.swift */; };
 		04443C5222556C790073AF87 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04443C5122556C790073AF87 /* ListViewModel.swift */; };
 		04443C54225583D80073AF87 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04443C53225583D80073AF87 /* DetailViewModel.swift */; };
+		044A50AD2267FB7C00F130CA /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A50AC2267FB7C00F130CA /* FavoriteViewController.swift */; };
 		04860950224AD1FA001C599A /* CharacterSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486094F224AD1FA001C599A /* CharacterSummary.swift */; };
 		04860952224AD215001C599A /* MarvelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860951224AD215001C599A /* MarvelItem.swift */; };
 		04860954224AD58C001C599A /* MarvelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860953224AD58C001C599A /* MarvelItemViewModel.swift */; };
@@ -66,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040A8B582268C05E003EB4EC /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		041B73E82246414E004844D9 /* Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		041B73EB2246414E004844D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		041B73F02246414E004844D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 		042D507E224CAFC100273EB6 /* CharacterFactorySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterFactorySpec.swift; sourceTree = "<group>"; };
 		04443C5122556C790073AF87 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		04443C53225583D80073AF87 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		044A50AC2267FB7C00F130CA /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
 		0486094F224AD1FA001C599A /* CharacterSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSummary.swift; sourceTree = "<group>"; };
 		04860951224AD215001C599A /* MarvelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItem.swift; sourceTree = "<group>"; };
 		04860953224AD58C001C599A /* MarvelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItemViewModel.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				04860953224AD58C001C599A /* MarvelItemViewModel.swift */,
 				04443C5122556C790073AF87 /* ListViewModel.swift */,
 				04443C53225583D80073AF87 /* DetailViewModel.swift */,
+				040A8B582268C05E003EB4EC /* FavoriteViewModel.swift */,
 			);
 			path = viewmodel;
 			sourceTree = "<group>";
@@ -289,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				041B742322465FB3004844D9 /* ListViewController.swift */,
+				044A50AC2267FB7C00F130CA /* FavoriteViewController.swift */,
 				04860962224ADEBD001C599A /* DetailViewController.swift */,
 			);
 			path = controller;
@@ -418,6 +424,7 @@
 				041B73E52246414E004844D9 /* Frameworks */,
 				041B73E62246414E004844D9 /* Resources */,
 				B4E30D080B79DC0F8280BC2A /* [CP] Embed Pods Frameworks */,
+				044A50AB226785A600F130CA /* lint */,
 			);
 			buildRules = (
 			);
@@ -512,6 +519,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		044A50AB226785A600F130CA /* lint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = lint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
 		266BD8DFDFEF2386DF493A0D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -633,12 +658,14 @@
 				041B73EC2246414E004844D9 /* AppDelegate.swift in Sources */,
 				041B741D22465B56004844D9 /* MarvelService.swift in Sources */,
 				04EC23F1224C1F9A00EBB81D /* MD5Helper+Extensions.swift in Sources */,
+				040A8B592268C05E003EB4EC /* FavoriteViewModel.swift in Sources */,
 				0486095B224ADA1E001C599A /* SummaryService.swift in Sources */,
 				0486095D224ADCAD001C599A /* SummaryViewModel.swift in Sources */,
 				04E2B23022496A7100DD72A3 /* LoadingMoreView.swift in Sources */,
 				041B742422465FB3004844D9 /* ListViewController.swift in Sources */,
 				04443C5222556C790073AF87 /* ListViewModel.swift in Sources */,
 				04860963224ADEBD001C599A /* DetailViewController.swift in Sources */,
+				044A50AD2267FB7C00F130CA /* FavoriteViewController.swift in Sources */,
 				04E2B21F22495C1400DD72A3 /* CharacterViewModel.swift in Sources */,
 				041B741F22465C93004844D9 /* CharactersResponse.swift in Sources */,
 				041B741922465810004844D9 /* CharactersService.swift in Sources */,

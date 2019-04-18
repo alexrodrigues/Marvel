@@ -18,7 +18,6 @@ class CharacterFactorySpec: QuickSpec {
         
         describe("CharacterFactory Spec") {
             
-            
             beforeEach {
                 
                 var models = [MarvelCharacter]()
@@ -56,7 +55,7 @@ class CharacterFactorySpec: QuickSpec {
                 expect(viewModels.first?.name).to(equal("Spider-man"))
                 expect(viewModels.first?.path).to(equal("https://marvel-image.com/900"))
                 expect(viewModels.first?.imageExtension).to(equal("jpg"))
-                expect(viewModels.first?.profileImage).to(equal("https://marvel-image.com/900/portrait_xlarge.jpg"))
+                expect(viewModels.first?.profileImageUrl?.absoluteString).to(equal("https://marvel-image.com/900/portrait_xlarge.jpg"))
             })
             
             it("testing ironman", closure: {
@@ -64,7 +63,7 @@ class CharacterFactorySpec: QuickSpec {
                 expect(viewModels[1].name).to(equal("Iron man"))
                 expect(viewModels[1].path).to(equal("https://marvel-image.com/901"))
                 expect(viewModels[1].imageExtension).to(equal("jpg"))
-                expect(viewModels[1].profileImage).to(equal("https://marvel-image.com/901/portrait_xlarge.jpg"))
+                expect(viewModels[1].profileImageUrl?.absoluteString).to(equal("https://marvel-image.com/901/portrait_xlarge.jpg"))
             })
             
             it("testing hulk", closure: {
@@ -72,10 +71,9 @@ class CharacterFactorySpec: QuickSpec {
                 expect(viewModels[2].name).to(equal("Hulk"))
                 expect(viewModels[2].path).to(equal("https://marvel-image.com/902"))
                 expect(viewModels[2].imageExtension).to(equal("jpg"))
-                expect(viewModels[2].profileImage).to(equal("https://marvel-image.com/902/portrait_xlarge.jpg"))
+                expect(viewModels[2].profileImageUrl?.absoluteString).to(equal("https://marvel-image.com/902/portrait_xlarge.jpg"))
             })
         }
-        
         
     }
 }

@@ -12,7 +12,7 @@ import RxSwift
 
 class SummaryService: MarvelService {
     
-    func fetch(models: [MarvelItemViewModel]) -> Observable<[SummaryViewModel]>  {
+    func fetch(models: [MarvelItemViewModel]) -> Observable<[SummaryViewModel]> {
         var summariesArray = [SummaryViewModel]()
         return Observable.create({ observer -> Disposable in
             

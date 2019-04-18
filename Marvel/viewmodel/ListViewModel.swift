@@ -12,11 +12,14 @@ import RxCocoa
 
 struct ListViewModel {
 
+    // MARK: - Variables
+    
     var characters = BehaviorRelay<[CharacterViewModel]>(value: [CharacterViewModel]())
     var searchCharacters = BehaviorRelay<[CharacterViewModel]>(value: [CharacterViewModel]())
     var errorMessage = BehaviorRelay<String>(value: "")
     private let disposeBag = DisposeBag()
     
+    // MARK: - Methods to Query
     
     func fetch(lastIndex: Int) {
         CharactersService().fetch(lastIndex: lastIndex)

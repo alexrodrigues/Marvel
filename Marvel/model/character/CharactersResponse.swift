@@ -13,7 +13,6 @@ struct CharactersResponse: Codable {
     var data: CharactersData?
 }
 
-
 struct CharactersData: Codable {
     var offset: Int?
     var limit: Int?

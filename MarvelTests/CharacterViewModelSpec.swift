@@ -10,7 +10,6 @@ import Quick
 import Nimble
 @testable import Marvel
 
-
 class CharacterViewModelSpec: QuickSpec {
 
     override func spec() {
@@ -36,7 +35,7 @@ class CharacterViewModelSpec: QuickSpec {
             it("testing image", closure: {
                 expect(viewModel.path).to(equal("https://marvel-image.com/900"))
                 expect(viewModel.imageExtension).to(equal("jpg"))
-                expect(viewModel.profileImage).to(equal("https://marvel-image.com/900/portrait_xlarge.jpg"))
+                expect(viewModel.profileImageUrl?.absoluteString).to(equal("https://marvel-image.com/900/portrait_xlarge.jpg"))
             })
         }
     }
