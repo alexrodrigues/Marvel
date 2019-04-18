@@ -15,6 +15,7 @@ class HomeListCell: UICollectionViewCell {
     
     private let dispose = DisposeBag()
     private var favorite: CharacterViewModel!
+    private var disposeBag = DisposeBag()
     
     // MARK: - Outlets
     
@@ -45,7 +46,7 @@ class HomeListCell: UICollectionViewCell {
                 self.configureFavorite(isFavorite: isFavorite)
             }).disposed(by: dispose)
     }
-    
+
     private func loadingState() {
         profileImageView.image = nil
     }
@@ -75,10 +76,19 @@ class HomeListCell: UICollectionViewCell {
     }
     
     @objc func performFavorite() {
-        
+        favorite.favorite()
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.configureFavorite(isFavorite: true)
+            }).disposed(by: disposeBag)
     }
     
     @objc func performUnfavorite() {
+        favorite.unFavorite()
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                self.configureFavorite(isFavorite: false)
+            }).disposed(by: disposeBag)
         
     }
 }

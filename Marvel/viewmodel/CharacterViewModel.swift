@@ -13,6 +13,9 @@ import RxCocoa
 struct CharacterViewModel {
     
     private var _character: MarvelCharacter
+    private var repository: FavoriteRepository!
+    var updateFavorite = BehaviorRelay<Bool>(value: false)
+    private var disposeBag = DisposeBag()
     
     var identifier: Int {
         return _character.id ?? 0
@@ -50,14 +53,19 @@ struct CharacterViewModel {
     
     init(character: MarvelCharacter) {
         _character = character
+        repository = FavoriteRepository()
     }
     
     func isFavorite() -> Observable<Bool> {
-        return FavoriteRepository().find(character: self)
+        return repository.find(character: self)
                     .map { !$0.isEmpty }
     }
     
-    func favorite() {
-        
+    func favorite() -> Observable<Bool> {
+         return repository.insert(character: self)
+    }
+    
+    func unFavorite() -> Observable<Bool> {
+        return repository.delete(character: self)
     }
 }
