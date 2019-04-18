@@ -36,7 +36,7 @@ class CharactersService: MarvelService {
     func exists(character: CharacterViewModel) -> Observable<Bool> {
         return favoriteRepository
             .find(character: character)
-            .map { $0.isEmpty }
+            .map { !$0.isEmpty }
     }
     
     func search(text: String) -> Observable<[CharacterViewModel]> {

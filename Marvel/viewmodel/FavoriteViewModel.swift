@@ -20,6 +20,7 @@ struct FavoriteViewModel {
     // MARK: - Methods to Query
     
     func fetchFavorites() {
+        self.charactersFavorites.accept([CharacterViewModel]())
         CharactersService().fetchFavorites()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { viewModels in

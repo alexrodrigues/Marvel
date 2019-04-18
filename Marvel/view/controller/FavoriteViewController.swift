@@ -31,6 +31,11 @@ class FavoriteViewController: UIViewController {
         super.viewDidLoad()
         bind()
         registerCells()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        showLoading()
         favoriteViewModel.fetchFavorites()
     }
     
