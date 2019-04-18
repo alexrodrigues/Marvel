@@ -15,7 +15,7 @@ class FavoriteViewController: UIViewController {
 
     // MARK: - Variables
     
-    private let homeCell = "HomeListCell"
+    private let favoriteCell = "FavoriteCell"
     private var disposeBag = DisposeBag()
     private var favoriteViewModel = FavoriteViewModel()
     private var charactersArray = [CharacterViewModel]()
@@ -69,7 +69,7 @@ class FavoriteViewController: UIViewController {
     }
     
     private func registerCells() {
-        favoriteCollectionView.register(UINib(nibName: homeCell, bundle: nil), forCellWithReuseIdentifier: homeCell)
+        favoriteCollectionView.register(UINib(nibName: favoriteCell, bundle: nil), forCellWithReuseIdentifier: favoriteCell)
     }
     
     private func showLoading() {
@@ -92,12 +92,12 @@ class FavoriteViewController: UIViewController {
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCell, for: indexPath) as? HomeListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: favoriteCell, for: indexPath) as? FavoriteCell else {
             return UICollectionViewCell()
         }
         
         let character =  charactersArray[indexPath.row]
-        cell.setup(character: character)
+        cell.setup(favorite: character)
         return cell
     }
     
@@ -106,17 +106,17 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: SegueIdentifiers.detail, sender: charactersArray[indexPath.row])
+        performSegue(withIdentifier: SegueIdentifiers.detailFavorite, sender: charactersArray[indexPath.row])
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? HomeListCell {
+        if let cell = collectionView.cellForItem(at: indexPath) as? FavoriteCell {
             cell.didHighlight()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? HomeListCell {
+        if let cell = collectionView.cellForItem(at: indexPath) as? FavoriteCell {
             cell.didUnHighlight()
         }
     }

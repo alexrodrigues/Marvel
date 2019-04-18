@@ -21,7 +21,7 @@ class FavoriteCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    func setup(favorite: CharacterViewModel, index: Int) {
+    func setup(favorite: CharacterViewModel) {
         loadingState()
         nameLabel.text = favorite.name
         
@@ -33,4 +33,15 @@ class FavoriteCell: UICollectionViewCell {
         profileImageView.image = nil
     }
 
+    func didUnHighlight() {
+        UIView.animate(withDuration: 0.2) {
+            self.alpha = 1.0
+        }
+    }
+    
+    func didHighlight() {
+        UIView.animate(withDuration: 0.2) {
+            self.alpha = 0.2
+        }
+    }
 }

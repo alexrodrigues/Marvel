@@ -126,7 +126,7 @@ extension FavoriteComponent: UICollectionViewDataSource, UICollectionViewDelegat
             return UICollectionViewCell()
         }
         let favorite = favoritesArray[indexPath.row]
-        cell.setup(favorite: favorite, index: indexPath.row)
+        cell.setup(favorite: favorite)
         return cell 
     }
     

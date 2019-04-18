@@ -216,8 +216,8 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let original = CGSize(width: 100.0, height: 160.0)
-        let ratio = CGFloat(1.6)
+        let original = CGSize(width: 100.0, height: 208.0)
+        let ratio = CGFloat(2.08)
         let width = UIScreen.main.bounds.size.width
         let desiredWidth = (width / 2) - 16.0
         
