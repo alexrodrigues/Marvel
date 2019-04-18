@@ -98,7 +98,7 @@ class FavoriteComponent: UIView, ViewConfiguration {
     // MARK: - Favorite methods
     
     func checkFavorites() {
-        CharactersService().fetchFavorites()
+        FavoriteRepository().fetch()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }

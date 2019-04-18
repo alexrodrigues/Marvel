@@ -78,6 +78,7 @@
             <viewLayoutGuide key="safeArea" id="J5g-Ui-DxV"/>
             <size key="customSize" width="108" height="208"/>
             <connections>
+                <outlet property="favoriteButton" destination="GwT-ba-Wy1" id="ueh-YM-NOO"/>
                 <outlet property="nameLabel" destination="3H7-pp-adC" id="TID-Ch-m8f"/>
                 <outlet property="profileImageView" destination="UkR-mX-Aty" id="Lxl-gJ-QST"/>
             </connections>

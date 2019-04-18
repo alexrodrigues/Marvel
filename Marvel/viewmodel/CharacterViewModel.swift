@@ -51,4 +51,13 @@ struct CharacterViewModel {
     init(character: MarvelCharacter) {
         _character = character
     }
+    
+    func isFavorite() -> Observable<Bool> {
+        return FavoriteRepository().find(character: self)
+                    .map { !$0.isEmpty }
+    }
+    
+    func favorite() {
+        
+    }
 }

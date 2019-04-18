@@ -12,14 +12,22 @@ import Kingfisher
 
 class FavoriteCell: UICollectionViewCell {
     
+    // MARK: - Variables
+    
+    private let dispose = DisposeBag()
+    
+    // MARK: - Outlets
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     
-    private let dispose = DisposeBag()
+    // MARK: - Lifecycle
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    // MARK: - Setup
     
     func setup(favorite: CharacterViewModel) {
         loadingState()

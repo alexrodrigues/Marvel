@@ -110,7 +110,7 @@ class DetailViewController: UIViewController {
     }
     
     private func setupFavoriteButton() {
-        detailViewModel.isCharacterExists(character: character)
+        detailViewModel.isFavorite(character: character)
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: {[weak self] exists in
                 guard let self = self else { return }

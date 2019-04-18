@@ -21,7 +21,7 @@ struct FavoriteViewModel {
     
     func fetchFavorites() {
         self.charactersFavorites.accept([CharacterViewModel]())
-        CharactersService().fetchFavorites()
+        FavoriteRepository().fetch()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { viewModels in
                 self.charactersFavorites.accept(viewModels)
