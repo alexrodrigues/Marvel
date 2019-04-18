@@ -22,7 +22,8 @@ class ListViewController: UIViewController, ViewConfiguration {
     private var disponseBag = DisposeBag()
     private var listViewModel = ListViewModel()
     private var charactersArray = [CharacterViewModel]()
-    private var bottomRefreshController: UIRefreshControl!
+    private var bottomRefreshControl: UIRefreshControl!
+    private var upperRefreshControl: UIRefreshControl!
     
     // MARK: - Outlets
     
@@ -61,6 +62,7 @@ class ListViewController: UIViewController, ViewConfiguration {
                 guard let self = self else { return }
                 self.charactersArray.append(contentsOf: characters)
                 self.setupCollectionview()
+                self.hideRefreshers()
             }).disposed(by: disponseBag)
         
         listViewModel.searchCharacters
@@ -99,21 +101,38 @@ class ListViewController: UIViewController, ViewConfiguration {
         charactersArray.removeAll()
     }
     
+    private func hideRefreshers() {
+        bottomRefreshControl.endRefreshing()
+        upperRefreshControl.endRefreshing()
+    }
+    
     // MARK: - Setup View Methods
     
     private func setupLoadingMoreView() {
-        bottomRefreshController = UIRefreshControl()
-        bottomRefreshController.addTarget(self, action: #selector(ListViewController.performRefreshBottom), for: .valueChanged)
-        homeCollectionView.bottomRefreshControl = bottomRefreshController
+        bottomRefreshControl = UIRefreshControl()
+        bottomRefreshControl.tintColor = .red
+        bottomRefreshControl.addTarget(self, action: #selector(ListViewController.performLoadMoreBottom), for: .valueChanged)
+        homeCollectionView.bottomRefreshControl = bottomRefreshControl
+        
+        upperRefreshControl = UIRefreshControl()
+        upperRefreshControl.tintColor = .red
+        upperRefreshControl.addTarget(self, action: #selector(ListViewController.performRefresh), for: .valueChanged)
+        homeCollectionView.refreshControl = upperRefreshControl
     }
     
-    @objc func performRefreshBottom() {
+    @objc func performRefresh() {
+        fetch(page: firstPage)
+    }
+    
+    @objc func performLoadMoreBottom() {
         fetch(page: charactersArray.count + 1)
     }
     
     private func disableLoadingMore() {
+        upperRefreshControl.endRefreshing()
+        bottomRefreshControl.endRefreshing()
         homeCollectionView.bottomRefreshControl = nil
-        bottomRefreshController.endRefreshing()
+        homeCollectionView.refreshControl = nil
     }
     
     // MARK: - View Coding Methods
@@ -138,7 +157,6 @@ class ListViewController: UIViewController, ViewConfiguration {
     private func fetch(page: Int) {
         lastKnowIndex = page
         listViewModel.fetch(lastIndex: lastKnowIndex)
-        setupLoadingMoreView()
     }
     
     // MARK: - Search Methods
@@ -149,9 +167,9 @@ class ListViewController: UIViewController, ViewConfiguration {
 
     private func searchCancelled() {
         showLoading()
-        
         isLoadingRemoved = false
-        fetch(page: lastKnowIndex)
+        setupLoadingMoreView()
+        fetch(page: firstPage)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
