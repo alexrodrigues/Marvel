@@ -24,12 +24,6 @@ class ListViewController: UIViewController, ViewConfiguration {
     private var charactersArray = [CharacterViewModel]()
     private var bottomRefreshControl: UIRefreshControl!
     private var upperRefreshControl: UIRefreshControl!
-    
-    // MARK: - Outlets
-    
-    @IBOutlet weak var homeCollectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var listSearchBar: UISearchBar!
     private lazy var favoriteComponent: FavoriteComponent = {
         return FavoriteComponent()
     }()
@@ -37,6 +31,12 @@ class ListViewController: UIViewController, ViewConfiguration {
         let constraint = NSLayoutConstraint(item: favoriteComponent, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 0.0, constant: 0.0)
         return constraint
     } ()
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var homeCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var listSearchBar: UISearchBar!
     
     // MARK: - Life Cycle
     
