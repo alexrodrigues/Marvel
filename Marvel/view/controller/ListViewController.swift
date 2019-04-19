@@ -20,17 +20,10 @@ class ListViewController: UIViewController, ViewConfiguration {
     private var lastKnowIndex = 1
     private var isLoadingRemoved = false
     private var disponseBag = DisposeBag()
-    private var listViewModel = ListViewModel()
+    private var listViewModel: ListViewModel!
     private var charactersArray = [CharacterViewModel]()
     private var bottomRefreshControl: UIRefreshControl!
     private var upperRefreshControl: UIRefreshControl!
-    private lazy var favoriteComponent: FavoriteComponent = {
-        return FavoriteComponent()
-    }()
-    private lazy var favoriteComponentHeight: NSLayoutConstraint = {
-        let constraint = NSLayoutConstraint(item: favoriteComponent, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 0.0, constant: 0.0)
-        return constraint
-    } ()
     
     // MARK: - Outlets
     
@@ -43,17 +36,18 @@ class ListViewController: UIViewController, ViewConfiguration {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-        favoriteComponent.setup(delegate: self)
         setupViews()
         fetch(page: firstPage)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        favoriteComponent.checkFavorites()
     }
     
     private func bind() {
+        if let navController = navigationController {
+            listViewModel = ListViewModel(with: navController)
+        }
         listViewModel.characters
             .asObservable()
             .observeOn(MainScheduler.instance)
@@ -149,7 +143,6 @@ class ListViewController: UIViewController, ViewConfiguration {
     }
     
     func setupConstraints() {
-        favoriteComponent.addConstraint(favoriteComponentHeight)
     }
     
     // MARK: - ViewModel Fetch Methods
@@ -170,14 +163,6 @@ class ListViewController: UIViewController, ViewConfiguration {
         isLoadingRemoved = false
         setupLoadingMoreView()
         fetch(page: firstPage)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueIdentifiers.detail {
-            if let character = sender as? CharacterViewModel, let destination = segue.destination as? DetailViewController {
-                destination.character = character
-            }
-        }
     }
 }
 
@@ -200,7 +185,8 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: SegueIdentifiers.detail, sender: charactersArray[indexPath.row])
+        let pickedCharacter = charactersArray[indexPath.row]
+        listViewModel.navigateToDetail(with: pickedCharacter)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -242,6 +228,15 @@ extension ListViewController: UISearchBarDelegate {
         }
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = false
+        return true
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.text = ""
@@ -254,25 +249,6 @@ extension ListViewController: UISearchBarDelegate {
             searchBar.showsCancelButton = false
             searchBar.resignFirstResponder()
             searchCancelled()
-        }
-    }
-}
-
-// MARK: - FavoriteComponentDelegate Methods
-
-extension ListViewController: FavoriteComponentDelegate {
-    
-    func inflateFavorites() {
-        favoriteComponentHeight.constant = FavoriteComponent.openHeight
-        UIView.animate(withDuration: 0.6) {
-            self.view.setNeedsLayout()
-        }
-    }
-    
-    func disinflateFavorites() {
-        favoriteComponentHeight.constant = 0.0
-        UIView.animate(withDuration: 0.6) {
-            self.view.setNeedsLayout()
         }
     }
 }

@@ -26,5 +26,4 @@ struct MarvelItemViewModel {
     init(marvelItem: MarvelItem) {
         _marvelItem = marvelItem
     }
-
 }

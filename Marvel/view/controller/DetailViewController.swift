@@ -13,43 +13,58 @@ import Kingfisher
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var activtiyIndicatorView: UIActivityIndicatorView!
-    @IBOutlet weak var detailTableView: UITableView!
-    @IBOutlet weak var favoriteComponent: FavoriteComponent!
-    @IBOutlet weak var favoriteComponentHeight: NSLayoutConstraint!
+    // MARK: - Variables
     
     private var disposeBag = DisposeBag()
     private var favoriteBarButton: UIBarButtonItem!
     private let summaryCellIdentifier = "SummaryCell"
-    
     var character: CharacterViewModel!
-    
     private var detailViewModel: DetailViewModel!
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var activtiyIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var detailTableView: UITableView!
+    
+    // MARK: - Coordinator auxiliars
+    
+    static func instantiateFromStoryboard(character: CharacterViewModel) -> DetailViewController {
+        guard let detailViewController = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
+            fatalError("Could not find a ViewController of type \(String(describing: type(of: self)))")
+        }
+        detailViewController.character = character
+        return detailViewController
+    }
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         detailViewModel = DetailViewModel()
         setupView()
         bind()
+        registerCells()
         detailViewModel.fetch(character: character)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        favoriteComponent.checkFavorites()
     }
+    
+    // MARK: - Setup
     
     private func setupView() {
         navigationItem.title = character.name
-        favoriteComponent.setup(delegate: self)
         setupFavoriteButton()
         nameLabel.text = character.name
         
         profileImageView.kf.indicatorType = .activity
         profileImageView.kf.setImage(with: character.profileImageUrl)
     }
+    
+    // MARK: - View Model Binding
     
     private func bind() {
         detailViewModel
@@ -93,6 +108,12 @@ class DetailViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    // MARK: - Presentation
+    
+    private func registerCells() {
+        detailTableView.register(UINib(nibName: summaryCellIdentifier, bundle: nil), forCellReuseIdentifier: summaryCellIdentifier)
+    }
+    
     private func presentTableview () {
         self.activtiyIndicatorView.stopAnimating()
         self.detailTableView.reloadData()
@@ -124,11 +145,12 @@ class DetailViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    // MARK: - Favorite Methods
+    
     @objc func favorite() {
         detailViewModel.insert(character: character)
             .subscribe(onNext: { _ in
                 self.setupFavoriteButton()
-                self.favoriteComponent.checkFavorites()
             }, onError: { [weak self] error in
                 guard let self = self else { return }
                 self.showErrorAlert(error.localizedDescription)
@@ -139,7 +161,6 @@ class DetailViewController: UIViewController {
         detailViewModel.delete(character: character)
             .subscribe(onNext: { _ in
                 self.setupFavoriteButton()
-                self.favoriteComponent.checkFavorites()
             }, onError: { [weak self] error in
                 guard let self = self else { return }
                 self.showErrorAlert(error.localizedDescription)
@@ -147,13 +168,16 @@ class DetailViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource, UITableViewDelegate Methods
+
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: summaryCellIdentifier, for: indexPath)
-        let summary = getRightArray(section: indexPath.section)[indexPath.row]
-        cell.textLabel?.text = summary.title
-        cell.detailTextLabel?.text = summary.description
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: summaryCellIdentifier, for: indexPath) as? SummaryCell else {
+            return UITableViewCell()
+        }
+        let summaryViewModel = getRightArray(section: indexPath.section)[indexPath.row]
+        cell.setup(with: summaryViewModel)
         return cell
     }
     
@@ -168,21 +192,14 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return detailViewModel.sectionTitles[section]
     }
-}
-
-extension DetailViewController: FavoriteComponentDelegate {
     
-    func inflateFavorites() {
-        favoriteComponentHeight.constant = FavoriteComponent.openHeight
-        UIView.animate(withDuration: 0.6) {
-            self.view.setNeedsLayout()
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.textColor = .white
         }
     }
     
-    func disinflateFavorites() {
-        favoriteComponentHeight.constant = 0.0
-        UIView.animate(withDuration: 0.6) {
-            self.view.setNeedsLayout()
-        }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 91.0
     }
 }

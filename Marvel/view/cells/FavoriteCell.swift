@@ -2,19 +2,16 @@
 //  FavoriteCell.swift
 //  Marvel
 //
-//  Created by Digital on 27/03/19.
+//  Created by Alex Rodrigues on 27/03/19.
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
 import UIKit
-import RxSwift
 import Kingfisher
 
 class FavoriteCell: UICollectionViewCell {
     
     // MARK: - Variables
-    
-    private let dispose = DisposeBag()
     
     // MARK: - Outlets
     

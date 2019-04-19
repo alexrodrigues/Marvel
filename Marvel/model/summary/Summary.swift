@@ -12,5 +12,6 @@ struct Summary: Codable {
 
     var title: String?
     var description: String?
+    var thumbnail: CharacterThumbnail?
     
 }

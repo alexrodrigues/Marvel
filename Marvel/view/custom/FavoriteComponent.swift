@@ -2,7 +2,7 @@
 //  FavoriteComponent.swift
 //  Marvel
 //
-//  Created by Digital on 27/03/19.
+//  Created by Alex Rodrigues on 27/03/19.
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
