@@ -13,7 +13,6 @@ import Kingfisher
 
 class DetailViewController: UIViewController {
 
-    
     // MARK: - Variables
     
     private var disposeBag = DisposeBag()
@@ -28,7 +27,16 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var activtiyIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var detailTableView: UITableView!
-    @IBOutlet weak var favoriteComponentHeight: NSLayoutConstraint!
+    
+    // MARK: - Coordinator auxiliars
+    
+    static func instantiateFromStoryboard(character: CharacterViewModel) -> DetailViewController {
+        guard let detailViewController = UIStoryboard(name: "Detail", bundle: nil).instantiateViewController(withIdentifier: "DetailViewController") as? DetailViewController else {
+            fatalError("Could not find a ViewController of type \(String(describing: type(of: self)))")
+        }
+        detailViewController.character = character
+        return detailViewController
+    }
     
     // MARK: - Life Cycle
     

@@ -52,7 +52,7 @@ public extension String {
     ///   - type: The type of hash to use.
     ///   - output: The type of output desired, defaults to .hex.
     /// - Returns: The requested hash output or nil if failure.
-    public func hashed(_ type: HashType, output: HashOutputType = .hex) -> String? {
+    func hashed(_ type: HashType, output: HashOutputType = .hex) -> String? {
         
         // convert string to utf8 encoded data
         guard let message = data(using: .utf8) else { return nil }

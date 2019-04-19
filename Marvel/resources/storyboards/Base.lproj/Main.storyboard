@@ -72,20 +72,11 @@
                         <outlet property="activityIndicator" destination="vNB-ki-huA" id="zZj-zo-dow"/>
                         <outlet property="homeCollectionView" destination="9TG-tG-3Hp" id="CTk-y1-Rj5"/>
                         <outlet property="listSearchBar" destination="SUw-G1-9Or" id="KMP-g8-Ryg"/>
-                        <segue destination="7bI-gV-DsV" kind="show" identifier="segueToDetail" id="jqG-rn-nyN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1394" y="121"/>
-        </scene>
-        <!--Detail-->
-        <scene sceneID="WuD-Mj-8ux">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Detail" id="7bI-gV-DsV" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rdq-Yu-Elz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1974" y="60"/>
         </scene>
         <!--Item-->
         <scene sceneID="ldf-QM-tp3">
