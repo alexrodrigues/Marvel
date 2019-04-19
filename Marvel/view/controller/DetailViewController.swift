@@ -13,20 +13,24 @@ import Kingfisher
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
-    @IBOutlet weak var activtiyIndicatorView: UIActivityIndicatorView!
-    @IBOutlet weak var detailTableView: UITableView!
-    @IBOutlet weak var favoriteComponent: FavoriteComponent!
-    @IBOutlet weak var favoriteComponentHeight: NSLayoutConstraint!
+    
+    // MARK: - Variables
     
     private var disposeBag = DisposeBag()
     private var favoriteBarButton: UIBarButtonItem!
     private let summaryCellIdentifier = "SummaryCell"
-    
     var character: CharacterViewModel!
-    
     private var detailViewModel: DetailViewModel!
+    
+    // MARK: - Outlets
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var activtiyIndicatorView: UIActivityIndicatorView!
+    @IBOutlet weak var detailTableView: UITableView!
+    @IBOutlet weak var favoriteComponentHeight: NSLayoutConstraint!
+    
+    // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,12 +42,12 @@ class DetailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        favoriteComponent.checkFavorites()
     }
+    
+    // MARK: - Setup
     
     private func setupView() {
         navigationItem.title = character.name
-        favoriteComponent.setup(delegate: self)
         setupFavoriteButton()
         nameLabel.text = character.name
         
@@ -124,11 +128,12 @@ class DetailViewController: UIViewController {
             }).disposed(by: disposeBag)
     }
     
+    // MARK: - Favorite Methods
+    
     @objc func favorite() {
         detailViewModel.insert(character: character)
             .subscribe(onNext: { _ in
                 self.setupFavoriteButton()
-                self.favoriteComponent.checkFavorites()
             }, onError: { [weak self] error in
                 guard let self = self else { return }
                 self.showErrorAlert(error.localizedDescription)
@@ -139,13 +144,14 @@ class DetailViewController: UIViewController {
         detailViewModel.delete(character: character)
             .subscribe(onNext: { _ in
                 self.setupFavoriteButton()
-                self.favoriteComponent.checkFavorites()
             }, onError: { [weak self] error in
                 guard let self = self else { return }
                 self.showErrorAlert(error.localizedDescription)
             }).disposed(by: disposeBag)
     }
 }
+
+// MARK: - UITableViewDataSource, UITableViewDelegate Methods
 
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -167,22 +173,5 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return detailViewModel.sectionTitles[section]
-    }
-}
-
-extension DetailViewController: FavoriteComponentDelegate {
-    
-    func inflateFavorites() {
-        favoriteComponentHeight.constant = FavoriteComponent.openHeight
-        UIView.animate(withDuration: 0.6) {
-            self.view.setNeedsLayout()
-        }
-    }
-    
-    func disinflateFavorites() {
-        favoriteComponentHeight.constant = 0.0
-        UIView.animate(withDuration: 0.6) {
-            self.view.setNeedsLayout()
-        }
     }
 }

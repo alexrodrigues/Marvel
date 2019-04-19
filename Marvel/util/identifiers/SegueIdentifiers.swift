@@ -11,6 +11,4 @@ import UIKit
 struct SegueIdentifiers {
 
     static let detail = "segueToDetail"
-    static let detailFavorite = "segueFavoriteDetail"
-    
 }

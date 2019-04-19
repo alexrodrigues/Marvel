@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		040A8B592268C05E003EB4EC /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A8B582268C05E003EB4EC /* FavoriteViewModel.swift */; };
+		040A8B5D22694CEF003EB4EC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040A8B5C22694CEF003EB4EC /* GradientView.swift */; };
 		041B73EC2246414E004844D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041B73EB2246414E004844D9 /* AppDelegate.swift */; };
 		041B73F12246414E004844D9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041B73EF2246414E004844D9 /* Main.storyboard */; };
 		041B73F322464150004844D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 041B73F222464150004844D9 /* Assets.xcassets */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		040A8B582268C05E003EB4EC /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		040A8B5C22694CEF003EB4EC /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		041B73E82246414E004844D9 /* Marvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		041B73EB2246414E004844D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		041B73F02246414E004844D9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				041B742222465FA3004844D9 /* controller */,
 				04E2B22E22496A5E00DD72A3 /* custom */,
 				04E2B22522495E1600DD72A3 /* cells */,
+				04AAED052265C70A00813D3C /* view coding */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -273,7 +276,6 @@
 		041B7412224646C7004844D9 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				04AAED052265C70A00813D3C /* view coding */,
 				04EC23EE224C1F9A00EBB81D /* extensions */,
 				04EC23EC224C1F1500EBB81D /* identifiers */,
 			);
@@ -349,6 +351,7 @@
 		04E2B22E22496A5E00DD72A3 /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				040A8B5C22694CEF003EB4EC /* GradientView.swift */,
 				ED6406FD224BA6AA0092EC59 /* FavoriteComponent.swift */,
 				04E2B22F22496A7100DD72A3 /* LoadingMoreView.swift */,
 			);
@@ -655,6 +658,7 @@
 				04EC23F4224C1FA700EBB81D /* UIView+Extensions.swift in Sources */,
 				04EC23F6224C1FC400EBB81D /* Controller+Extensions.swift in Sources */,
 				04860950224AD1FA001C599A /* CharacterSummary.swift in Sources */,
+				040A8B5D22694CEF003EB4EC /* GradientView.swift in Sources */,
 				041B73EC2246414E004844D9 /* AppDelegate.swift in Sources */,
 				041B741D22465B56004844D9 /* MarvelService.swift in Sources */,
 				04EC23F1224C1F9A00EBB81D /* MD5Helper+Extensions.swift in Sources */,

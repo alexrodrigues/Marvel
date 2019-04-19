@@ -181,20 +181,11 @@
                     <connections>
                         <outlet property="activityIndicator" destination="0gt-y7-SWN" id="6VT-HQ-vva"/>
                         <outlet property="favoriteCollectionView" destination="sVM-xq-ceo" id="k6M-vL-sSz"/>
-                        <segue destination="wjX-U7-yQF" kind="show" identifier="segueFavoriteDetail" id="tqj-6B-GDJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XWM-C2-Fli" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1428" y="854"/>
-        </scene>
-        <!--Detail-->
-        <scene sceneID="oXq-Xe-KXg">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Detail" id="wjX-U7-yQF" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6bu-XW-3mW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1960" y="853"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.82114034889999998" green="0.028517900030000001" blue="0.026026805859999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
