@@ -45,6 +45,7 @@ class DetailViewController: UIViewController {
         detailViewModel = DetailViewModel()
         setupView()
         bind()
+        registerCells()
         detailViewModel.fetch(character: character)
     }
     
@@ -62,6 +63,8 @@ class DetailViewController: UIViewController {
         profileImageView.kf.indicatorType = .activity
         profileImageView.kf.setImage(with: character.profileImageUrl)
     }
+    
+    // MARK: - View Model Binding
     
     private func bind() {
         detailViewModel
@@ -103,6 +106,12 @@ class DetailViewController: UIViewController {
                 }, onError: { error in
                     print(error.localizedDescription)
             }).disposed(by: disposeBag)
+    }
+    
+    // MARK: - Presentation
+    
+    private func registerCells() {
+        detailTableView.register(UINib(nibName: summaryCellIdentifier, bundle: nil), forCellReuseIdentifier: summaryCellIdentifier)
     }
     
     private func presentTableview () {
@@ -164,10 +173,11 @@ class DetailViewController: UIViewController {
 extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: summaryCellIdentifier, for: indexPath)
-        let summary = getRightArray(section: indexPath.section)[indexPath.row]
-        cell.textLabel?.text = summary.title
-        cell.detailTextLabel?.text = summary.description
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: summaryCellIdentifier, for: indexPath) as? SummaryCell else {
+            return UITableViewCell()
+        }
+        let summaryViewModel = getRightArray(section: indexPath.section)[indexPath.row]
+        cell.setup(with: summaryViewModel)
         return cell
     }
     
@@ -181,5 +191,15 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return detailViewModel.sectionTitles[section]
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            headerView.textLabel?.textColor = .white
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 91.0
     }
 }

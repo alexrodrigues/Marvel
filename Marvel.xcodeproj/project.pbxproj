@@ -38,6 +38,8 @@
 		04860963224ADEBD001C599A /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860962224ADEBD001C599A /* DetailViewController.swift */; };
 		04AAED082265C74C00813D3C /* ConstraintsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAED062265C74C00813D3C /* ConstraintsHelper.swift */; };
 		04AAED092265C74C00813D3C /* ViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AAED072265C74C00813D3C /* ViewConfiguration.swift */; };
+		04B47352226A69A400110263 /* SummaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B47351226A69A400110263 /* SummaryCell.xib */; };
+		04B47354226A6B7500110263 /* SummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B47353226A6B7500110263 /* SummaryCell.swift */; };
 		04E2B21F22495C1400DD72A3 /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2B21E22495C1400DD72A3 /* CharacterViewModel.swift */; };
 		04E2B22122495C7800DD72A3 /* CharacterVMFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E2B22022495C7800DD72A3 /* CharacterVMFactory.swift */; };
 		04E2B22422495E0100DD72A3 /* HomeListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E2B22322495E0100DD72A3 /* HomeListCell.xib */; };
@@ -105,6 +107,8 @@
 		04860962224ADEBD001C599A /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		04AAED062265C74C00813D3C /* ConstraintsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstraintsHelper.swift; sourceTree = "<group>"; };
 		04AAED072265C74C00813D3C /* ViewConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConfiguration.swift; sourceTree = "<group>"; };
+		04B47351226A69A400110263 /* SummaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SummaryCell.xib; sourceTree = "<group>"; };
+		04B47353226A6B7500110263 /* SummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryCell.swift; sourceTree = "<group>"; };
 		04E2B21E22495C1400DD72A3 /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
 		04E2B22022495C7800DD72A3 /* CharacterVMFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterVMFactory.swift; sourceTree = "<group>"; };
 		04E2B22322495E0100DD72A3 /* HomeListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeListCell.xib; sourceTree = "<group>"; };
@@ -335,6 +339,7 @@
 			children = (
 				04E2B22322495E0100DD72A3 /* HomeListCell.xib */,
 				ED640705224BAE680092EC59 /* FavoriteCell.xib */,
+				04B47351226A69A400110263 /* SummaryCell.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 			children = (
 				04E2B22622495E3200DD72A3 /* HomeListCell.swift */,
 				ED640701224BAE260092EC59 /* FavoriteCell.swift */,
+				04B47353226A6B7500110263 /* SummaryCell.swift */,
 			);
 			path = cells;
 			sourceTree = "<group>";
@@ -504,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				041B73F622464150004844D9 /* LaunchScreen.storyboard in Resources */,
+				04B47352226A69A400110263 /* SummaryCell.xib in Resources */,
 				04FB29782266A077002EF6CD /* Detail.storyboard in Resources */,
 				041B73F322464150004844D9 /* Assets.xcassets in Resources */,
 				04E2B22422495E0100DD72A3 /* HomeListCell.xib in Resources */,
@@ -653,6 +660,7 @@
 				04E2B22722495E3200DD72A3 /* HomeListCell.swift in Sources */,
 				04860954224AD58C001C599A /* MarvelItemViewModel.swift in Sources */,
 				ED640703224BAE260092EC59 /* FavoriteCell.swift in Sources */,
+				04B47354226A6B7500110263 /* SummaryCell.swift in Sources */,
 				04860959224AD99D001C599A /* Summary.swift in Sources */,
 				04EC23F4224C1FA700EBB81D /* UIView+Extensions.swift in Sources */,
 				04EC23F6224C1FC400EBB81D /* Controller+Extensions.swift in Sources */,

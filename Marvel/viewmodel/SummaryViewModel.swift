@@ -13,15 +13,36 @@ class SummaryViewModel {
     private var _summary: Summary
     
     var title: String {
-        return _summary.title ?? ""
+        guard let summaryText = _summary.title else {
+            return "No info"
+        }
+        if summaryText.isEmpty {
+            return "No info"
+        }
+        return summaryText
     }
     
     var description: String {
-        return _summary.description ?? ""
+        guard let summaryText = _summary.description else {
+            return "No info"
+        }
+        if summaryText.isEmpty {
+            return "No info"
+        }
+        return summaryText
+    }
+    
+    var thumbnailImageUrl: URL? {
+        if let image = _summary.thumbnail?.path,
+            let imageExtension = _summary.thumbnail?.imageExtension,
+            let url = URL(string: "\(image)/portrait_xlarge.\(imageExtension)") {
+            return url
+        }
+        
+        return nil
     }
     
     init(summary: Summary) {
         _summary = summary
     }
-    
 }

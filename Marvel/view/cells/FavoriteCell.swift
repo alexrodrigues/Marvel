@@ -7,14 +7,11 @@
 //
 
 import UIKit
-import RxSwift
 import Kingfisher
 
 class FavoriteCell: UICollectionViewCell {
     
     // MARK: - Variables
-    
-    private let dispose = DisposeBag()
     
     // MARK: - Outlets
     
