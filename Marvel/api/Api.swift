@@ -11,7 +11,7 @@ import RxSwift
 
 class Api<T: Decodable> {
     
-    private let errorMessage = "Something went wrong on fetching musics"
+    private let errorMessage = "Something went wrong on fetching heroes"
     
     func requestObject(urlString: String) -> Observable<T> {
         var remoteTask: URLSessionTask!

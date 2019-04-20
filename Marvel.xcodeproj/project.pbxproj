@@ -26,6 +26,12 @@
 		04443C5222556C790073AF87 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04443C5122556C790073AF87 /* ListViewModel.swift */; };
 		04443C54225583D80073AF87 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04443C53225583D80073AF87 /* DetailViewModel.swift */; };
 		044A50AD2267FB7C00F130CA /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044A50AC2267FB7C00F130CA /* FavoriteViewController.swift */; };
+		04837ABD226B82490003FF6A /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04837ABC226B82490003FF6A /* Main_iPad.storyboard */; };
+		04837ABF226B85DD0003FF6A /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837ABE226B85DD0003FF6A /* ListTableViewController.swift */; };
+		04837AC1226B895F0003FF6A /* HomeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04837AC0226B895F0003FF6A /* HomeTableCell.xib */; };
+		04837AC3226B89F00003FF6A /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837AC2226B89F00003FF6A /* HomeTableCell.swift */; };
+		04837AC5226BBAF70003FF6A /* LoadMore.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04837AC4226BBAF70003FF6A /* LoadMore.xib */; };
+		04837AC7226BC4580003FF6A /* iPadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837AC6226BC4580003FF6A /* iPadDetailViewController.swift */; };
 		04860950224AD1FA001C599A /* CharacterSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486094F224AD1FA001C599A /* CharacterSummary.swift */; };
 		04860952224AD215001C599A /* MarvelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860951224AD215001C599A /* MarvelItem.swift */; };
 		04860954224AD58C001C599A /* MarvelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860953224AD58C001C599A /* MarvelItemViewModel.swift */; };
@@ -95,6 +101,12 @@
 		04443C5122556C790073AF87 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		04443C53225583D80073AF87 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		044A50AC2267FB7C00F130CA /* FavoriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
+		04837ABC226B82490003FF6A /* Main_iPad.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
+		04837ABE226B85DD0003FF6A /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		04837AC0226B895F0003FF6A /* HomeTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableCell.xib; sourceTree = "<group>"; };
+		04837AC2226B89F00003FF6A /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
+		04837AC4226BBAF70003FF6A /* LoadMore.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMore.xib; sourceTree = "<group>"; };
+		04837AC6226BC4580003FF6A /* iPadDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadDetailViewController.swift; sourceTree = "<group>"; };
 		0486094F224AD1FA001C599A /* CharacterSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSummary.swift; sourceTree = "<group>"; };
 		04860951224AD215001C599A /* MarvelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItem.swift; sourceTree = "<group>"; };
 		04860953224AD58C001C599A /* MarvelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItemViewModel.swift; sourceTree = "<group>"; };
@@ -289,8 +301,9 @@
 		041B7413224646D9004844D9 /* storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				04FB29772266A076002EF6CD /* Detail.storyboard */,
 				041B73EF2246414E004844D9 /* Main.storyboard */,
+				04837ABC226B82490003FF6A /* Main_iPad.storyboard */,
+				04FB29772266A076002EF6CD /* Detail.storyboard */,
 				041B73F422464150004844D9 /* LaunchScreen.storyboard */,
 			);
 			path = storyboards;
@@ -300,8 +313,10 @@
 			isa = PBXGroup;
 			children = (
 				041B742322465FB3004844D9 /* ListViewController.swift */,
+				04837ABE226B85DD0003FF6A /* ListTableViewController.swift */,
 				044A50AC2267FB7C00F130CA /* FavoriteViewController.swift */,
 				04860962224ADEBD001C599A /* DetailViewController.swift */,
+				04837AC6226BC4580003FF6A /* iPadDetailViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -338,8 +353,10 @@
 			isa = PBXGroup;
 			children = (
 				04E2B22322495E0100DD72A3 /* HomeListCell.xib */,
+				04837AC0226B895F0003FF6A /* HomeTableCell.xib */,
 				ED640705224BAE680092EC59 /* FavoriteCell.xib */,
 				04B47351226A69A400110263 /* SummaryCell.xib */,
+				04837AC4226BBAF70003FF6A /* LoadMore.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -348,6 +365,7 @@
 			isa = PBXGroup;
 			children = (
 				04E2B22622495E3200DD72A3 /* HomeListCell.swift */,
+				04837AC2226B89F00003FF6A /* HomeTableCell.swift */,
 				ED640701224BAE260092EC59 /* FavoriteCell.swift */,
 				04B47353226A6B7500110263 /* SummaryCell.swift */,
 			);
@@ -511,10 +529,13 @@
 			files = (
 				041B73F622464150004844D9 /* LaunchScreen.storyboard in Resources */,
 				04B47352226A69A400110263 /* SummaryCell.xib in Resources */,
+				04837AC1226B895F0003FF6A /* HomeTableCell.xib in Resources */,
 				04FB29782266A077002EF6CD /* Detail.storyboard in Resources */,
 				041B73F322464150004844D9 /* Assets.xcassets in Resources */,
 				04E2B22422495E0100DD72A3 /* HomeListCell.xib in Resources */,
+				04837ABD226B82490003FF6A /* Main_iPad.storyboard in Resources */,
 				041B73F12246414E004844D9 /* Main.storyboard in Resources */,
+				04837AC5226BBAF70003FF6A /* LoadMore.xib in Resources */,
 				ED640706224BAE680092EC59 /* FavoriteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -668,10 +689,12 @@
 				040A8B5D22694CEF003EB4EC /* GradientView.swift in Sources */,
 				041B73EC2246414E004844D9 /* AppDelegate.swift in Sources */,
 				041B741D22465B56004844D9 /* MarvelService.swift in Sources */,
+				04837ABF226B85DD0003FF6A /* ListTableViewController.swift in Sources */,
 				04EC23F1224C1F9A00EBB81D /* MD5Helper+Extensions.swift in Sources */,
 				040A8B592268C05E003EB4EC /* FavoriteViewModel.swift in Sources */,
 				0486095B224ADA1E001C599A /* SummaryService.swift in Sources */,
 				0486095D224ADCAD001C599A /* SummaryViewModel.swift in Sources */,
+				04837AC3226B89F00003FF6A /* HomeTableCell.swift in Sources */,
 				04E2B23022496A7100DD72A3 /* LoadingMoreView.swift in Sources */,
 				041B742422465FB3004844D9 /* ListViewController.swift in Sources */,
 				04443C5222556C790073AF87 /* ListViewModel.swift in Sources */,
@@ -679,6 +702,7 @@
 				04860963224ADEBD001C599A /* DetailViewController.swift in Sources */,
 				044A50AD2267FB7C00F130CA /* FavoriteViewController.swift in Sources */,
 				04E2B21F22495C1400DD72A3 /* CharacterViewModel.swift in Sources */,
+				04837AC7226BC4580003FF6A /* iPadDetailViewController.swift in Sources */,
 				041B741F22465C93004844D9 /* CharactersResponse.swift in Sources */,
 				041B741922465810004844D9 /* CharactersService.swift in Sources */,
 				04AAED082265C74C00813D3C /* ConstraintsHelper.swift in Sources */,

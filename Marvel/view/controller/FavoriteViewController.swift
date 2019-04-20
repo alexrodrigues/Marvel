@@ -24,6 +24,7 @@ class FavoriteViewController: UIViewController {
     
     @IBOutlet weak var favoriteCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var favoriteLabel: UILabel!
     
     // MARK: - Lifecycle
     
@@ -46,8 +47,12 @@ class FavoriteViewController: UIViewController {
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (characters) in
-                if (characters.isEmpty) { return }
                 guard let self = self else { return }
+                if (characters.isEmpty) {
+                    self.favoriteLabel.isHidden = false
+                    self.activityIndicator.stopAnimating()
+                    return
+                }
                 self.charactersArray.append(contentsOf: characters)
                 self.setupCollectionview()
             }).disposed(by: disposeBag)
@@ -99,7 +104,13 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         let original = CGSize(width: 100.0, height: 160.0)
         let ratio = CGFloat(1.6)
         let width = UIScreen.main.bounds.size.width
-        let desiredWidth = (width / 2) - 16.0
+        var totalPerLine = 2
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            totalPerLine = 4
+        }
+        
+        let desiredWidth = (width / CGFloat(totalPerLine)) - 16.0
         
         let desired = CGRect(x: 0, y: 0, width: desiredWidth, height: desiredWidth * ratio)
         return AVMakeRect(aspectRatio: original, insideRect: desired).size

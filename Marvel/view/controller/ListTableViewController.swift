@@ -1,35 +1,35 @@
 //
-//  ListViewController.swift
+//  ListTableViewController.swift
 //  Marvel
 //
-//  Created by Alex Rodrigues on 23/03/19.
+//  Created by Alex Rodrigues on 20/04/19.
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
-import AVFoundation
 import UIKit
 import RxCocoa
 import RxSwift
 
-class ListViewController: UIViewController {
+class ListTableViewController: UITableViewController {
 
     // MARK: - Variables
     
-    private let homeCell = "HomeListCell"
+    private let homeCell = "HomeTableCell"
     private let firstPage = 1
     private var lastKnowIndex = 1
+    private var isLoadingRemoved = false
     private var disponseBag = DisposeBag()
     private var listViewModel: ListViewModel!
     private var charactersArray = [CharacterViewModel]()
-    private var bottomRefreshControl: UIRefreshControl!
     private var upperRefreshControl: UIRefreshControl!
+    private lazy var loadingMoreView: LoadingMoreView = {
+        return LoadingMoreView.loadFromNibNamed() as! LoadingMoreView
+    }()
     
     // MARK: - Outlets
     
-    @IBOutlet weak var homeCollectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var listSearchBar: UISearchBar!
-    @IBOutlet weak var lblErrorInfo: UILabel!
     
     // MARK: - Life Cycle
     
@@ -40,15 +40,11 @@ class ListViewController: UIViewController {
         fetch(page: firstPage)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     // MARK: - ViewModel Binding
     
     private func bind() {
-        if let navController = navigationController {
-            listViewModel = ListViewModel(with: navController)
+        if let split = splitViewController {
+            listViewModel = ListViewModel(with: split)
         }
         listViewModel.characters
             .asObservable()
@@ -57,7 +53,7 @@ class ListViewController: UIViewController {
                 if (characters.isEmpty) { return }
                 guard let self = self else { return }
                 self.charactersArray.append(contentsOf: characters)
-                self.setupCollectionview()
+                self.setupTableview()
                 self.hideRefreshers()
             }).disposed(by: disponseBag)
         
@@ -68,7 +64,7 @@ class ListViewController: UIViewController {
                 if (characters.isEmpty) { return }
                 guard let self = self else { return }
                 self.charactersArray = characters
-                self.setupCollectionview()
+                self.setupTableview()
             }).disposed(by: disponseBag)
         
         listViewModel.errorMessage
@@ -77,45 +73,41 @@ class ListViewController: UIViewController {
             .subscribe(onNext: { [weak self] (message) in
                 if (message.isEmpty) { return }
                 guard let self = self else { return }
-                self.activityIndicator.stopAnimating()
-                self.lblErrorInfo.isHidden = false
-                self.showErrorAlert(message)
+                self.listViewModel.presentiPadError(with: message)
             }).disposed(by: disponseBag)
     }
     
     // MARK: - Setup
     
     private func registerCells() {
-        homeCollectionView.register(UINib(nibName: homeCell, bundle: nil), forCellWithReuseIdentifier: homeCell)
+        homeTableView.register(UINib(nibName: homeCell, bundle: nil), forCellReuseIdentifier: homeCell)
     }
     
-    private func setupCollectionview() {
-        activityIndicator.stopAnimating()
-        homeCollectionView.isHidden = false
-        homeCollectionView.reloadData()
+    private func setupTableview() {
+        homeTableView.reloadData()
+        if let first = charactersArray.first {
+            listViewModel.navigateToiPadDetail(with: first)
+        }
     }
-    
+
     private func showLoading() {
-        homeCollectionView.isHidden = true
-        activityIndicator.startAnimating()
         charactersArray.removeAll()
+        listViewModel.presentiPadLoading()
     }
     
     private func hideRefreshers() {
-        bottomRefreshControl.endRefreshing()
         upperRefreshControl.endRefreshing()
     }
     
     private func setupLoadingMoreView() {
-        bottomRefreshControl = UIRefreshControl()
-        bottomRefreshControl.tintColor = .red
-        bottomRefreshControl.addTarget(self, action: #selector(ListViewController.performLoadMoreBottom), for: .valueChanged)
-        homeCollectionView.bottomRefreshControl = bottomRefreshControl
-        
         upperRefreshControl = UIRefreshControl()
         upperRefreshControl.tintColor = .red
         upperRefreshControl.addTarget(self, action: #selector(ListViewController.performRefresh), for: .valueChanged)
-        homeCollectionView.refreshControl = upperRefreshControl
+        homeTableView.refreshControl = upperRefreshControl
+        
+        isLoadingRemoved = false
+        loadingMoreView.frame = CGRect(x: 0, y: 0, width: homeTableView.frame.width, height: 50.0)
+        homeTableView.tableFooterView = loadingMoreView
     }
     
     @objc func performRefresh() {
@@ -128,9 +120,11 @@ class ListViewController: UIViewController {
     
     private func disableLoadingMore() {
         upperRefreshControl.endRefreshing()
-        bottomRefreshControl.endRefreshing()
-        homeCollectionView.bottomRefreshControl = nil
-        homeCollectionView.refreshControl = nil
+        homeTableView.bottomRefreshControl = nil
+        homeTableView.refreshControl = nil
+        
+        isLoadingRemoved = true
+        loadingMoreView.isHidden = true
     }
     
     func configureViews() {
@@ -145,7 +139,6 @@ class ListViewController: UIViewController {
     
     private func fetch(page: Int) {
         lastKnowIndex = page
-        lblErrorInfo.isHidden = true
         listViewModel.fetch(lastIndex: lastKnowIndex)
     }
     
@@ -154,63 +147,55 @@ class ListViewController: UIViewController {
     private func search(text: String) {
         listViewModel.search(text: text)
     }
-
+    
     private func searchCancelled() {
         showLoading()
+        isLoadingRemoved = false
+        loadingMoreView.isHidden = false
         setupLoadingMoreView()
         fetch(page: firstPage)
     }
 }
 
-// MARK: - CollectionViewDelegate & CollectionViewDataSource Methods
+// MARK: - UITableViewDataSource & Delegate Methods
 
-extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ListTableViewController {
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCell, for: indexPath) as? HomeListCell else {
-            return UICollectionViewCell()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: homeCell, for: indexPath) as? HomeTableCell else {
+            return UITableViewCell()
         }
         
         let character =  charactersArray[indexPath.row]
-        cell.setup(character: character)
+        cell.setup(with: character)
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return charactersArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let pickedCharacter = charactersArray[indexPath.row]
-        listViewModel.navigateToDetail(with: pickedCharacter)
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 91.0
     }
     
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? HomeListCell {
-            cell.didHighlight()
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == charactersArray.count - 1 && !isLoadingRemoved {
+            fetch(page: charactersArray.count + 1)
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? HomeListCell {
-            cell.didUnHighlight()
-        }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let aCharacter = charactersArray[indexPath.row]
+        listViewModel.navigateToiPadDetail(with: aCharacter)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let original = CGSize(width: 100.0, height: 208.0)
-        let ratio = CGFloat(2.08)
-        let width = UIScreen.main.bounds.size.width
-        let desiredWidth = (width / 2) - 16.0
-        
-        let desired = CGRect(x: 0, y: 0, width: desiredWidth, height: desiredWidth * ratio)
-        return AVMakeRect(aspectRatio: original, insideRect: desired).size
-    }
 }
 
 // MARK: - UISearchBarDelegate Methods
 
-extension ListViewController: UISearchBarDelegate {
+extension ListTableViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
@@ -239,7 +224,7 @@ extension ListViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchCancelled()
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if (searchText.isEmpty) {
             searchBar.showsCancelButton = false
