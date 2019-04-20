@@ -25,7 +25,7 @@ struct ListViewModel {
     }
     
     init(with splitController: UISplitViewController) {
-        
+        coordinator = MarvelCoordinator(with: splitController)
     }
     
     // MARK: - Methods to Query
@@ -56,5 +56,17 @@ extension ListViewModel {
     
     func navigateToDetail(with character: CharacterViewModel) {
         coordinator?.start(character: character)
+    }
+    
+    func presentiPadLoading() {
+        coordinator?.presentiPadLoading()
+    }
+    
+    func presentiPadError(with message: String) {
+        coordinator?.presentiPadError(with: message)
+    }
+    
+    func navigateToiPadDetail(with character: CharacterViewModel) {
+        coordinator?.navigateToiPadDetail(with: character)
     }
 }

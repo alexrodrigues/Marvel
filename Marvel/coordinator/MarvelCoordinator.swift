@@ -18,6 +18,7 @@ class MarvelCoordinator: NSObject, MarvelCoordinatorProtocol {
     
     private var navigationController: UINavigationController?
     private var splitViewController: UISplitViewController?
+    private var ipadDetail: IPadDetailViewController?
     private var characterViewModel: CharacterViewModel?
     
     // MARK: - Initializers
@@ -28,6 +29,11 @@ class MarvelCoordinator: NSObject, MarvelCoordinatorProtocol {
     
     init(with splitConroller: UISplitViewController) {
         self.splitViewController = splitConroller
+        if let detailVC =  self.splitViewController?.viewControllers[1] as? IPadDetailViewController {
+            ipadDetail = detailVC
+        } else {
+            fatalError("Split Detail View Controller not setted.")
+        }
     }
     
     // MARK: - Navigations
@@ -37,10 +43,16 @@ class MarvelCoordinator: NSObject, MarvelCoordinatorProtocol {
         let detailViewController = DetailViewController.instantiateFromStoryboard(character: character)
         navigationController?.pushViewController(detailViewController, animated: true)
     }
+
+    func presentiPadLoading() {
+        ipadDetail?.showLoading()
+    }
     
-    func presentSplited(character: CharacterViewModel) {
-        self.characterViewModel = character
-        let detailViewController = DetailViewController.instantiateFromStoryboard(character: character)
-        self.splitViewController?.viewControllers[1] = detailViewController
+    func presentiPadError(with message: String) {
+        ipadDetail?.showError(with: message)
+    }
+    
+    func navigateToiPadDetail(with character: CharacterViewModel) {
+        ipadDetail?.start(with: character)
     }
 }

@@ -11,7 +11,6 @@ target 'Marvel' do
   pod 'RxCocoa',    '~> 4.0'
   pod 'Kingfisher', '~> 5.0'
   pod 'SwiftLint'
-  pod 'SVProgressHUD'
   pod 'CCBottomRefreshControl'
   
   target 'MarvelTests' do

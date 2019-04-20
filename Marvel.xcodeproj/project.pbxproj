@@ -31,6 +31,7 @@
 		04837AC1226B895F0003FF6A /* HomeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04837AC0226B895F0003FF6A /* HomeTableCell.xib */; };
 		04837AC3226B89F00003FF6A /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837AC2226B89F00003FF6A /* HomeTableCell.swift */; };
 		04837AC5226BBAF70003FF6A /* LoadMore.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04837AC4226BBAF70003FF6A /* LoadMore.xib */; };
+		04837AC7226BC4580003FF6A /* iPadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837AC6226BC4580003FF6A /* iPadDetailViewController.swift */; };
 		04860950224AD1FA001C599A /* CharacterSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486094F224AD1FA001C599A /* CharacterSummary.swift */; };
 		04860952224AD215001C599A /* MarvelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860951224AD215001C599A /* MarvelItem.swift */; };
 		04860954224AD58C001C599A /* MarvelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860953224AD58C001C599A /* MarvelItemViewModel.swift */; };
@@ -105,6 +106,7 @@
 		04837AC0226B895F0003FF6A /* HomeTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableCell.xib; sourceTree = "<group>"; };
 		04837AC2226B89F00003FF6A /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
 		04837AC4226BBAF70003FF6A /* LoadMore.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMore.xib; sourceTree = "<group>"; };
+		04837AC6226BC4580003FF6A /* iPadDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadDetailViewController.swift; sourceTree = "<group>"; };
 		0486094F224AD1FA001C599A /* CharacterSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSummary.swift; sourceTree = "<group>"; };
 		04860951224AD215001C599A /* MarvelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItem.swift; sourceTree = "<group>"; };
 		04860953224AD58C001C599A /* MarvelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItemViewModel.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				04837ABE226B85DD0003FF6A /* ListTableViewController.swift */,
 				044A50AC2267FB7C00F130CA /* FavoriteViewController.swift */,
 				04860962224ADEBD001C599A /* DetailViewController.swift */,
+				04837AC6226BC4580003FF6A /* iPadDetailViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -646,7 +649,6 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -656,7 +658,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -701,6 +702,7 @@
 				04860963224ADEBD001C599A /* DetailViewController.swift in Sources */,
 				044A50AD2267FB7C00F130CA /* FavoriteViewController.swift in Sources */,
 				04E2B21F22495C1400DD72A3 /* CharacterViewModel.swift in Sources */,
+				04837AC7226BC4580003FF6A /* iPadDetailViewController.swift in Sources */,
 				041B741F22465C93004844D9 /* CharactersResponse.swift in Sources */,
 				041B741922465810004844D9 /* CharactersService.swift in Sources */,
 				04AAED082265C74C00813D3C /* ConstraintsHelper.swift in Sources */,

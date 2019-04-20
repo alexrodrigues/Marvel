@@ -9,7 +9,6 @@
 import UIKit
 import RxCocoa
 import RxSwift
-import SVProgressHUD
 
 class ListTableViewController: UITableViewController {
 
@@ -71,10 +70,10 @@ class ListTableViewController: UITableViewController {
         listViewModel.errorMessage
             .asObservable()
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { (message) in
+            .subscribe(onNext: { [weak self] (message) in
                 if (message.isEmpty) { return }
-                SVProgressHUD.dismiss()
-                SVProgressHUD.showError(withStatus: message)
+                guard let self = self else { return }
+                self.listViewModel.presentiPadError(with: message)
             }).disposed(by: disponseBag)
     }
     
@@ -85,15 +84,17 @@ class ListTableViewController: UITableViewController {
     }
     
     private func setupTableview() {
-        SVProgressHUD.dismiss()
         homeTableView.isHidden = false
         homeTableView.reloadData()
+        if let first = charactersArray.first {
+            listViewModel.navigateToiPadDetail(with: first)
+        }
     }
 
     private func showLoading() {
         homeTableView.isHidden = true
-        SVProgressHUD.show()
         charactersArray.removeAll()
+        listViewModel.presentiPadLoading()
     }
     
     private func hideRefreshers() {
@@ -140,8 +141,6 @@ class ListTableViewController: UITableViewController {
     
     private func fetch(page: Int) {
         lastKnowIndex = page
-        SVProgressHUD.dismiss()
-        SVProgressHUD.show()
         listViewModel.fetch(lastIndex: lastKnowIndex)
     }
     
@@ -189,7 +188,9 @@ extension ListTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        tableView.deselectRow(at: indexPath, animated: true)
+        let aCharacter = charactersArray[indexPath.row]
+        listViewModel.navigateToiPadDetail(with: aCharacter)
     }
     
 }
