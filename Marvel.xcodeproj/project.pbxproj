@@ -348,9 +348,9 @@
 			isa = PBXGroup;
 			children = (
 				04E2B22322495E0100DD72A3 /* HomeListCell.xib */,
+				04837AC0226B895F0003FF6A /* HomeTableCell.xib */,
 				ED640705224BAE680092EC59 /* FavoriteCell.xib */,
 				04B47351226A69A400110263 /* SummaryCell.xib */,
-				04837AC0226B895F0003FF6A /* HomeTableCell.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";

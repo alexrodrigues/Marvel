@@ -22,7 +22,6 @@ class ListTableViewController: UITableViewController {
     private var disponseBag = DisposeBag()
     private var listViewModel: ListViewModel!
     private var charactersArray = [CharacterViewModel]()
-    private var bottomRefreshControl: UIRefreshControl!
     private var upperRefreshControl: UIRefreshControl!
     
     // MARK: - Outlets
@@ -95,15 +94,10 @@ class ListTableViewController: UITableViewController {
     }
     
     private func hideRefreshers() {
-        bottomRefreshControl.endRefreshing()
         upperRefreshControl.endRefreshing()
     }
     
     private func setupLoadingMoreView() {
-        bottomRefreshControl = UIRefreshControl()
-        bottomRefreshControl.tintColor = .red
-        bottomRefreshControl.addTarget(self, action: #selector(ListViewController.performLoadMoreBottom), for: .valueChanged)
-        homeTableView.bottomRefreshControl = bottomRefreshControl
         
         upperRefreshControl = UIRefreshControl()
         upperRefreshControl.tintColor = .red
@@ -121,7 +115,6 @@ class ListTableViewController: UITableViewController {
     
     private func disableLoadingMore() {
         upperRefreshControl.endRefreshing()
-        bottomRefreshControl.endRefreshing()
         homeTableView.bottomRefreshControl = nil
         homeTableView.refreshControl = nil
     }
@@ -173,6 +166,10 @@ extension ListTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return charactersArray.count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 91.0
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
