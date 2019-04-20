@@ -153,6 +153,15 @@
                                     <outlet property="delegate" destination="x03-xT-LOu" id="XWM-DD-gvu"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5n-BX-JaT">
+                                <rect key="frame" x="874" y="50" width="120" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="GmO-uu-jJh"/>
+                                    <constraint firstAttribute="height" constant="50" id="Hus-2J-f44"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="tintColor" red="0.92366516590000003" green="0.2302157879" blue="0.25469863409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="x5h-2p-wxU">
                                 <rect key="frame" x="502" y="673" width="20" height="20"/>
                                 <color key="color" red="0.92455786470000001" green="0.10997990520000001" blue="0.1375359595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -162,7 +171,9 @@
                         <constraints>
                             <constraint firstItem="ykG-E4-pvd" firstAttribute="centerY" secondItem="Pfu-wK-SIO" secondAttribute="centerY" id="1TL-lc-EpB"/>
                             <constraint firstItem="8gZ-t6-0BO" firstAttribute="bottom" secondItem="Yg8-xH-aOK" secondAttribute="bottom" id="8uB-II-BT5"/>
+                            <constraint firstItem="x5n-BX-JaT" firstAttribute="top" secondItem="Yg8-xH-aOK" secondAttribute="top" constant="30" id="Hvd-eb-c6m"/>
                             <constraint firstItem="ykG-E4-pvd" firstAttribute="leading" secondItem="Yg8-xH-aOK" secondAttribute="leading" id="KsP-aS-bvW"/>
+                            <constraint firstItem="Yg8-xH-aOK" firstAttribute="trailing" secondItem="x5n-BX-JaT" secondAttribute="trailing" constant="30" id="Mex-eV-OZU"/>
                             <constraint firstItem="8gZ-t6-0BO" firstAttribute="top" secondItem="Yg8-xH-aOK" secondAttribute="top" id="TtO-K4-qHt"/>
                             <constraint firstItem="x5h-2p-wxU" firstAttribute="centerX" secondItem="Pfu-wK-SIO" secondAttribute="centerX" id="Vce-GQ-XhT"/>
                             <constraint firstItem="8gZ-t6-0BO" firstAttribute="leading" secondItem="Yg8-xH-aOK" secondAttribute="leading" id="YrH-M7-FKC"/>
@@ -176,6 +187,7 @@
                         <outlet property="activtiyIndicatorView" destination="x5h-2p-wxU" id="GGV-eC-xxG"/>
                         <outlet property="detailTableView" destination="8gZ-t6-0BO" id="QK4-A2-tYN"/>
                         <outlet property="errorMessageLabel" destination="ykG-E4-pvd" id="LBq-id-Bjr"/>
+                        <outlet property="favoriteButton" destination="x5n-BX-JaT" id="uXq-wA-8xA"/>
                         <outlet property="nameLabel" destination="EfC-wg-Lf9" id="o3c-oG-MRV"/>
                         <outlet property="profileImageView" destination="v9h-ua-Wll" id="6Cz-Nm-G1j"/>
                     </connections>

@@ -16,7 +16,6 @@ class IPadDetailViewController: UIViewController {
     // MARK: - Variables
     
     private var disposeBag = DisposeBag()
-    private var favoriteBarButton: UIBarButtonItem!
     private let summaryCellIdentifier = "SummaryCell"
     private var character: CharacterViewModel?
     private var detailViewModel: DetailViewModel!
@@ -28,6 +27,7 @@ class IPadDetailViewController: UIViewController {
     @IBOutlet weak var activtiyIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var detailTableView: UITableView!
     @IBOutlet weak var errorMessageLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     // MARK: - Coordinator auxiliars
     
@@ -50,6 +50,7 @@ class IPadDetailViewController: UIViewController {
     
     func showLoading() {
         clearArrays()
+        favoriteButton.setTitle("", for: .normal)
         detailTableView.isHidden = true
         activtiyIndicatorView.startAnimating()
     }
@@ -145,11 +146,11 @@ class IPadDetailViewController: UIViewController {
             .subscribe(onNext: {[weak self] exists in
                 guard let self = self else { return }
                 if exists {
-                    self.favoriteBarButton = UIBarButtonItem(title: "Unfavorite", style: .done, target: self, action: #selector(DetailViewController.unfavorite))
-                    self.navigationItem.rightBarButtonItem = self.favoriteBarButton
+                    self.favoriteButton.addTarget(self, action: #selector(IPadDetailViewController.unfavorite), for: .touchUpInside)
+                    self.favoriteButton.setTitle("Unfavorite", for: .normal)
                 } else {
-                    self.favoriteBarButton = UIBarButtonItem(title: "Favorite", style: .done, target: self, action: #selector(DetailViewController.favorite))
-                    self.navigationItem.rightBarButtonItem = self.favoriteBarButton
+                    self.favoriteButton.addTarget(self, action: #selector(IPadDetailViewController.favorite), for: .touchUpInside)
+                    self.favoriteButton.setTitle("Favorite", for: .normal)
                 }
             }).disposed(by: disposeBag)
     }
@@ -169,6 +170,30 @@ class IPadDetailViewController: UIViewController {
         detailViewModel.eventsArray.accept([SummaryViewModel]())
         detailViewModel.storiesArray.accept([SummaryViewModel]())
         detailViewModel.seriesArray.accept([SummaryViewModel]())
+    }
+    
+    // MARK: - Favorite Methods
+    
+    @objc func favorite() {
+        guard let characterViewModel = character else { return }
+        detailViewModel.insert(character: characterViewModel)
+            .subscribe(onNext: { _ in
+                self.setupFavoriteButton()
+            }, onError: { [weak self] error in
+                guard let self = self else { return }
+                self.showErrorAlert(error.localizedDescription)
+            }).disposed(by: disposeBag)
+    }
+    
+    @objc func unfavorite() {
+        guard let characterViewModel = character else { return }
+        detailViewModel.delete(character: characterViewModel)
+            .subscribe(onNext: { _ in
+                self.setupFavoriteButton()
+            }, onError: { [weak self] error in
+                guard let self = self else { return }
+                self.showErrorAlert(error.localizedDescription)
+            }).disposed(by: disposeBag)
     }
 }
 
