@@ -23,6 +23,9 @@ class ListTableViewController: UITableViewController {
     private var listViewModel: ListViewModel!
     private var charactersArray = [CharacterViewModel]()
     private var upperRefreshControl: UIRefreshControl!
+    private lazy var loadingMoreView: LoadingMoreView = {
+        return LoadingMoreView.loadFromNibNamed() as! LoadingMoreView
+    }()
     
     // MARK: - Outlets
     
@@ -98,11 +101,14 @@ class ListTableViewController: UITableViewController {
     }
     
     private func setupLoadingMoreView() {
-        
         upperRefreshControl = UIRefreshControl()
         upperRefreshControl.tintColor = .red
         upperRefreshControl.addTarget(self, action: #selector(ListViewController.performRefresh), for: .valueChanged)
         homeTableView.refreshControl = upperRefreshControl
+        
+        isLoadingRemoved = false
+        loadingMoreView.frame = CGRect(x: 0, y: 0, width: homeTableView.frame.width, height: 50.0)
+        homeTableView.tableFooterView = loadingMoreView
     }
     
     @objc func performRefresh() {
@@ -117,6 +123,9 @@ class ListTableViewController: UITableViewController {
         upperRefreshControl.endRefreshing()
         homeTableView.bottomRefreshControl = nil
         homeTableView.refreshControl = nil
+        
+        isLoadingRemoved = true
+        loadingMoreView.isHidden = true
     }
     
     func configureViews() {
@@ -145,6 +154,7 @@ class ListTableViewController: UITableViewController {
     private func searchCancelled() {
         showLoading()
         isLoadingRemoved = false
+        loadingMoreView.isHidden = false
         setupLoadingMoreView()
         fetch(page: firstPage)
     }
@@ -170,6 +180,12 @@ extension ListTableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 91.0
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == charactersArray.count - 1 && !isLoadingRemoved {
+            fetch(page: charactersArray.count + 1)
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

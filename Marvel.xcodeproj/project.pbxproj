@@ -30,6 +30,7 @@
 		04837ABF226B85DD0003FF6A /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837ABE226B85DD0003FF6A /* ListTableViewController.swift */; };
 		04837AC1226B895F0003FF6A /* HomeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04837AC0226B895F0003FF6A /* HomeTableCell.xib */; };
 		04837AC3226B89F00003FF6A /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837AC2226B89F00003FF6A /* HomeTableCell.swift */; };
+		04837AC5226BBAF70003FF6A /* LoadMore.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04837AC4226BBAF70003FF6A /* LoadMore.xib */; };
 		04860950224AD1FA001C599A /* CharacterSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486094F224AD1FA001C599A /* CharacterSummary.swift */; };
 		04860952224AD215001C599A /* MarvelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860951224AD215001C599A /* MarvelItem.swift */; };
 		04860954224AD58C001C599A /* MarvelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860953224AD58C001C599A /* MarvelItemViewModel.swift */; };
@@ -103,6 +104,7 @@
 		04837ABE226B85DD0003FF6A /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		04837AC0226B895F0003FF6A /* HomeTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableCell.xib; sourceTree = "<group>"; };
 		04837AC2226B89F00003FF6A /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
+		04837AC4226BBAF70003FF6A /* LoadMore.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMore.xib; sourceTree = "<group>"; };
 		0486094F224AD1FA001C599A /* CharacterSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSummary.swift; sourceTree = "<group>"; };
 		04860951224AD215001C599A /* MarvelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItem.swift; sourceTree = "<group>"; };
 		04860953224AD58C001C599A /* MarvelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItemViewModel.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				04837AC0226B895F0003FF6A /* HomeTableCell.xib */,
 				ED640705224BAE680092EC59 /* FavoriteCell.xib */,
 				04B47351226A69A400110263 /* SummaryCell.xib */,
+				04837AC4226BBAF70003FF6A /* LoadMore.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				04E2B22422495E0100DD72A3 /* HomeListCell.xib in Resources */,
 				04837ABD226B82490003FF6A /* Main_iPad.storyboard in Resources */,
 				041B73F12246414E004844D9 /* Main.storyboard in Resources */,
+				04837AC5226BBAF70003FF6A /* LoadMore.xib in Resources */,
 				ED640706224BAE680092EC59 /* FavoriteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

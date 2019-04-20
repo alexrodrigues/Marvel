@@ -18,7 +18,6 @@ class ListViewController: UIViewController {
     private let homeCell = "HomeListCell"
     private let firstPage = 1
     private var lastKnowIndex = 1
-    private var isLoadingRemoved = false
     private var disponseBag = DisposeBag()
     private var listViewModel: ListViewModel!
     private var charactersArray = [CharacterViewModel]()
@@ -158,7 +157,6 @@ class ListViewController: UIViewController {
 
     private func searchCancelled() {
         showLoading()
-        isLoadingRemoved = false
         setupLoadingMoreView()
         fetch(page: firstPage)
     }
