@@ -84,7 +84,6 @@ class ListTableViewController: UITableViewController {
     }
     
     private func setupTableview() {
-        homeTableView.isHidden = false
         homeTableView.reloadData()
         if let first = charactersArray.first {
             listViewModel.navigateToiPadDetail(with: first)
@@ -92,7 +91,6 @@ class ListTableViewController: UITableViewController {
     }
 
     private func showLoading() {
-        homeTableView.isHidden = true
         charactersArray.removeAll()
         listViewModel.presentiPadLoading()
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pYX-wZ-m1O">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iW9-oT-wdJ">
     <device id="ipad12_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -63,10 +63,11 @@
             </objects>
             <point key="canvasLocation" x="-1220" y="48"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Heroes-->
         <scene sceneID="Gvd-pu-oko">
             <objects>
                 <splitViewController id="pYX-wZ-m1O" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Heroes" image="tabicon_heroes" landscapeImage="tabicon_heroes" id="6uh-Ok-H44"/>
                     <connections>
                         <segue destination="9Fe-oD-QFO" kind="relationship" relationship="masterViewController" id="orn-IE-nzk"/>
                         <segue destination="x03-xT-LOu" kind="relationship" relationship="detailViewController" id="02D-px-7p5"/>
@@ -94,7 +95,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="8gZ-t6-0BO">
-                                <rect key="frame" x="0.0" y="20" width="1024" height="1346"/>
+                                <rect key="frame" x="0.0" y="20" width="1024" height="1296"/>
                                 <color key="backgroundColor" red="0.18823529410000001" green="0.20000000000000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.18823529410000001" green="0.20000000000000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -181,7 +182,119 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qhy-m4-cUD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-498.04687499999994" y="822.69399707174227"/>
+            <point key="canvasLocation" x="226.17187499999997" y="822.69399707174227"/>
+        </scene>
+        <!--Marvel-->
+        <scene sceneID="iqc-7V-oql">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="iW9-oT-wdJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Marvel" id="OPr-VO-zJv"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5Q5-Az-qhs">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.87627476449999997" green="0.18181419369999999" blue="0.2047961056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="pYX-wZ-m1O" kind="relationship" relationship="viewControllers" id="0ev-rm-cN0"/>
+                        <segue destination="59p-Wm-iGI" kind="relationship" relationship="viewControllers" id="9DI-Pp-CaF"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tTV-8B-HjM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2761" y="359"/>
+        </scene>
+        <!--Marvel-->
+        <scene sceneID="quO-ib-MbV">
+            <objects>
+                <viewController title="Marvel" id="GpN-9i-uY6" customClass="FavoriteViewController" customModule="Marvel" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dvp-0r-dfq">
+                        <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Favorites yet" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sc-rW-uMj">
+                                <rect key="frame" x="0.0" y="668" width="1024" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="N51-bd-Akn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oEo-cN-v4n">
+                                <rect key="frame" x="0.0" y="70" width="1024" height="1246"/>
+                                <color key="backgroundColor" red="0.18823529410000001" green="0.20000000000000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="8" minimumInteritemSpacing="0.0" id="soV-fA-Amh">
+                                    <size key="itemSize" width="100" height="160"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="8" minY="8" maxX="8" maxY="8"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="GpN-9i-uY6" id="91h-zj-HtS"/>
+                                    <outlet property="delegate" destination="GpN-9i-uY6" id="bRM-pl-Oob"/>
+                                </connections>
+                            </collectionView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="9Sa-3q-Nbp">
+                                <rect key="frame" x="502" y="673" width="20" height="20"/>
+                                <color key="color" red="0.92455786470000001" green="0.10997990520000001" blue="0.1375359595" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.18823529410000001" green="0.20000000000000001" blue="0.2156862745" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="oEo-cN-v4n" firstAttribute="top" secondItem="5F2-gw-bKd" secondAttribute="top" id="0wR-qW-d18"/>
+                            <constraint firstItem="oEo-cN-v4n" firstAttribute="trailing" secondItem="5F2-gw-bKd" secondAttribute="trailing" id="3u5-Ha-JFu"/>
+                            <constraint firstItem="9Sa-3q-Nbp" firstAttribute="centerX" secondItem="dvp-0r-dfq" secondAttribute="centerX" id="5na-Qt-mQJ"/>
+                            <constraint firstItem="oEo-cN-v4n" firstAttribute="leading" secondItem="5F2-gw-bKd" secondAttribute="leading" id="HY6-Hp-cmb"/>
+                            <constraint firstItem="5F2-gw-bKd" firstAttribute="trailing" secondItem="6sc-rW-uMj" secondAttribute="trailing" id="Igh-dQ-wCh"/>
+                            <constraint firstItem="9Sa-3q-Nbp" firstAttribute="centerY" secondItem="dvp-0r-dfq" secondAttribute="centerY" id="Usr-65-Fvr"/>
+                            <constraint firstItem="6sc-rW-uMj" firstAttribute="centerY" secondItem="dvp-0r-dfq" secondAttribute="centerY" id="VBW-HG-8BR"/>
+                            <constraint firstItem="oEo-cN-v4n" firstAttribute="bottom" secondItem="5F2-gw-bKd" secondAttribute="bottom" id="hPg-69-w4a"/>
+                            <constraint firstItem="6sc-rW-uMj" firstAttribute="leading" secondItem="5F2-gw-bKd" secondAttribute="leading" id="pTf-pt-Pn8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5F2-gw-bKd"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Marvel" id="RzL-wF-nVF"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="9Sa-3q-Nbp" id="Q6T-bV-zUc"/>
+                        <outlet property="favoriteCollectionView" destination="oEo-cN-v4n" id="HUY-Vk-dVn"/>
+                        <outlet property="favoriteLabel" destination="6sc-rW-uMj" id="WcP-u3-VY9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lr8-2G-Mx3" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1228.125" y="1109.9560761346997"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="XJa-ie-X6N">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="59p-Wm-iGI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="tabicon_favorites" landscapeImage="tabicon_favorites" selectedImage="tabicon_favorites" id="KoC-Fc-jjd"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SJG-1p-xDk">
+                        <rect key="frame" x="0.0" y="20" width="1024" height="50"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.92366516590000003" green="0.2302157879" blue="0.25469863409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GpN-9i-uY6" kind="relationship" relationship="rootViewController" id="M0C-xX-hfd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ya8-1S-qOL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1952.3437499999998" y="1109.9560761346997"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="tabicon_favorites" width="32" height="32"/>
+        <image name="tabicon_heroes" width="32" height="32"/>
+    </resources>
 </document>
