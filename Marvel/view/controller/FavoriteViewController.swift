@@ -24,6 +24,7 @@ class FavoriteViewController: UIViewController {
     
     @IBOutlet weak var favoriteCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var favoriteLabel: UILabel!
     
     // MARK: - Lifecycle
     
@@ -46,8 +47,12 @@ class FavoriteViewController: UIViewController {
             .asObservable()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (characters) in
-                if (characters.isEmpty) { return }
                 guard let self = self else { return }
+                if (characters.isEmpty) {
+                    self.favoriteLabel.isHidden = false
+                    self.activityIndicator.stopAnimating()
+                    return
+                }
                 self.charactersArray.append(contentsOf: characters)
                 self.setupCollectionview()
             }).disposed(by: disposeBag)

@@ -31,6 +31,7 @@ class SummaryCell: UITableViewCell {
         descriptionLabel.text = summaryViewModel.description
         thumbnailImageView.kf.indicatorType = .activity
         if let url = summaryViewModel.thumbnailImageUrl {
+            thumbnailImageView.kf.indicatorType = .activity
             thumbnailImageView.kf.setImage(with: url)
         } else {
             thumbnailImageView.backgroundColor = .darkGray

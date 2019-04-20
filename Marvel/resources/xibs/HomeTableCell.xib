@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HomeTableCell" rowHeight="91" id="PLM-4K-XXV" customClass="HomeTableCell" customModule="Marvel" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="91"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PLM-4K-XXV" id="9lB-07-a7C">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="90.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Pfk-lD-FD6">
+                        <rect key="frame" x="8" y="8" width="60" height="74.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="xKY-Jt-W9l"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="RKi-z2-dxq">
+                        <rect key="frame" x="84" y="8" width="314" height="74.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2I-n4-1Py">
+                                <rect key="frame" x="0.0" y="0.0" width="314" height="24"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T3F-VW-Unv">
+                                <rect key="frame" x="0.0" y="32" width="314" height="42.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Favorite">
+                                    <color key="titleColor" red="0.92366516590000003" green="0.2302157879" blue="0.25469863409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="RKi-z2-dxq" firstAttribute="bottom" secondItem="Pfk-lD-FD6" secondAttribute="bottom" id="4gD-f5-Gc9"/>
+                    <constraint firstAttribute="trailing" secondItem="RKi-z2-dxq" secondAttribute="trailing" constant="16" id="IdV-Ri-cpU"/>
+                    <constraint firstItem="RKi-z2-dxq" firstAttribute="top" secondItem="Pfk-lD-FD6" secondAttribute="top" id="JtF-Gt-PQ9"/>
+                    <constraint firstAttribute="bottom" secondItem="Pfk-lD-FD6" secondAttribute="bottom" constant="8" id="X90-I9-R77"/>
+                    <constraint firstItem="Pfk-lD-FD6" firstAttribute="top" secondItem="9lB-07-a7C" secondAttribute="top" constant="8" id="beq-AO-mKh"/>
+                    <constraint firstItem="Pfk-lD-FD6" firstAttribute="leading" secondItem="9lB-07-a7C" secondAttribute="leading" constant="8" id="jZn-Jg-TF4"/>
+                    <constraint firstItem="RKi-z2-dxq" firstAttribute="leading" secondItem="Pfk-lD-FD6" secondAttribute="trailing" constant="16" id="owU-gv-Jjp"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="favoriteButton" destination="T3F-VW-Unv" id="Vew-8o-AUZ"/>
+                <outlet property="nameLabel" destination="w2I-n4-1Py" id="4mE-fZ-qf2"/>
+                <outlet property="thumbnailImageView" destination="Pfk-lD-FD6" id="58V-Rk-Py5"/>
+            </connections>
+            <point key="canvasLocation" x="115.94202898550725" y="-43.861607142857139"/>
+        </tableViewCell>
+    </objects>
+</document>

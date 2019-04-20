@@ -14,22 +14,33 @@ protocol MarvelCoordinatorProtocol: class {
 
 class MarvelCoordinator: NSObject, MarvelCoordinatorProtocol {
 
-    //MARK: - Variables
+    // MARK: - Variables
     
-    private var navigationController: UINavigationController
+    private var navigationController: UINavigationController?
+    private var splitViewController: UISplitViewController?
     private var characterViewModel: CharacterViewModel?
     
-    //MARK: - Initializers
+    // MARK: - Initializers
     
     init(with navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    //MARK: - Navigations
+    init(with splitConroller: UISplitViewController) {
+        self.splitViewController = splitConroller
+    }
+    
+    // MARK: - Navigations
     
     func start(character: CharacterViewModel) {
         self.characterViewModel = character
         let detailViewController = DetailViewController.instantiateFromStoryboard(character: character)
-        navigationController.pushViewController(detailViewController, animated: true)
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func presentSplited(character: CharacterViewModel) {
+        self.characterViewModel = character
+        let detailViewController = DetailViewController.instantiateFromStoryboard(character: character)
+        self.splitViewController?.viewControllers[1] = detailViewController
     }
 }

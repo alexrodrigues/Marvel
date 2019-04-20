@@ -1,25 +1,24 @@
 //
-//  HomeListCell.swift
+//  HomeTableCell.swift
 //  Marvel
 //
-//  Created by Alex Rodrigues on 25/03/19.
+//  Created by Alex Rodrigues on 20/04/19.
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
 import UIKit
 import RxSwift
 
-class HomeListCell: UICollectionViewCell {
+class HomeTableCell: UITableViewCell {
 
     // MARK: - Variables
     
     private var character: CharacterViewModel!
-    private var disposeBag = DisposeBag()
+    private var disposeBag  = DisposeBag()
     
     // MARK: - Outlets
-    
+    @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var favoriteButton: UIButton!
     
     // MARK: - Lifecycle
@@ -28,19 +27,17 @@ class HomeListCell: UICollectionViewCell {
         super.awakeFromNib()
     }
 
-    // MARK: - Setup
-    
-    func setup(character: CharacterViewModel) {
-        profileImageView.backgroundColor = .clear
-        self.character = character
-        loadingState()
-        nameLabel.text = character.name
+    func setup(with characterViewModel: CharacterViewModel) {
+        self.character = characterViewModel
         
-        if let url = character.profileImageUrl {
-            profileImageView.kf.indicatorType = .activity
-            profileImageView.kf.setImage(with: url)
+        thumbnailImageView.backgroundColor = .clear
+        nameLabel.text = characterViewModel.name
+        
+        if let url = characterViewModel.profileImageUrl {
+            thumbnailImageView.kf.indicatorType = .activity
+            thumbnailImageView.kf.setImage(with: url)
         } else {
-            profileImageView.backgroundColor = .darkGray
+            thumbnailImageView.backgroundColor = .darkGray
         }
         
         character.isFavorite()
@@ -49,22 +46,6 @@ class HomeListCell: UICollectionViewCell {
                 guard let self = self else { return }
                 self.configureFavorite(isFavorite: isFavorite)
             }).disposed(by: disposeBag)
-    }
-
-    private func loadingState() {
-        profileImageView.image = nil
-    }
-    
-    func didUnHighlight() {
-        UIView.animate(withDuration: 0.2) {
-            self.alpha = 1.0
-        }
-    }
-    
-    func didHighlight() {
-        UIView.animate(withDuration: 0.2) {
-            self.alpha = 0.2
-        }
     }
     
     // MARK: - Favorite Actions

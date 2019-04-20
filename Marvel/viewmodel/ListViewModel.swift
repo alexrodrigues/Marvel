@@ -18,10 +18,14 @@ struct ListViewModel {
     var searchCharacters = BehaviorRelay<[CharacterViewModel]>(value: [CharacterViewModel]())
     var errorMessage = BehaviorRelay<String>(value: "")
     private let disposeBag = DisposeBag()
-    private var coordinator: MarvelCoordinator
+    private var coordinator: MarvelCoordinator?
     
     init(with navigationController: UINavigationController) {
         coordinator = MarvelCoordinator(with: navigationController)
+    }
+    
+    init(with splitController: UISplitViewController) {
+        
     }
     
     // MARK: - Methods to Query
@@ -51,6 +55,6 @@ struct ListViewModel {
 extension ListViewModel {
     
     func navigateToDetail(with character: CharacterViewModel) {
-        coordinator.start(character: character)
+        coordinator?.start(character: character)
     }
 }

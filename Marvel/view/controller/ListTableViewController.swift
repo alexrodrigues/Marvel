@@ -1,21 +1,21 @@
 //
-//  ListViewController.swift
+//  ListTableViewController.swift
 //  Marvel
 //
-//  Created by Alex Rodrigues on 23/03/19.
+//  Created by Alex Rodrigues on 20/04/19.
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
-import AVFoundation
 import UIKit
 import RxCocoa
 import RxSwift
+import SVProgressHUD
 
-class ListViewController: UIViewController {
+class ListTableViewController: UITableViewController {
 
     // MARK: - Variables
     
-    private let homeCell = "HomeListCell"
+    private let homeCell = "HomeTableCell"
     private let firstPage = 1
     private var lastKnowIndex = 1
     private var isLoadingRemoved = false
@@ -27,10 +27,8 @@ class ListViewController: UIViewController {
     
     // MARK: - Outlets
     
-    @IBOutlet weak var homeCollectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var listSearchBar: UISearchBar!
-    @IBOutlet weak var lblErrorInfo: UILabel!
     
     // MARK: - Life Cycle
     
@@ -41,15 +39,11 @@ class ListViewController: UIViewController {
         fetch(page: firstPage)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     // MARK: - ViewModel Binding
     
     private func bind() {
-        if let navController = navigationController {
-            listViewModel = ListViewModel(with: navController)
+        if let split = splitViewController {
+            listViewModel = ListViewModel(with: split)
         }
         listViewModel.characters
             .asObservable()
@@ -58,7 +52,7 @@ class ListViewController: UIViewController {
                 if (characters.isEmpty) { return }
                 guard let self = self else { return }
                 self.charactersArray.append(contentsOf: characters)
-                self.setupCollectionview()
+                self.setupTableview()
                 self.hideRefreshers()
             }).disposed(by: disponseBag)
         
@@ -69,36 +63,34 @@ class ListViewController: UIViewController {
                 if (characters.isEmpty) { return }
                 guard let self = self else { return }
                 self.charactersArray = characters
-                self.setupCollectionview()
+                self.setupTableview()
             }).disposed(by: disponseBag)
         
         listViewModel.errorMessage
             .asObservable()
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] (message) in
+            .subscribe(onNext: { (message) in
                 if (message.isEmpty) { return }
-                guard let self = self else { return }
-                self.activityIndicator.stopAnimating()
-                self.lblErrorInfo.isHidden = false
-                self.showErrorAlert(message)
+                SVProgressHUD.dismiss()
+                SVProgressHUD.showError(withStatus: message)
             }).disposed(by: disponseBag)
     }
     
     // MARK: - Setup
     
     private func registerCells() {
-        homeCollectionView.register(UINib(nibName: homeCell, bundle: nil), forCellWithReuseIdentifier: homeCell)
+        homeTableView.register(UINib(nibName: homeCell, bundle: nil), forCellReuseIdentifier: homeCell)
     }
     
-    private func setupCollectionview() {
-        activityIndicator.stopAnimating()
-        homeCollectionView.isHidden = false
-        homeCollectionView.reloadData()
+    private func setupTableview() {
+        SVProgressHUD.dismiss()
+        homeTableView.isHidden = false
+        homeTableView.reloadData()
     }
-    
+
     private func showLoading() {
-        homeCollectionView.isHidden = true
-        activityIndicator.startAnimating()
+        homeTableView.isHidden = true
+        SVProgressHUD.show()
         charactersArray.removeAll()
     }
     
@@ -111,12 +103,12 @@ class ListViewController: UIViewController {
         bottomRefreshControl = UIRefreshControl()
         bottomRefreshControl.tintColor = .red
         bottomRefreshControl.addTarget(self, action: #selector(ListViewController.performLoadMoreBottom), for: .valueChanged)
-        homeCollectionView.bottomRefreshControl = bottomRefreshControl
+        homeTableView.bottomRefreshControl = bottomRefreshControl
         
         upperRefreshControl = UIRefreshControl()
         upperRefreshControl.tintColor = .red
         upperRefreshControl.addTarget(self, action: #selector(ListViewController.performRefresh), for: .valueChanged)
-        homeCollectionView.refreshControl = upperRefreshControl
+        homeTableView.refreshControl = upperRefreshControl
     }
     
     @objc func performRefresh() {
@@ -130,8 +122,8 @@ class ListViewController: UIViewController {
     private func disableLoadingMore() {
         upperRefreshControl.endRefreshing()
         bottomRefreshControl.endRefreshing()
-        homeCollectionView.bottomRefreshControl = nil
-        homeCollectionView.refreshControl = nil
+        homeTableView.bottomRefreshControl = nil
+        homeTableView.refreshControl = nil
     }
     
     func configureViews() {
@@ -146,7 +138,8 @@ class ListViewController: UIViewController {
     
     private func fetch(page: Int) {
         lastKnowIndex = page
-        lblErrorInfo.isHidden = true
+        SVProgressHUD.dismiss()
+        SVProgressHUD.show()
         listViewModel.fetch(lastIndex: lastKnowIndex)
     }
     
@@ -155,7 +148,7 @@ class ListViewController: UIViewController {
     private func search(text: String) {
         listViewModel.search(text: text)
     }
-
+    
     private func searchCancelled() {
         showLoading()
         isLoadingRemoved = false
@@ -164,55 +157,33 @@ class ListViewController: UIViewController {
     }
 }
 
-// MARK: - CollectionViewDelegate & CollectionViewDataSource Methods
+// MARK: - UITableViewDataSource & Delegate Methods
 
-extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ListTableViewController {
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCell, for: indexPath) as? HomeListCell else {
-            return UICollectionViewCell()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: homeCell, for: indexPath) as? HomeTableCell else {
+            return UITableViewCell()
         }
         
         let character =  charactersArray[indexPath.row]
-        cell.setup(character: character)
+        cell.setup(with: character)
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return charactersArray.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let pickedCharacter = charactersArray[indexPath.row]
-        listViewModel.navigateToDetail(with: pickedCharacter)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? HomeListCell {
-            cell.didHighlight()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? HomeListCell {
-            cell.didUnHighlight()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let original = CGSize(width: 100.0, height: 208.0)
-        let ratio = CGFloat(2.08)
-        let width = UIScreen.main.bounds.size.width
-        let desiredWidth = (width / 2) - 16.0
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let desired = CGRect(x: 0, y: 0, width: desiredWidth, height: desiredWidth * ratio)
-        return AVMakeRect(aspectRatio: original, insideRect: desired).size
     }
+    
 }
 
 // MARK: - UISearchBarDelegate Methods
 
-extension ListViewController: UISearchBarDelegate {
+extension ListTableViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
@@ -241,7 +212,7 @@ extension ListViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchCancelled()
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if (searchText.isEmpty) {
             searchBar.showsCancelButton = false
