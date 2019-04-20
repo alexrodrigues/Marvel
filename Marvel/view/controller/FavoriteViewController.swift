@@ -104,7 +104,13 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
         let original = CGSize(width: 100.0, height: 160.0)
         let ratio = CGFloat(1.6)
         let width = UIScreen.main.bounds.size.width
-        let desiredWidth = (width / 2) - 16.0
+        var totalPerLine = 2
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            totalPerLine = 4
+        }
+        
+        let desiredWidth = (width / CGFloat(totalPerLine)) - 16.0
         
         let desired = CGRect(x: 0, y: 0, width: desiredWidth, height: desiredWidth * ratio)
         return AVMakeRect(aspectRatio: original, insideRect: desired).size
