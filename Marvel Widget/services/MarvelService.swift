@@ -1,8 +1,8 @@
 //
 //  MarvelService.swift
-//  Marvel
+//  Marvel Widget
 //
-//  Created by Alex Rodrigues on 23/03/19.
+//  Created by Alex Rodrigues on 21/04/19.
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
