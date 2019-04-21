@@ -32,6 +32,7 @@
 		04837AC3226B89F00003FF6A /* HomeTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837AC2226B89F00003FF6A /* HomeTableCell.swift */; };
 		04837AC5226BBAF70003FF6A /* LoadMore.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04837AC4226BBAF70003FF6A /* LoadMore.xib */; };
 		04837AC7226BC4580003FF6A /* iPadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837AC6226BC4580003FF6A /* iPadDetailViewController.swift */; };
+		04837ACF226BE50C0003FF6A /* MarvelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04837ACE226BE50C0003FF6A /* MarvelUITests.swift */; };
 		04860950224AD1FA001C599A /* CharacterSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0486094F224AD1FA001C599A /* CharacterSummary.swift */; };
 		04860952224AD215001C599A /* MarvelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860951224AD215001C599A /* MarvelItem.swift */; };
 		04860954224AD58C001C599A /* MarvelItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04860953224AD58C001C599A /* MarvelItemViewModel.swift */; };
@@ -56,6 +57,8 @@
 		04EC23F4224C1FA700EBB81D /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC23F3224C1FA700EBB81D /* UIView+Extensions.swift */; };
 		04EC23F6224C1FC400EBB81D /* Controller+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC23F5224C1FC400EBB81D /* Controller+Extensions.swift */; };
 		04EC40DF2269DA4600C56ECA /* MarvelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC40DE2269DA4600C56ECA /* MarvelCoordinator.swift */; };
+		04EDA7D3226CAA8600B12199 /* UI+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EDA7D2226CAA8600B12199 /* UI+Accessibility.swift */; };
+		04EDA7D5226CAA8E00B12199 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EDA7D4226CAA8E00B12199 /* AccessibilityIdentifiers.swift */; };
 		04FB29782266A077002EF6CD /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04FB29772266A076002EF6CD /* Detail.storyboard */; };
 		0F428C5ABB0BA866BDF878CD /* Pods_Marvel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843387F7D810F0671F22CB48 /* Pods_Marvel.framework */; };
 		DD4493082F596FF30BDEE921 /* Pods_MarvelTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6764AAD3BFAF97F6175438F /* Pods_MarvelTests.framework */; };
@@ -68,6 +71,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		041B73FD22464150004844D9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 041B73E02246414E004844D9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 041B73E72246414E004844D9;
+			remoteInfo = Marvel;
+		};
+		04837AD1226BE50C0003FF6A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 041B73E02246414E004844D9 /* Project object */;
 			proxyType = 1;
@@ -107,6 +117,9 @@
 		04837AC2226B89F00003FF6A /* HomeTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableCell.swift; sourceTree = "<group>"; };
 		04837AC4226BBAF70003FF6A /* LoadMore.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMore.xib; sourceTree = "<group>"; };
 		04837AC6226BC4580003FF6A /* iPadDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iPadDetailViewController.swift; sourceTree = "<group>"; };
+		04837ACC226BE50B0003FF6A /* MarvelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		04837ACE226BE50C0003FF6A /* MarvelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelUITests.swift; sourceTree = "<group>"; };
+		04837AD0226BE50C0003FF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0486094F224AD1FA001C599A /* CharacterSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSummary.swift; sourceTree = "<group>"; };
 		04860951224AD215001C599A /* MarvelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItem.swift; sourceTree = "<group>"; };
 		04860953224AD58C001C599A /* MarvelItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelItemViewModel.swift; sourceTree = "<group>"; };
@@ -131,6 +144,8 @@
 		04EC23F3224C1FA700EBB81D /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		04EC23F5224C1FC400EBB81D /* Controller+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Controller+Extensions.swift"; sourceTree = "<group>"; };
 		04EC40DE2269DA4600C56ECA /* MarvelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelCoordinator.swift; sourceTree = "<group>"; };
+		04EDA7D2226CAA8600B12199 /* UI+Accessibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UI+Accessibility.swift"; sourceTree = "<group>"; };
+		04EDA7D4226CAA8E00B12199 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		04FB297022669CB9002EF6CD /* Marvel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Marvel-Bridging-Header.h"; sourceTree = "<group>"; };
 		04FB29772266A076002EF6CD /* Detail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
 		1595A4B436127A304D000307 /* Pods-MarvelTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelTests.release.xcconfig"; path = "Target Support Files/Pods-MarvelTests/Pods-MarvelTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -163,6 +178,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04837AC9226BE50B0003FF6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -171,6 +193,7 @@
 			children = (
 				041B73EA2246414E004844D9 /* Marvel */,
 				041B73FF22464150004844D9 /* MarvelTests */,
+				04837ACD226BE50C0003FF6A /* MarvelUITests */,
 				041B73E92246414E004844D9 /* Products */,
 				B6E7C22F90CA3912C48BF938 /* Pods */,
 				8872120EF89FBFBB4C17A4B2 /* Frameworks */,
@@ -182,6 +205,7 @@
 			children = (
 				041B73E82246414E004844D9 /* Marvel.app */,
 				041B73FC22464150004844D9 /* MarvelTests.xctest */,
+				04837ACC226BE50B0003FF6A /* MarvelUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -321,6 +345,15 @@
 			path = controller;
 			sourceTree = "<group>";
 		};
+		04837ACD226BE50C0003FF6A /* MarvelUITests */ = {
+			isa = PBXGroup;
+			children = (
+				04837ACE226BE50C0003FF6A /* MarvelUITests.swift */,
+				04837AD0226BE50C0003FF6A /* Info.plist */,
+			);
+			path = MarvelUITests;
+			sourceTree = "<group>";
+		};
 		0486094E224AD1D6001C599A /* character */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,6 +418,8 @@
 		04EC23EE224C1F9A00EBB81D /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				04EDA7D4226CAA8E00B12199 /* AccessibilityIdentifiers.swift */,
+				04EDA7D2226CAA8600B12199 /* UI+Accessibility.swift */,
 				04EC23EF224C1F9A00EBB81D /* MD5Helper+Extensions.swift */,
 				04EC23F3224C1FA700EBB81D /* UIView+Extensions.swift */,
 				04EC23F0224C1F9A00EBB81D /* Error+Extensions.swift */,
@@ -482,13 +517,31 @@
 			productReference = 041B73FC22464150004844D9 /* MarvelTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		04837ACB226BE50B0003FF6A /* MarvelUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 04837AD5226BE50C0003FF6A /* Build configuration list for PBXNativeTarget "MarvelUITests" */;
+			buildPhases = (
+				04837AC8226BE50B0003FF6A /* Sources */,
+				04837AC9226BE50B0003FF6A /* Frameworks */,
+				04837ACA226BE50B0003FF6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				04837AD2226BE50C0003FF6A /* PBXTargetDependency */,
+			);
+			name = MarvelUITests;
+			productName = MarvelUITests;
+			productReference = 04837ACC226BE50B0003FF6A /* MarvelUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		041B73E02246414E004844D9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Alex Rodrigues";
 				TargetAttributes = {
@@ -499,6 +552,10 @@
 					041B73FB22464150004844D9 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1010;
+						TestTargetID = 041B73E72246414E004844D9;
+					};
+					04837ACB226BE50B0003FF6A = {
+						CreatedOnToolsVersion = 10.2;
 						TestTargetID = 041B73E72246414E004844D9;
 					};
 				};
@@ -518,6 +575,7 @@
 			targets = (
 				041B73E72246414E004844D9 /* Marvel */,
 				041B73FB22464150004844D9 /* MarvelTests */,
+				04837ACB226BE50B0003FF6A /* MarvelUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -541,6 +599,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		041B73FA22464150004844D9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		04837ACA226BE50B0003FF6A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -698,7 +763,9 @@
 				04E2B23022496A7100DD72A3 /* LoadingMoreView.swift in Sources */,
 				041B742422465FB3004844D9 /* ListViewController.swift in Sources */,
 				04443C5222556C790073AF87 /* ListViewModel.swift in Sources */,
+				04EDA7D5226CAA8E00B12199 /* AccessibilityIdentifiers.swift in Sources */,
 				04EC40DF2269DA4600C56ECA /* MarvelCoordinator.swift in Sources */,
+				04EDA7D3226CAA8600B12199 /* UI+Accessibility.swift in Sources */,
 				04860963224ADEBD001C599A /* DetailViewController.swift in Sources */,
 				044A50AD2267FB7C00F130CA /* FavoriteViewController.swift in Sources */,
 				04E2B21F22495C1400DD72A3 /* CharacterViewModel.swift in Sources */,
@@ -726,6 +793,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		04837AC8226BE50B0003FF6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				04837ACF226BE50C0003FF6A /* MarvelUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -733,6 +808,11 @@
 			isa = PBXTargetDependency;
 			target = 041B73E72246414E004844D9 /* Marvel */;
 			targetProxy = 041B73FD22464150004844D9 /* PBXContainerItemProxy */;
+		};
+		04837AD2226BE50C0003FF6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 041B73E72246414E004844D9 /* Marvel */;
+			targetProxy = 04837AD1226BE50C0003FF6A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -964,6 +1044,46 @@
 			};
 			name = Release;
 		};
+		04837AD3226BE50C0003FF6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HJ28CBRTR9;
+				INFOPLIST_FILE = MarvelUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.alexrodrigues.MarvelUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Marvel;
+			};
+			name = Debug;
+		};
+		04837AD4226BE50C0003FF6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = HJ28CBRTR9;
+				INFOPLIST_FILE = MarvelUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = br.com.alexrodrigues.MarvelUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Marvel;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -990,6 +1110,15 @@
 			buildConfigurations = (
 				041B740922464150004844D9 /* Debug */,
 				041B740A22464150004844D9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		04837AD5226BE50C0003FF6A /* Build configuration list for PBXNativeTarget "MarvelUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				04837AD3226BE50C0003FF6A /* Debug */,
+				04837AD4226BE50C0003FF6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
