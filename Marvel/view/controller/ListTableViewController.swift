@@ -22,6 +22,7 @@ class ListTableViewController: UITableViewController {
     private var listViewModel: ListViewModel!
     private var charactersArray = [CharacterViewModel]()
     private var upperRefreshControl: UIRefreshControl!
+    private var shouldLoadFirst = true
     private lazy var loadingMoreView: LoadingMoreView = {
         return LoadingMoreView.loadFromNibNamed() as! LoadingMoreView
     }()
@@ -35,6 +36,7 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        shouldLoadFirst = true
         bind()
         configureViews()
         fetch(page: firstPage)
@@ -85,7 +87,8 @@ class ListTableViewController: UITableViewController {
     
     private func setupTableview() {
         homeTableView.reloadData()
-        if let first = charactersArray.first {
+        if let first = charactersArray.first, shouldLoadFirst {
+            shouldLoadFirst = false
             listViewModel.navigateToiPadDetail(with: first)
         }
     }

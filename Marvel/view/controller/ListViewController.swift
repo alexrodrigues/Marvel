@@ -35,6 +35,7 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupIdentifiersForUiTests()
         bind()
         configureViews()
         fetch(page: firstPage)
@@ -159,6 +160,14 @@ class ListViewController: UIViewController {
         showLoading()
         setupLoadingMoreView()
         fetch(page: firstPage)
+    }
+    
+    // MARK: - Identifiers for UI Tests
+    
+    private func setupIdentifiersForUiTests() {
+        homeCollectionView.receiveAccessibilityIdentifier(identifier: .homeCollectionView)
+        listSearchBar.receiveAccessibilityIdentifier(identifier: .searchBarHome)
+        tabBarController?.tabBar.receiveAccessibilityIdentifier(identifier: .marvelTabbar)
     }
 }
 
