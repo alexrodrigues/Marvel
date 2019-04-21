@@ -35,4 +35,11 @@ class MarvelUITests: XCTestCase {
         collection.swipeDown()
         collection.swipeUp()
     }
+    
+    func testIfCollectionViewCanClick() {
+        let exp = expectation(description: "Waiting Screen wake up")
+        _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
+        let collection = app.collectionViews["HomeCollectionView"]
+        collection.cells.element(boundBy: 0)
+    }
 }
