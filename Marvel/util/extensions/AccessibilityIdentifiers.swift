@@ -11,5 +11,6 @@ import Foundation
 enum AccessibilityIdentifiers: String {
     case searchBarHome = "SearchBar"
     case homeCollectionView = "HomeCollectionView"
+    case homeTableView = "HomeTableView"
     case marvelTabbar = "Tabbar"
 }

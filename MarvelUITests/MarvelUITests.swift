@@ -9,7 +9,7 @@
 import XCTest
 
 class MarvelUITests: XCTestCase {
-
+    
     private var app: XCUIApplication!
     
     override func setUp() {
@@ -21,25 +21,40 @@ class MarvelUITests: XCTestCase {
     func testIfTabbarIsThere() {
         XCTAssertTrue(app.tabBars["Tabbar"].exists)
     }
-
-    func testIfTableIsThere() {
-        let exp = expectation(description: "Waiting Screen wake up")
-        _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
-        XCTAssertTrue(app.collectionViews["HomeCollectionView"].exists)
+    
+    func testIfCollectionIsThere() {
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            let exp = expectation(description: "Waiting Screen wake up")
+            _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
+            XCTAssertTrue(app.collectionViews["HomeCollectionView"].exists)
+        } else {
+            let exp = expectation(description: "Waiting Screen wake up")
+            _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
+            XCTAssertTrue(app.tables["HomeTableView"].exists)
+        }
     }
     
-    func testIfTableViewCanScroll() {
-        let exp = expectation(description: "Waiting Screen wake up")
-        _ = XCTWaiter.wait(for: [exp], timeout: 7.0)
-        let collection = app.collectionViews["HomeCollectionView"]
-        collection.swipeDown()
-        collection.swipeUp()
+    func testIfCollectionCanScroll() {
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            let exp = expectation(description: "Waiting Screen wake up")
+            _ = XCTWaiter.wait(for: [exp], timeout: 7.0)
+            let collection = app.collectionViews["HomeCollectionView"]
+            collection.swipeDown()
+            collection.swipeUp()
+        } 
     }
     
     func testIfCollectionViewCanClick() {
-        let exp = expectation(description: "Waiting Screen wake up")
-        _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
-        let collection = app.collectionViews["HomeCollectionView"]
-        collection.cells.element(boundBy: 0)
+        if UIDevice.current.userInterfaceIdiom != .pad {
+            let exp = expectation(description: "Waiting Screen wake up")
+            _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
+            let collection = app.collectionViews["HomeCollectionView"]
+            collection.cells.element(boundBy: 0)
+        } else {
+            let exp = expectation(description: "Waiting Screen wake up")
+            _ = XCTWaiter.wait(for: [exp], timeout: 5.0)
+            let table = app.tables["HomeTableView"]
+            table.cells.element(boundBy: 0)
+        }
     }
 }

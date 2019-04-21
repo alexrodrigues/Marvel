@@ -36,6 +36,7 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupIdentifiersForUiTests()
         shouldLoadFirst = true
         bind()
         configureViews()
@@ -157,6 +158,13 @@ class ListTableViewController: UITableViewController {
         loadingMoreView.isHidden = false
         setupLoadingMoreView()
         fetch(page: firstPage)
+    }
+    
+    // MARK: - Identifiers for UI Tests
+    
+    private func setupIdentifiersForUiTests() {
+        homeTableView.receiveAccessibilityIdentifier(identifier: .homeTableView)
+        tabBarController?.tabBar.receiveAccessibilityIdentifier(identifier: .marvelTabbar)
     }
 }
 
