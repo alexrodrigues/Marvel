@@ -2,13 +2,12 @@
 //  Favorite+CoreDataProperties.swift
 //  
 //
-//  Created by Digital on 27/03/19.
+//  Created by Alex Rodrigues on 27/03/19.
 //
 //
 
 import Foundation
 import CoreData
-
 
 extension Favorite {
 

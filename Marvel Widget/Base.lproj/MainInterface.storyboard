@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Today View Controller-->
+        <scene sceneID="cwh-vc-ff4">
+            <objects>
+                <viewController id="M4Y-Lb-cyx" customClass="TodayViewController" customModule="Marvel_Widget" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" simulatedAppContext="notificationCenter" id="S3S-Oj-5AN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNr-6A-zR5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="116"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.92366516590000003" green="0.2302157879" blue="0.25469863409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="ffo-GT-YB2">
+                                <rect key="frame" x="150" y="65" width="20" height="20"/>
+                                <color key="color" red="0.92366516590000003" green="0.2302157879" blue="0.25469863409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
+                            <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="evz-NC-qRY">
+                                <rect key="frame" x="0.0" y="44" width="320" height="72"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3fd-sw-LYE">
+                                        <rect key="frame" x="0.0" y="0.0" width="96" height="72"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.92366516590000003" green="0.2302157879" blue="0.25469863409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="open" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="4QN-jz-Ynj"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kD5-Ul-6w0">
+                                        <rect key="frame" x="112" y="0.0" width="96" height="72"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.92366516590000003" green="0.2302157879" blue="0.25469863409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="open" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="yNa-iN-h13"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUy-Gf-cPr">
+                                        <rect key="frame" x="224" y="0.0" width="96" height="72"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.92366516590000003" green="0.2302157879" blue="0.25469863409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="open" destination="M4Y-Lb-cyx" eventType="touchUpInside" id="lfz-FJ-cbH"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="evz-NC-qRY" firstAttribute="top" secondItem="ssy-KU-ocm" secondAttribute="top" id="55g-By-jG2"/>
+                            <constraint firstItem="zNr-6A-zR5" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="top" id="5E5-6S-eNQ"/>
+                            <constraint firstItem="zNr-6A-zR5" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="E2E-ZB-Tjy"/>
+                            <constraint firstItem="ffo-GT-YB2" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="LPS-9V-gnw"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="zNr-6A-zR5" secondAttribute="bottom" id="Pt2-Ce-PMn"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="bottom" secondItem="evz-NC-qRY" secondAttribute="bottom" id="SPD-9Y-Nfz"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="zNr-6A-zR5" secondAttribute="trailing" id="ghO-gg-Pgs"/>
+                            <constraint firstItem="ffo-GT-YB2" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="hlA-Kw-MU8"/>
+                            <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="evz-NC-qRY" secondAttribute="trailing" id="niv-6U-Sfl"/>
+                            <constraint firstItem="evz-NC-qRY" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="sgA-qx-tmH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ssy-KU-ocm"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="150"/>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="ffo-GT-YB2" id="Y7U-jb-AfC"/>
+                        <outlet property="buttonsStackView" destination="evz-NC-qRY" id="5bj-uf-FQ9"/>
+                        <outlet property="errorMessageLabel" destination="zNr-6A-zR5" id="Clj-MQ-77h"/>
+                        <outlet property="firstButton" destination="3fd-sw-LYE" id="4jG-ib-7dr"/>
+                        <outlet property="secondButton" destination="kD5-Ul-6w0" id="f4R-qn-VWg"/>
+                        <outlet property="thirdButton" destination="IUy-Gf-cPr" id="mLH-6o-Cq4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

@@ -11,48 +11,46 @@ import UIKit
 import RxCocoa
 import RxSwift
 
-class ListViewController: UIViewController, ViewConfiguration {
+class ListViewController: UIViewController {
 
     // MARK: - Variables
     
-    private let HOME_CELL = "HomeListCell"
-    private let FIRST_PAGE = 1
+    private let homeCell = "HomeListCell"
+    private let firstPage = 1
     private var lastKnowIndex = 1
-    private var isLoadingRemoved = false
     private var disponseBag = DisposeBag()
-    private var listViewModel = ListViewModel()
+    private var listViewModel: ListViewModel!
     private var charactersArray = [CharacterViewModel]()
-    private var bottomRefreshController: UIRefreshControl!
+    private var bottomRefreshControl: UIRefreshControl!
+    private var upperRefreshControl: UIRefreshControl!
     
     // MARK: - Outlets
     
     @IBOutlet weak var homeCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var listSearchBar: UISearchBar!
-    private lazy var favoriteComponent: FavoriteComponent = {
-        return FavoriteComponent()
-    }()
-    private lazy var favoriteComponentHeight: NSLayoutConstraint = {
-        let constraint = NSLayoutConstraint(item: favoriteComponent, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 0.0, constant: 0.0)
-        return constraint
-    } ()
+    @IBOutlet weak var lblErrorInfo: UILabel!
     
     // MARK: - Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupIdentifiersForUiTests()
         bind()
-        favoriteComponent.setup(delegate: self)
-        setupViews()
-        fetch(page: FIRST_PAGE)
+        configureViews()
+        fetch(page: firstPage)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        favoriteComponent.checkFavorites()
     }
     
+    // MARK: - ViewModel Binding
+    
     private func bind() {
+        if let navController = navigationController {
+            listViewModel = ListViewModel(with: navController)
+        }
         listViewModel.characters
             .asObservable()
             .observeOn(MainScheduler.instance)
@@ -61,6 +59,7 @@ class ListViewController: UIViewController, ViewConfiguration {
                 guard let self = self else { return }
                 self.charactersArray.append(contentsOf: characters)
                 self.setupCollectionview()
+                self.hideRefreshers()
             }).disposed(by: disponseBag)
         
         listViewModel.searchCharacters
@@ -79,17 +78,20 @@ class ListViewController: UIViewController, ViewConfiguration {
             .subscribe(onNext: { [weak self] (message) in
                 if (message.isEmpty) { return }
                 guard let self = self else { return }
+                self.activityIndicator.stopAnimating()
+                self.lblErrorInfo.isHidden = false
                 self.showErrorAlert(message)
             }).disposed(by: disponseBag)
     }
     
+    // MARK: - Setup
+    
     private func registerCells() {
-        homeCollectionView.register(UINib(nibName: HOME_CELL, bundle: nil), forCellWithReuseIdentifier: HOME_CELL)
+        homeCollectionView.register(UINib(nibName: homeCell, bundle: nil), forCellWithReuseIdentifier: homeCell)
     }
     
     private func setupCollectionview() {
         activityIndicator.stopAnimating()
-        disableLoadingMore()
         homeCollectionView.isHidden = false
         homeCollectionView.reloadData()
     }
@@ -100,23 +102,37 @@ class ListViewController: UIViewController, ViewConfiguration {
         charactersArray.removeAll()
     }
     
-    // MARK: - Setup View Methods
-    
-    private func setupLoadingMoreView() {
-        bottomRefreshController = UIRefreshControl()
-        bottomRefreshController.addTarget(self, action: #selector(ListViewController.performRefreshBottom), for: .valueChanged)
-        homeCollectionView.bottomRefreshControl = bottomRefreshController
+    private func hideRefreshers() {
+        bottomRefreshControl.endRefreshing()
+        upperRefreshControl.endRefreshing()
     }
     
-    @objc func performRefreshBottom() {
+    private func setupLoadingMoreView() {
+        bottomRefreshControl = UIRefreshControl()
+        bottomRefreshControl.tintColor = .red
+        bottomRefreshControl.addTarget(self, action: #selector(ListViewController.performLoadMoreBottom), for: .valueChanged)
+        homeCollectionView.bottomRefreshControl = bottomRefreshControl
+        
+        upperRefreshControl = UIRefreshControl()
+        upperRefreshControl.tintColor = .red
+        upperRefreshControl.addTarget(self, action: #selector(ListViewController.performRefresh), for: .valueChanged)
+        homeCollectionView.refreshControl = upperRefreshControl
+    }
+    
+    @objc func performRefresh() {
+        fetch(page: firstPage)
+    }
+    
+    @objc func performLoadMoreBottom() {
         fetch(page: charactersArray.count + 1)
     }
     
     private func disableLoadingMore() {
-        bottomRefreshController.endRefreshing()
+        upperRefreshControl.endRefreshing()
+        bottomRefreshControl.endRefreshing()
+        homeCollectionView.bottomRefreshControl = nil
+        homeCollectionView.refreshControl = nil
     }
-    
-    // MARK: - View Coding Methods
     
     func configureViews() {
         registerCells()
@@ -126,17 +142,11 @@ class ListViewController: UIViewController, ViewConfiguration {
         }
     }
     
-    func setupViewHierarchy() {
-    }
-    
-    func setupConstraints() {
-        favoriteComponent.addConstraint(favoriteComponentHeight)
-    }
-    
     // MARK: - ViewModel Fetch Methods
     
     private func fetch(page: Int) {
         lastKnowIndex = page
+        lblErrorInfo.isHidden = true
         listViewModel.fetch(lastIndex: lastKnowIndex)
     }
     
@@ -148,16 +158,16 @@ class ListViewController: UIViewController, ViewConfiguration {
 
     private func searchCancelled() {
         showLoading()
-        isLoadingRemoved = false
-        fetch(page: lastKnowIndex)
+        setupLoadingMoreView()
+        fetch(page: firstPage)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueIdentifiers.detail {
-            if let character = sender as? CharacterViewModel, let destination = segue.destination as? DetailViewController {
-                destination.character = character
-            }
-        }
+    // MARK: - Identifiers for UI Tests
+    
+    private func setupIdentifiersForUiTests() {
+        homeCollectionView.receiveAccessibilityIdentifier(identifier: .homeCollectionView)
+        listSearchBar.receiveAccessibilityIdentifier(identifier: .searchBarHome)
+        tabBarController?.tabBar.receiveAccessibilityIdentifier(identifier: .marvelTabbar)
     }
 }
 
@@ -166,7 +176,7 @@ class ListViewController: UIViewController, ViewConfiguration {
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HOME_CELL, for: indexPath) as? HomeListCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: homeCell, for: indexPath) as? HomeListCell else {
             return UICollectionViewCell()
         }
         
@@ -180,7 +190,8 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: SegueIdentifiers.detail, sender: charactersArray[indexPath.row])
+        let pickedCharacter = charactersArray[indexPath.row]
+        listViewModel.navigateToDetail(with: pickedCharacter)
     }
     
     func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
@@ -196,9 +207,12 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let original = CGSize(width: 108.0, height: 127.0)
+        let original = CGSize(width: 100.0, height: 208.0)
+        let ratio = CGFloat(2.08)
         let width = UIScreen.main.bounds.size.width
-        let desired = CGRect(x: 0, y: 0, width: (width / 3) - 16.0, height: 500.0)
+        let desiredWidth = (width / 2) - 16.0
+        
+        let desired = CGRect(x: 0, y: 0, width: desiredWidth, height: desiredWidth * ratio)
         return AVMakeRect(aspectRatio: original, insideRect: desired).size
     }
 }
@@ -219,6 +233,15 @@ extension ListViewController: UISearchBarDelegate {
         }
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        searchBar.showsCancelButton = false
+        return true
+    }
+    
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.text = ""
@@ -234,23 +257,3 @@ extension ListViewController: UISearchBarDelegate {
         }
     }
 }
-
-// MARK: - FavoriteComponentDelegate Methods
-
-extension ListViewController: FavoriteComponentDelegate {
-    
-    func inflateFavorites() {
-        favoriteComponentHeight.constant = FavoriteComponent.OPEN_HEIGHT
-        UIView.animate(withDuration: 0.6) {
-            self.view.setNeedsLayout()
-        }
-    }
-    
-    func disinflateFavorites() {
-        favoriteComponentHeight.constant = 0.0
-        UIView.animate(withDuration: 0.6) {
-            self.view.setNeedsLayout()
-        }
-    }
-}
-

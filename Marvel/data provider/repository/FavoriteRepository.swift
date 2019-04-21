@@ -2,7 +2,7 @@
 //  FavoriteService.swift
 //  Marvel
 //
-//  Created by Digital on 27/03/19.
+//  Created by Alex Rodrigues on 27/03/19.
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
@@ -37,7 +37,7 @@ class FavoriteRepository {
         request.returnsObjectsAsFaults = false
         do {
             let result = try context.fetch(request)
-            for obj in result as! [NSManagedObject]  {
+            for obj in result as! [NSManagedObject] {
                 if let identifier = obj.value(forKey: "id") as? Int, identifier == character.identifier {
                     context.delete(obj)
                 }
@@ -89,7 +89,7 @@ class FavoriteRepository {
                     let filtered = viewModels.filter { $0.identifier ==  character.identifier }
                     observer.onNext(filtered)
                     observer.onCompleted()
-                }, onError: { error in
+                }, onError: { _ in
                     observer.onError(MyError(msg: "Failed finding character \(character.name)"))
                 })
             

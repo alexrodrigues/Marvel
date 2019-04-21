@@ -6,7 +6,6 @@
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
-
 import Quick
 import Nimble
 @testable import Marvel

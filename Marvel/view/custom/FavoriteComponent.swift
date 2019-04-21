@@ -2,7 +2,7 @@
 //  FavoriteComponent.swift
 //  Marvel
 //
-//  Created by Digital on 27/03/19.
+//  Created by Alex Rodrigues on 27/03/19.
 //  Copyright © 2019 Alex Rodrigues. All rights reserved.
 //
 
@@ -22,8 +22,8 @@ class FavoriteComponent: UIView, ViewConfiguration {
     private weak var _delegate: FavoriteComponentDelegate?
     private var favoritesArray = [CharacterViewModel]()
     private let disposeBag = DisposeBag()
-    private let FAVORITE_CELL = "FavoriteCell"
-    static let OPEN_HEIGHT = CGFloat(150.0)
+    private let favoriteCell = "FavoriteCell"
+    static let openHeight = CGFloat(150.0)
     
     private lazy var favoriteLabel: UILabel = {
        let label = UILabel(frame: .zero)
@@ -57,7 +57,7 @@ class FavoriteComponent: UIView, ViewConfiguration {
     }
     
     private func registerCell() {
-        favoriteCollectionView.register(UINib(nibName: FAVORITE_CELL, bundle: Bundle.main), forCellWithReuseIdentifier: FAVORITE_CELL)
+        favoriteCollectionView.register(UINib(nibName: favoriteCell, bundle: Bundle.main), forCellWithReuseIdentifier: favoriteCell)
     }
     
     private func initialize() {
@@ -98,7 +98,7 @@ class FavoriteComponent: UIView, ViewConfiguration {
     // MARK: - Favorite methods
     
     func checkFavorites() {
-        CharactersService().fetchFavorites()
+        FavoriteRepository().fetch()
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] viewModels in
                 guard let self = self else { return }
@@ -122,11 +122,11 @@ class FavoriteComponent: UIView, ViewConfiguration {
 
 extension FavoriteComponent: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FAVORITE_CELL, for: indexPath) as? FavoriteCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: favoriteCell, for: indexPath) as? FavoriteCell else {
             return UICollectionViewCell()
         }
         let favorite = favoritesArray[indexPath.row]
-        cell.setup(favorite: favorite, index: indexPath.row)
+        cell.setup(favorite: favorite)
         return cell 
     }
     
@@ -134,4 +134,3 @@ extension FavoriteComponent: UICollectionViewDataSource, UICollectionViewDelegat
         return favoritesArray.count
     }
 }
-

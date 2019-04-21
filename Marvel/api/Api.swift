@@ -11,20 +11,20 @@ import RxSwift
 
 class Api<T: Decodable> {
     
-    private let ERROR_MESSAGE = "Something went wrong on fetching musics"
+    private let errorMessage = "Something went wrong on fetching heroes"
     
     func requestObject(urlString: String) -> Observable<T> {
         var remoteTask: URLSessionTask!
         guard let url = URL(string: urlString)  else {
-            return Observable.error(MyError(msg: self.ERROR_MESSAGE))
+            return Observable.error(MyError(msg: self.errorMessage))
         }
         return Observable<T>.create({ observer -> Disposable in
             var urlRequest = URLRequest(url: url)
             urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-            remoteTask = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            remoteTask = URLSession.shared.dataTask(with: urlRequest) { data, _ , error in
                 guard let dataReceived = data else {
-                    observer.onError(MyError(msg: self.ERROR_MESSAGE))
+                    observer.onError(MyError(msg: self.errorMessage))
                     observer.onCompleted()
                     return
                 }
@@ -36,7 +36,8 @@ class Api<T: Decodable> {
                     observer.onError(MyError(msg: error.localizedDescription))
                     observer.onCompleted()
                 }
-            };
+            }
+            
             remoteTask.resume()
             
             return Disposables.create {

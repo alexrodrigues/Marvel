@@ -12,11 +12,23 @@ import RxCocoa
 
 struct ListViewModel {
 
+    // MARK: - Variables
+    
     var characters = BehaviorRelay<[CharacterViewModel]>(value: [CharacterViewModel]())
     var searchCharacters = BehaviorRelay<[CharacterViewModel]>(value: [CharacterViewModel]())
     var errorMessage = BehaviorRelay<String>(value: "")
     private let disposeBag = DisposeBag()
+    private var coordinator: MarvelCoordinator?
     
+    init(with navigationController: UINavigationController) {
+        coordinator = MarvelCoordinator(with: navigationController)
+    }
+    
+    init(with splitController: UISplitViewController) {
+        coordinator = MarvelCoordinator(with: splitController)
+    }
+    
+    // MARK: - Methods to Query
     
     func fetch(lastIndex: Int) {
         CharactersService().fetch(lastIndex: lastIndex)
@@ -35,5 +47,26 @@ struct ListViewModel {
             }, onError: { (error) in
                 self.errorMessage.accept(error.localizedDescription)
             }).disposed(by: disposeBag)
+    }
+}
+
+// MARK: - CoordinatorLogic
+
+extension ListViewModel {
+    
+    func navigateToDetail(with character: CharacterViewModel) {
+        coordinator?.start(character: character)
+    }
+    
+    func presentiPadLoading() {
+        coordinator?.presentiPadLoading()
+    }
+    
+    func presentiPadError(with message: String) {
+        coordinator?.presentiPadError(with: message)
+    }
+    
+    func navigateToiPadDetail(with character: CharacterViewModel) {
+        coordinator?.navigateToiPadDetail(with: character)
     }
 }

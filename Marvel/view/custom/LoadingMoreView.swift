@@ -12,7 +12,7 @@ class LoadingMoreView: UIView {
 
     static func loadFromNibNamed() -> UIView? {
         return UINib(
-            nibName: "LoadingMore",
+            nibName: "LoadMore",
             bundle: Bundle.main
             ).instantiate(withOwner: nil, options: nil)[0] as? UIView
     }

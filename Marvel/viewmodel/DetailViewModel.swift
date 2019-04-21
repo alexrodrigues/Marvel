@@ -23,7 +23,6 @@ struct DetailViewModel {
     
     private let disposeBag = DisposeBag()
     
-    
     func fetch(character: CharacterViewModel) {
         
         SummaryService()
@@ -64,15 +63,15 @@ struct DetailViewModel {
         
     }
     
-    func isCharacterExists(character: CharacterViewModel)  -> Observable<Bool> {
-        return CharactersService().exists(character: character)
+    func isFavorite(character: CharacterViewModel)  -> Observable<Bool> {
+        return character.isFavorite()
     }
     
-    func insert(character: CharacterViewModel) -> Observable<Bool>  {
-        return CharactersService().insert(character: character)
+    func insert(character: CharacterViewModel) -> Observable<Bool> {
+        return FavoriteRepository().insert(character: character)
     }
     
     func delete(character: CharacterViewModel) -> Observable<Bool> {
-        return CharactersService().delete(character: character)
+        return FavoriteRepository().delete(character: character)
     }
 }

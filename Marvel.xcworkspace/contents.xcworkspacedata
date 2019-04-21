@@ -7,10 +7,4 @@
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:Favorite+CoreDataClass.swift">
-   </FileRef>
-   <FileRef
-      location = "group:Favorite+CoreDataProperties.swift">
-   </FileRef>
 </Workspace>

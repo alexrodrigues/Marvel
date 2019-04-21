@@ -12,7 +12,6 @@ struct MarvelItemViewModel {
     
     private var _marvelItem: MarvelItem
     
-    
     var resoureUri: String {
         if let resource = _marvelItem.resourceURI {
             return resource.replacingOccurrences(of: "http", with: "https")
@@ -27,5 +26,4 @@ struct MarvelItemViewModel {
     init(marvelItem: MarvelItem) {
         _marvelItem = marvelItem
     }
-
 }
