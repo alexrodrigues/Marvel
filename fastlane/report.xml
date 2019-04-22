@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+    
+    
+    
+      
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.0224">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="1: cocoapods" time="16.48021">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: slather coverage -s --scheme Marvel --workspace ../Marvel.xcworkspace ../Marvel.xcodeproj" time="6.015726">
+        
+      </testcase>
+    
+  </testsuite>
+</testsuites>
