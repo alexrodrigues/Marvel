@@ -2,17 +2,17 @@
 # **Alex's Mavel**
 
 ## *First things first*
-***
+
 
 
  **$ pod install** <br>
  **run the suit of tests** <br>
  **run $bundle** <br>
- **$ slather coverage -s --scheme Marvel --workspace [Workspace] [XProj]**
+ **$ fastlane test**
 
 
 ## *The Architecuture*
-***
+
 
 In this project we use **MVVMC**. 
 
@@ -20,7 +20,7 @@ Our **View** is binded to a **ViewModel** and notify him with all user interecat
 
 ## *Third Party Libraries*
 
-***
+
 ### RxSwift:
     
 RxSwfit its a powerful library how offers an alternative to handle callback hell. It makes the code more functional and easy to understand and threat callbacks and errors. In this particulary project it was essencial to chain requests  in Marvel's Detail, without probaly my code would more extensive and dirty.
